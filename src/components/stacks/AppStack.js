@@ -2,12 +2,12 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../screens/HomeScreen";
-import { Image } from "native-base";
 import SearchScreen from "../screens/SearchScreen";
 import BookingsScreen from "../screens/BookingsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import SvgUri from "react-native-svg-uri";
+import { LogBox } from "react-native-web";
 
 const Tab = createBottomTabNavigator();
 
@@ -27,7 +27,7 @@ const TabStack = () => (
           //     height: size,
           //   }}
           // />
-          <SvgUri source={require("../assets/nav_icons/home_svg.svg")} />
+          <SvgUri source={require("../assets/nav_icons/homeIcon.svg")} />
         ),
       }}
     />
@@ -37,7 +37,7 @@ const TabStack = () => (
       options={{
         headerShown: false,
         tabBarIcon: ({ focused, color, size }) => (
-          <SvgUri source={require("../assets/nav_icons/search_svg.svg")} />
+          <SvgUri source={require("../assets/nav_icons/searchIcon.svg")} />
         ),
       }}
     />
@@ -47,7 +47,7 @@ const TabStack = () => (
       options={{
         headerShown: false,
         tabBarIcon: ({ focused, color, size }) => (
-          <SvgUri source={require("../assets/nav_icons/bookings_svg.svg")} />
+          <SvgUri source={require("../assets/nav_icons/bookingsIcon.svg")} />
         ),
       }}
     />
@@ -57,7 +57,7 @@ const TabStack = () => (
       options={{
         headerShown: false,
         tabBarIcon: ({ focused, color, size }) => (
-          <SvgUri source={require("../assets/nav_icons/profile_svg.svg")} />
+          <SvgUri source={require("../assets/nav_icons/profileIcon.svg")} />
         ),
       }}
     />
@@ -67,6 +67,9 @@ const TabStack = () => (
 const Stack = createNativeStackNavigator();
 
 const AppStack = () => {
+  // temporarily hides all warnings
+  console.disableYellowBox = true;
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -76,16 +79,6 @@ const AppStack = () => {
           options={{
             headerShown: false,
           }}
-          //   options={{
-          //     title: "Table Hunt",
-          //     headerStyle: {
-          //       backgroundColor: "#015069",
-          //     },
-          //     headerTintColor: "#fff",
-          //     headerTitleStyle: {
-          //       fontWeight: "bold",
-          //     },
-          //   }}
         />
         {/* <Stack.Screen
           name="Details Page"

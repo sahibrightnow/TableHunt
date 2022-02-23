@@ -1,14 +1,4 @@
-import {
-  Center,
-  VStack,
-  HStack,
-  Stack,
-  Heading,
-  Text,
-  Box,
-  AspectRatio,
-  Image,
-} from "native-base";
+import { Center, VStack } from "native-base";
 import React from "react";
 
 const BookingsScreenContainer = ({ data }) => {
