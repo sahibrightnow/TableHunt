@@ -1,5 +1,5 @@
 import React from 'react';
-import * as GoogleSignIn from 'expo-auth-session/providers/google';
+import * as Google from 'expo-google-app-auth'
 import * as WebBrowser from 'expo-web-browser';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image} from 'react-native';
@@ -10,17 +10,26 @@ const authentication = () => {
     const [accessToken, setAccessToken] = React.useState();
 const [userInfo, setUserInfo] = React.useState();
 
-const [request, response, promptAsync] = GoogleSignIn.useAuthRequest({
-  expoClientId: "32874219277-hu0dk0feqc5ovl3gjg6b4i2lieopbi6a.apps.googleusercontent.com",
-  androidClientId: "32874219277-bhghnuaipathh4hs9s3kbmgvnmi6l9t7.apps.googleusercontent.com"
+async function signInWithGoogleAsync() {
+  try {
+    const result = await Google.logInAsync({
+      expoClientId: "32874219277-hu0dk0feqc5ovl3gjg6b4i2lieopbi6a.apps.googleusercontent.com",
+  androidClientId: "32874219277-bhghnuaipathh4hs9s3kbmgvnmi6l9t7.apps.googleusercontent.com",
+      scopes: ["profile", "email"]
+    });
 
-});
-
-React.useEffect(() => {
-  if (response?.type === "success") {
-    setAccessToken(response.authentication.accessToken);
+    if (result.type === "success") {
+      setAccessToken(result.accessToken);
+    } else {
+      console.log("Permission denied");
+    }
+  } catch (e) {
+    console.log(e);
   }
-}, [response])
+}
+
+
+
 
 async function getUserData() {
   let userInfoResponse = await fetch("https://www.googleapis.com/userinfo/v2/me", {
@@ -52,7 +61,7 @@ function showUserInfo() {
               {showUserInfo()}
               <Heading>Start Table Hunting!</Heading>
               <Button borderRadius={8} width='50%' mt='5' >Continue with email</Button>
-              <Button borderRadius={8} width='50%' mt='5' onPress={accessToken ? getUserData : () => { promptAsync({ useProxy: false, showInRecents: true }) }}>
+              <Button borderRadius={8} width='50%' mt='5' onPress={accessToken ? getUserData : signInWithGoogleAsync}>
               {accessToken ? "Get user data" : "Continue with google"}
               </Button>
               <Text>Not a member?<Link>Sign up</Link></Text>
@@ -60,7 +69,7 @@ function showUserInfo() {
              
             <Text>Are you a restaurant owner?</Text>
             <Button borderRadius={8} width='50%' mt='5'  >Continue with email</Button>
-              <Button borderRadius={8} width='50%' mt='5'  onPress={accessToken ? getUserData : () => { promptAsync({ useProxy: false, showInRecents: true }) }}>
+              <Button borderRadius={8} width='50%' mt='5'  onPress={accessToken ? getUserData : signInWithGoogleAsync}>
               {accessToken ? "Get user data" : "Continue with google"}
               </Button>
        
