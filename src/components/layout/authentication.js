@@ -14,7 +14,8 @@ async function signInWithGoogleAsync() {
   try {
     const result = await Google.logInAsync({
       expoClientId: "32874219277-hu0dk0feqc5ovl3gjg6b4i2lieopbi6a.apps.googleusercontent.com",
-  androidClientId: "32874219277-bhghnuaipathh4hs9s3kbmgvnmi6l9t7.apps.googleusercontent.com",
+      androidClientId: "32874219277-bhghnuaipathh4hs9s3kbmgvnmi6l9t7.apps.googleusercontent.com",
+      iosClientId: "32874219277-9fngpuj5j8kfi47dl51qheis3r9btt15.apps.googleusercontent.com",
       scopes: ["profile", "email"]
     });
 
