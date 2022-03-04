@@ -1,14 +1,16 @@
-import { Center, VStack, Text } from "native-base";
+import { Center, VStack, Text, View } from "native-base";
 import React from "react";
-import { API_KEY } from "react-native-dotenv";
+import GooglePlacesInput from "../forms/GooglePlacesInput";
+// import { API_KEY } from "react-native-dotenv";
 
 const HomeScreenContainer = ({ data }) => {
   return (
     <VStack space={5} py={10} px={5}>
       <Center>HOME SCREEN
-        <Text>`${API_KEY}`</Text>
+        {/* <Text>{API_KEY}</Text> */}
 
       </Center>
+      <GooglePlacesInput />
 
     </VStack>
   );
