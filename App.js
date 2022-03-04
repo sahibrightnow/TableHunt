@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
 const App = () => {
   return (
     <NativeBaseProvider>
-      {/* <AppStack /> */}
-      {/* <StatusBar style="light" /> */}
+      {/* <AppStack />
+      <StatusBar style="light" /> */}
       <View style={styles.container}>
         <Authentication />
         <StatusBar style="auto" />
