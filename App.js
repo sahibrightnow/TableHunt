@@ -1,24 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
-import Authentication from './src/components/layout/authentication';
-import { NativeBaseProvider } from 'native-base';
-
-import React from 'react';
-
-
-export default function App() {
-
-
-  return (
-    <NativeBaseProvider>
-      <View style={styles.container}>
-        <Authentication/>
-        
-        <StatusBar style="auto" />
-      </View>
-    </NativeBaseProvider>
-  );
-}
+import { StatusBar } from 'expo-status-bar'
+import { StyleSheet, Text, View, Image, Button } from 'react-native'
+import { NativeBaseProvider } from 'native-base'
+import AppStack from './src/components/stacks/AppStack'
+import Authentication from './src/components/layout/authentication'
 
 const styles = StyleSheet.create({
   container: {
@@ -26,5 +10,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  }
-});
+  },
+})
+
+const App = () => {
+  return (
+    <NativeBaseProvider>
+      {/* <AppStack /> */}
+      {/* <StatusBar style="light" /> */}
+      <View style={styles.container}>
+        <Authentication />
+        <StatusBar style="auto" />
+      </View>
+    </NativeBaseProvider>
+  )
+}
+
+export default App
