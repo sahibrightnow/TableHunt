@@ -19,9 +19,7 @@ const HomeScreenContainer = ({ data }) => {
   //   return <AppLoading />;
   // }
   return (
-    <VStack pt={20} px={10} bg="green.200" flex={1}>
-      <GooglePlacesInput />
-    </VStack>
+    <GooglePlacesInput />
   );
 };
 
