@@ -1,15 +1,14 @@
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomeScreen from "../screens/HomeScreen";
-import SearchScreen from "../screens/SearchScreen";
-import BookingsScreen from "../screens/BookingsScreen";
-import ProfileScreen from "../screens/ProfileScreen";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import SvgUri from "react-native-svg-uri";
-import { LogBox } from "react-native-web";
+import React from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import HomeScreen from '../screens/HomeScreen'
+import SearchScreen from '../screens/SearchScreen'
+import BookingsScreen from '../screens/BookingsScreen'
+import ProfileScreen from '../screens/ProfileScreen'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import SvgUri from 'react-native-svg-uri'
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator()
 
 const TabStack = () => (
   <Tab.Navigator>
@@ -19,15 +18,15 @@ const TabStack = () => (
       options={{
         headerShown: false,
         tabBarIcon: ({ focused, color, size }) => (
-          // <Image
-          //   source={require("../assets/nav_icons/home_png.png")}
-          //   alt="Home Nav Icon"
-          //   style={{
-          //     width: size,
-          //     height: size,
-          //   }}
-          // />
-          <SvgUri source={require("../assets/nav_icons/homeIcon.svg")} />
+          //   // <Image
+          //   //   source={require("../assets/nav_icons/home_png.png")}
+          //   //   alt="Home Nav Icon"
+          //   //   style={{
+          //   //     width: size,
+          //   //     height: size,
+          //   //   }}
+          //   // />
+          <SvgUri source={require('../assets/nav_icons/homeIcon.svg')} />
         ),
       }}
     />
@@ -37,7 +36,7 @@ const TabStack = () => (
       options={{
         headerShown: false,
         tabBarIcon: ({ focused, color, size }) => (
-          <SvgUri source={require("../assets/nav_icons/searchIcon.svg")} />
+          <SvgUri source={require('../assets/nav_icons/searchIcon.svg')} />
         ),
       }}
     />
@@ -47,7 +46,7 @@ const TabStack = () => (
       options={{
         headerShown: false,
         tabBarIcon: ({ focused, color, size }) => (
-          <SvgUri source={require("../assets/nav_icons/bookingsIcon.svg")} />
+          <SvgUri source={require('../assets/nav_icons/bookingsIcon.svg')} />
         ),
       }}
     />
@@ -57,18 +56,18 @@ const TabStack = () => (
       options={{
         headerShown: false,
         tabBarIcon: ({ focused, color, size }) => (
-          <SvgUri source={require("../assets/nav_icons/profileIcon.svg")} />
+          <SvgUri source={require('../assets/nav_icons/profileIcon.svg')} />
         ),
       }}
     />
   </Tab.Navigator>
-);
+)
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator()
 
 const AppStack = () => {
   // temporarily hides all warnings
-  console.disableYellowBox = true;
+  // console.disableYellowBox = true;
 
   return (
     <NavigationContainer>
@@ -90,7 +89,7 @@ const AppStack = () => {
         /> */}
       </Stack.Navigator>
     </NavigationContainer>
-  );
-};
+  )
+}
 
-export default AppStack;
+export default AppStack
