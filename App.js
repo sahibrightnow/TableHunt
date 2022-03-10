@@ -94,12 +94,12 @@ const App = () => {
 
   return (
     <NativeBaseProvider theme={theme}>
-      {/* <AppStack />
-      <StatusBar style="light" /> */}
-      <View style={styles.container}>
+      <AppStack />
+      <StatusBar style="light" />
+      {/* <View style={styles.container}>
         <Authentication />
         <StatusBar style="auto" />
-      </View>
+      </View> */}
     </NativeBaseProvider>
   )
 }
