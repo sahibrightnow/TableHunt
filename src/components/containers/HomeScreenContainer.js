@@ -1,11 +1,25 @@
-import { Center, VStack } from "native-base";
+import { Center, VStack, Text, ScrollView, View } from "native-base";
 import React from "react";
+import GooglePlacesInput from "../forms/GooglePlacesInput";
+// import { API_KEY } from "react-native-dotenv";
+// import AppLoading from 'expo-app-loading';
+
+// import {
+//   useFonts,
+//   Poppins_400Regular,
+//   Poppins_500Medium,
+//   Poppins_600SemiBold,
+//   Poppins_700Bold,
+// } from '@expo-google-fonts/poppins';
 
 const HomeScreenContainer = ({ data }) => {
+  // let [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_700Bold });
+
+  // if (!fontsLoaded) {
+  //   return <AppLoading />;
+  // }
   return (
-    <VStack space={5} py={10} px={5}>
-      <Center>HOME SCREEN</Center>
-    </VStack>
+    <GooglePlacesInput />
   );
 };
 
