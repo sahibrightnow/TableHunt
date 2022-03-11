@@ -35,6 +35,7 @@ const GooglePlacesInput = () => {
         getLocation();
     }, []);
 
+
     return (
         <HStack
             // pt={20}
@@ -53,6 +54,8 @@ const GooglePlacesInput = () => {
                 query={{
                     key: API_KEY,
                     language: 'en', // language of the results
+                    location: location ? `${location.latitude},${location.longitude}` : '49.246292,-123.116226',
+                    radius: 1000,
                     components: 'country:ca', // only Canada
                     types: 'establishment',
                 }}

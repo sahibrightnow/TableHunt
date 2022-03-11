@@ -42,7 +42,7 @@ const MapInput = ({ naviagtion }) => {
                     longitude: location.longitude,
                 }}
                 title={"Location"}
-                description={"This is my Location description"}
+                description={`This is my Location description. ${location.latitude}, ${location.longitude}`}
             /> : null}
         </MapView>
     )
