@@ -1,6 +1,7 @@
 import { Center, VStack, Text, ScrollView, View } from "native-base";
 import React from "react";
 import GooglePlacesInput from "../forms/GooglePlacesInput";
+import MapInput from "../forms/MapInput";
 // import { API_KEY } from "react-native-dotenv";
 // import AppLoading from 'expo-app-loading';
 
@@ -19,7 +20,10 @@ const HomeScreenContainer = ({ data }) => {
   //   return <AppLoading />;
   // }
   return (
-    <GooglePlacesInput />
+    <>
+      <GooglePlacesInput />
+      <MapInput />
+    </>
   );
 };
 

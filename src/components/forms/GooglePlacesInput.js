@@ -37,7 +37,18 @@ const GooglePlacesInput = () => {
     }, []);
 
     return (
-        <VStack pt={20} px={10} bg="green.200" flex={1}>
+        <VStack
+            // pt={20}
+            // px={10}
+            zIndex={2}
+            position="absolute"
+            top={20}
+            left={10}
+            right={10}
+        // bg="green.200" 
+        // flex={1}
+
+        >
             <GooglePlacesAutocomplete
                 placeholder="Search"
                 query={{
@@ -62,7 +73,7 @@ const GooglePlacesInput = () => {
             // currentLocationLabel='Current location'
             // getAddressText={(data) => data.description}
             />
-            {location ? <Text>Lat: {location.latitude} and Long: {location.longitude}</Text> : null}
+            {/* {location ? <Text>Lat: {location.latitude} and Long: {location.longitude}</Text> : null} */}
         </VStack>
 
     );
