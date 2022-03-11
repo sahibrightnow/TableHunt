@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Center, HStack, Text, Actionsheet, useDisclose, Box, Button } from "native-base";
+import { StyleSheet } from 'react-native';
+import { Center, HStack, Text, Actionsheet, useDisclose, Box, Button, ScrollView, View, FlatList, Image, Stack, Heading } from "native-base";
 import Constants from 'expo-constants';
 import { API_KEY } from 'react-native-dotenv';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
@@ -84,23 +84,98 @@ const GooglePlacesInput = () => {
                 <MaterialIcons name="filter-list" size={24} color="white" />
             </Button>
 
-            <Actionsheet isOpen={isOpen} onClose={onClose}>
+
+            <Actionsheet
+                isOpen={isOpen}
+                onClose={onClose}
+            >
                 <Actionsheet.Content>
-                    <Box w="100%" h={60} px={4} justifyContent="center">
-                        <Text fontSize="16" color="gray.500" _dark={{
-                            color: "gray.300"
-                        }}>
-                            Albums
-                        </Text>
-                    </Box>
-                    <Actionsheet.Item>Delete</Actionsheet.Item>
-                    <Actionsheet.Item>Share</Actionsheet.Item>
-                    <Actionsheet.Item>Play</Actionsheet.Item>
-                    <Actionsheet.Item>Favourite</Actionsheet.Item>
-                    <Actionsheet.Item>Cancel</Actionsheet.Item>
+
+                    <ScrollView horizontal={true}>
+
+                        <Actionsheet.Item maxWidth="270px">
+                            <Box bg="white" shadow={2} rounded="lg" maxWidth="260px">
+                                <Image source={{
+                                    uri: "https://sample-example.nativebase.io/static/media/dawki-river.ebbf5434.png"
+                                }} alt="image base" resizeMode="cover" height={150} roundedTop="md" />
+                                <Stack space={4} p={[4, 4, 8]}>
+                                    <Text color="gray.400">June 22, 2021</Text>
+                                    <Heading size={["md", "lg", "md"]} noOfLines={2}>
+                                        The Stunning Dawki River in Meghalaya is So Clear That Boats Appear
+                                        Floating in Air
+                                    </Heading>
+                                    <Text lineHeight={[5, 5, 7]} noOfLines={[4, 4, 2]} color="gray.700" lineHeight={"22px"}>
+                                        With lush green meadows, rivers clear as crystal, pine-covered
+                                        hills, gorgeous waterfalls, lakes and majestic forests, the
+                                        mesmerizing…
+                                    </Text>
+                                </Stack>
+                            </Box>
+                        </Actionsheet.Item>
+                        <Actionsheet.Item maxWidth="270px">
+                            <Box bg="white" shadow={2} rounded="lg" maxWidth="260px">
+                                <Image source={{
+                                    uri: "https://sample-example.nativebase.io/static/media/dawki-river.ebbf5434.png"
+                                }} alt="image base" resizeMode="cover" height={150} roundedTop="md" />
+                                <Stack space={4} p={[4, 4, 8]}>
+                                    <Text color="gray.400">June 22, 2021</Text>
+                                    <Heading size={["md", "lg", "md"]} noOfLines={2}>
+                                        The Stunning Dawki River in Meghalaya is So Clear That Boats Appear
+                                        Floating in Air
+                                    </Heading>
+                                    <Text lineHeight={[5, 5, 7]} noOfLines={[4, 4, 2]} color="gray.700" lineHeight={"22px"}>
+                                        With lush green meadows, rivers clear as crystal, pine-covered
+                                        hills, gorgeous waterfalls, lakes and majestic forests, the
+                                        mesmerizing…
+                                    </Text>
+                                </Stack>
+                            </Box>
+                        </Actionsheet.Item>
+                        <Actionsheet.Item maxWidth="270px">
+                            <Box bg="white" shadow={2} rounded="lg" maxWidth="260px">
+                                <Image source={{
+                                    uri: "https://sample-example.nativebase.io/static/media/dawki-river.ebbf5434.png"
+                                }} alt="image base" resizeMode="cover" height={150} roundedTop="md" />
+                                <Stack space={4} p={[4, 4, 8]}>
+                                    <Text color="gray.400">June 22, 2021</Text>
+                                    <Heading size={["md", "lg", "md"]} noOfLines={2}>
+                                        The Stunning Dawki River in Meghalaya is So Clear That Boats Appear
+                                        Floating in Air
+                                    </Heading>
+                                    <Text lineHeight={[5, 5, 7]} noOfLines={[4, 4, 2]} color="gray.700" lineHeight={"22px"}>
+                                        With lush green meadows, rivers clear as crystal, pine-covered
+                                        hills, gorgeous waterfalls, lakes and majestic forests, the
+                                        mesmerizing…
+                                    </Text>
+                                </Stack>
+                            </Box>
+                        </Actionsheet.Item>
+                        <Actionsheet.Item maxWidth="270px">
+                            <Box bg="white" shadow={2} rounded="lg" maxWidth="260px">
+                                <Image source={{
+                                    uri: "https://sample-example.nativebase.io/static/media/dawki-river.ebbf5434.png"
+                                }} alt="image base" resizeMode="cover" height={150} roundedTop="md" />
+                                <Stack space={4} p={[4, 4, 8]}>
+                                    <Text color="gray.400">June 22, 2021</Text>
+                                    <Heading size={["md", "lg", "md"]} noOfLines={2}>
+                                        The Stunning Dawki River in Meghalaya is So Clear That Boats Appear
+                                        Floating in Air
+                                    </Heading>
+                                    <Text lineHeight={[5, 5, 7]} noOfLines={[4, 4, 2]} color="gray.700" lineHeight={"22px"}>
+                                        With lush green meadows, rivers clear as crystal, pine-covered
+                                        hills, gorgeous waterfalls, lakes and majestic forests, the
+                                        mesmerizing…
+                                    </Text>
+                                </Stack>
+                            </Box>
+                        </Actionsheet.Item>
+                        <Actionsheet.Item maxWidth="270px">Cancel</Actionsheet.Item>
+                    </ScrollView>
+
                 </Actionsheet.Content>
             </Actionsheet>
-        </HStack>
+
+        </HStack >
 
     );
 };
