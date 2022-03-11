@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Center, VStack, Text } from "native-base";
+import { Center, VStack, Text, Actionsheet, useDisclose, Box, NativeBaseProvider } from "native-base";
 import Constants from 'expo-constants';
 import { API_KEY } from "react-native-dotenv";
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 // import Geolocation from 'react-native-geolocation-service';
 import * as Location from 'expo-location';
-// navigator.geolocation = require('react-native-geolocation-service');
-// import * as Permissions from 'expo-permissions';
-
 
 const GooglePlacesInput = () => {
-
-    // const homePlace = {
-    //     description: 'Home',
-    //     geometry: { location: { lat: 49.246292, lng: -123.116226 } },
-    // };
+    const {
+        isOpen,
+        onOpen,
+        onClose
+    } = useDisclose();
 
     const [location, setLocation] = useState();
 
@@ -61,7 +58,11 @@ const GooglePlacesInput = () => {
                     // rankby: 'distance',
                     types: ['restaurant', 'cafe'],
                 }}
-                onPress={(data, details = null) => console.log(data)}
+                // onPress={(data, details = null) => {
+                //     console.log("DATA", data)
+                //     console.log("DETAILS", details)
+                // }}
+                onPress={onOpen}
                 onFail={(error) => console.error(error)}
                 requestUrl={{
                     url:
@@ -73,20 +74,25 @@ const GooglePlacesInput = () => {
             // currentLocationLabel='Current location'
             // getAddressText={(data) => data.description}
             />
-            {/* {location ? <Text>Lat: {location.latitude} and Long: {location.longitude}</Text> : null} */}
+            <Actionsheet isOpen={isOpen} onClose={onClose}>
+                <Actionsheet.Content>
+                    <Box w="100%" h={60} px={4} justifyContent="center">
+                        <Text fontSize="16" color="gray.500" _dark={{
+                            color: "gray.300"
+                        }}>
+                            Albums
+                        </Text>
+                    </Box>
+                    <Actionsheet.Item>Delete</Actionsheet.Item>
+                    <Actionsheet.Item>Share</Actionsheet.Item>
+                    <Actionsheet.Item>Play</Actionsheet.Item>
+                    <Actionsheet.Item>Favourite</Actionsheet.Item>
+                    <Actionsheet.Item>Cancel</Actionsheet.Item>
+                </Actionsheet.Content>
+            </Actionsheet>
         </VStack>
 
     );
 };
-
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         padding: 10,
-//         paddingTop: Constants.statusBarHeight + 10,
-//         backgroundColor: '#ecf0f1',
-//         height: '100%',
-//     },
-// });
 
 export default GooglePlacesInput;
