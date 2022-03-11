@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Center, VStack, Text, Actionsheet, useDisclose, Box, NativeBaseProvider } from "native-base";
+import { Center, HStack, Text, Actionsheet, useDisclose, Box, Button } from "native-base";
 import Constants from 'expo-constants';
-import { API_KEY } from "react-native-dotenv";
+import { API_KEY } from 'react-native-dotenv';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 // import Geolocation from 'react-native-geolocation-service';
 import * as Location from 'expo-location';
+import { MaterialIcons } from '@expo/vector-icons';
+// import BottomList from '../lists/BottomList';
 
 const GooglePlacesInput = () => {
     const {
@@ -34,7 +36,7 @@ const GooglePlacesInput = () => {
     }, []);
 
     return (
-        <VStack
+        <HStack
             // pt={20}
             // px={10}
             zIndex={2}
@@ -74,6 +76,11 @@ const GooglePlacesInput = () => {
             // currentLocationLabel='Current location'
             // getAddressText={(data) => data.description}
             />
+
+            <Button bgColor="danger.200" ml={2} onPress={onOpen} h={12}>
+                <MaterialIcons name="filter-list" size={24} color="white" />
+            </Button>
+
             <Actionsheet isOpen={isOpen} onClose={onClose}>
                 <Actionsheet.Content>
                     <Box w="100%" h={60} px={4} justifyContent="center">
@@ -90,7 +97,7 @@ const GooglePlacesInput = () => {
                     <Actionsheet.Item>Cancel</Actionsheet.Item>
                 </Actionsheet.Content>
             </Actionsheet>
-        </VStack>
+        </HStack>
 
     );
 };
