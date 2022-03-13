@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import HomeScreen from '../screens/HomeScreen'
@@ -7,6 +7,7 @@ import BookingsScreen from '../screens/BookingsScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import SvgUri from 'react-native-svg-uri'
+import Authentication from '../layout/authentication'
 
 const Tab = createBottomTabNavigator()
 
@@ -68,10 +69,18 @@ const Stack = createNativeStackNavigator()
 const AppStack = () => {
   // temporarily hides all warnings
   // console.disableYellowBox = true;
+  const [accessToken, setAccessToken] = useState();
+  const [userInfo, setUserInfo] = useState();
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen
+        name="Authentication"
+        options={{
+            headerShown: false,
+          }}
+       >{()=> <Authentication setAccessToken={setAccessToken} setUserInfo={setUserInfo} accessToken={accessToken} userInfo={userInfo} />}</Stack.Screen>
         <Stack.Screen
           name="HomePage"
           component={TabStack}
@@ -79,7 +88,7 @@ const AppStack = () => {
             headerShown: false,
           }}
         />
-        {/* <Stack.Screen
+        {/* <Stack.Screen 
           name="Details Page"
           component={DetailScreen}
           options={({ route }) => ({
@@ -87,6 +96,7 @@ const AppStack = () => {
             headerBackTitle: "Back to List",
           })}
         /> */}
+       
       </Stack.Navigator>
     </NavigationContainer>
   )

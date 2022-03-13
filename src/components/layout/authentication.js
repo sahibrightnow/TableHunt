@@ -2,16 +2,16 @@ import React from 'react';
 import * as Google from 'expo-google-app-auth'
 import * as WebBrowser from 'expo-web-browser';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image,  } from 'react-native';
 import { Heading, Button, VStack, Flex, Link, Box } from 'native-base';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
-const authentication = () => {
-  const [accessToken, setAccessToken] = React.useState();
-  const [userInfo, setUserInfo] = React.useState();
+const Authentication = ({setAccessToken, setUserInfo, navigation, userInfo, accessToken}) => {
+
 
   async function signInWithGoogleAsync() {
+   
     try {
       const result = await Google.logInAsync({
         expoClientId: "32874219277-hu0dk0feqc5ovl3gjg6b4i2lieopbi6a.apps.googleusercontent.com",
@@ -19,15 +19,21 @@ const authentication = () => {
         iosClientId: "32874219277-9fngpuj5j8kfi47dl51qheis3r9btt15.apps.googleusercontent.com",
         scopes: ["profile", "email"]
       });
+      
 
       if (result.type === "success") {
         setAccessToken(result.accessToken);
+        navigation.navigate('HomePage', {
+          accessToken: result.accessToken,
+        })
+
       } else {
         console.log("Permission denied");
       }
     } catch (e) {
       console.log(e);
     }
+  
   }
 
 
@@ -64,18 +70,18 @@ const authentication = () => {
           <Heading style={styles.tableHunt}>Table Hunt</Heading>
           <Text style={styles.subheading}>Choose your seating in seconds for your next occasion</Text>
           <Text style={styles.subtitle}>You signup, we reserve. Quick!</Text>
-          <Button borderRadius={8} width='50%' mt='5' >Continue with email</Button>
+          <Button borderRadius={8} width='50%' mt='5' height='50' onPress={()=> console.log('Continue with email')} >Continue with email</Button>
 
-          <Button style={styles.button} borderRadius={8} width='50%' mt='5' onPress={accessToken ? getUserData : signInWithGoogleAsync}>
+          <Button style={styles.button} borderRadius={8} width='30%' mt='5' onPress={()=> alert('Continue with email')}>
             <MaterialCommunityIcons name="google" size={24} color="black" />
             <Text>{accessToken ? "Get user data" : "Continue with Google"}</Text>
           </Button>
-          <Text>Not a member?<Link>Sign up</Link></Text>
+          <Text >Not a member?<Link>Sign up</Link></Text>
           <StatusBar style="auto" />
 
           <Text>Are you a restaurant owner?</Text>
-          <Button borderRadius={8} width='50%' mt='5'>Continue with email</Button>
-          <Button borderRadius={8} width='50%' mt='5' onPress={accessToken ? getUserData : signInWithGoogleAsync}>
+          <Button height='50' borderRadius={8} width='50%' mt='5'>Continue with email</Button>
+          <Button  height='50' borderRadius={8} width='50%' mt='5' onPress={accessToken ? getUserData : signInWithGoogleAsync}>
             {accessToken ? "Get user data" : "Continue with google"}
           </Button>
 
@@ -88,7 +94,7 @@ const authentication = () => {
   )
 }
 
-export default authentication
+export default Authentication
 
 const styles = StyleSheet.create({
   container: {
