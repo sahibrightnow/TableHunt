@@ -70,9 +70,9 @@ const Authentication = ({setAccessToken, setUserInfo, navigation, userInfo, acce
           <Heading style={styles.tableHunt}>Table Hunt</Heading>
           <Text style={styles.subheading}>Choose your seating in seconds for your next occasion</Text>
           <Text style={styles.subtitle}>You signup, we reserve. Quick!</Text>
-          <Button borderRadius={8} width='50%' mt='5' height='50' onPress={()=> console.log('Continue with email')} >Continue with email</Button>
+          <Button borderRadius={8} width='50%' mt='5' height='50' onPress={()=> accessToken ? getUserData : signInWithGoogleAsync} >Continue with email</Button>
 
-          <Button style={styles.button} borderRadius={8} width='30%' mt='5' onPress={()=> alert('Continue with email')}>
+          <Button style={styles.button} borderRadius={8} width='30%' mt='5' onPress={()=>  signInWithGoogleAsync()}>
             <MaterialCommunityIcons name="google" size={24} color="black" />
             <Text>{accessToken ? "Get user data" : "Continue with Google"}</Text>
           </Button>

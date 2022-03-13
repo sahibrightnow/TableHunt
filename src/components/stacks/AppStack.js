@@ -74,7 +74,7 @@ const AppStack = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName='Authentication'>
       <Stack.Screen
         name="Authentication"
         options={{
