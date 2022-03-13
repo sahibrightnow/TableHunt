@@ -5,10 +5,12 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image,  } from 'react-native';
 import { Heading, Button, VStack, Flex, Link, Box } from 'native-base';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 
-const Authentication = ({setAccessToken, setUserInfo, navigation, userInfo, accessToken}) => {
+const Authentication = ({setAccessToken, setUserInfo, userInfo, accessToken}) => {
 
+  const navigation = useNavigation();
 
   async function signInWithGoogleAsync() {
    
@@ -23,9 +25,12 @@ const Authentication = ({setAccessToken, setUserInfo, navigation, userInfo, acce
 
       if (result.type === "success") {
         setAccessToken(result.accessToken);
-        navigation.navigate('HomePage', {
-          accessToken: result.accessToken,
-        })
+
+        
+          navigation.navigate('HomePage', {
+            accessToken: result.accessToken,
+          })
+        
 
       } else {
         console.log("Permission denied");
