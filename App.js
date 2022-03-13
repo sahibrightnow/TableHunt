@@ -3,6 +3,7 @@ import { NativeBaseProvider, extendTheme } from 'native-base'
 import AppStack from './src/components/stacks/AppStack'
 import AppLoading from 'expo-app-loading'
 import { StyleSheet, Text, View, Image, Button } from 'react-native'
+import React, {useState} from 'react'
 import Authentication from './src/components/layout/authentication'
 import {
   useFonts,
@@ -22,6 +23,8 @@ const styles = StyleSheet.create({
 })
 
 const App = () => {
+  const [accessToken, setAccessToken] = useState();
+  const [userInfo, setUserInfo] = useState();
   // Color Palette
   // black = #14110F
   // singletons.white = #FFFFFF
@@ -97,7 +100,7 @@ const App = () => {
       <AppStack />
       <StatusBar style="light" />
       {/* <View style={styles.container}>
-        <Authentication />
+        <Authentication setAccessToken={setAccessToken} setUserInfo={setUserInfo} userInfo={userInfo} accessToken={accessToken} />
         <StatusBar style="auto" />
       </View> */}
     </NativeBaseProvider>
