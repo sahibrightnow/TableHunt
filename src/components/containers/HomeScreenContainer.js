@@ -27,6 +27,7 @@ const HomeScreenContainer = ({ data }) => {
   const [nearbyPlaces, setNearbyPlaces] = useState([])
   const [location, setLocation] = useState()
 
+
   const getLocation = async () => {
     try {
       const { granted } = await Location.requestPermissionsAsync()
@@ -52,7 +53,6 @@ const HomeScreenContainer = ({ data }) => {
       )
       .then((result) => {
         setNearbyPlaces(result.data.results)
-        console.log('setNearbyPlaces', result.data.results)
       })
       .catch((error) => {
         console.log(error)
@@ -62,7 +62,7 @@ const HomeScreenContainer = ({ data }) => {
   return (
     <>
       <GooglePlacesInput />
-      <MapInput />
+      <MapInput nearbyPlaces={nearbyPlaces} />
       <RestaurantList nearbyPlaces={nearbyPlaces} />
     </>
   )
