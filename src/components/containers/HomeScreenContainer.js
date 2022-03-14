@@ -63,7 +63,6 @@ const HomeScreenContainer = ({ data }) => {
     <>
       <GooglePlacesInput />
       <MapInput />
-
       <RestaurantList nearbyPlaces={nearbyPlaces} />
     </>
   )

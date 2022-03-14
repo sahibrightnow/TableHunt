@@ -67,7 +67,7 @@ const Stack = createNativeStackNavigator()
 
 const AppStack = () => {
   // temporarily hides all warnings
-  // console.disableYellowBox = true;
+  console.disableYellowBox = true;
 
   return (
     <NavigationContainer>
