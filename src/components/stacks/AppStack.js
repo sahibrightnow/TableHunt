@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import HomeScreen from '../screens/HomeScreen'
@@ -8,11 +8,13 @@ import ProfileScreen from '../screens/ProfileScreen'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import SvgUri from 'react-native-svg-uri'
 import Authentication from '../layout/authentication'
+import RestaurantScreen from '../screens/RestaurantScreen'
 
 const Tab = createBottomTabNavigator()
 
 const TabStack = () => (
-  <Tab.Navigator>
+
+  < Tab.Navigator >
     <Tab.Screen
       name="Home"
       component={HomeScreen}
@@ -61,26 +63,28 @@ const TabStack = () => (
         ),
       }}
     />
-  </Tab.Navigator>
+  </Tab.Navigator >
 )
 
 const Stack = createNativeStackNavigator()
 
 const AppStack = () => {
   // temporarily hides all warnings
-  // console.disableYellowBox = true;
+  console.disableYellowBox = true;
+
   const [accessToken, setAccessToken] = useState();
   const [userInfo, setUserInfo] = useState();
 
   return (
+
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Authentication'>
-      <Stack.Screen
-        name="Authentication"
-        options={{
+        <Stack.Screen
+          name="Authentication"
+          options={{
             headerShown: false,
           }}
-       >{()=> <Authentication setAccessToken={setAccessToken} setUserInfo={setUserInfo} accessToken={accessToken} userInfo={userInfo} />}</Stack.Screen>
+        >{() => <Authentication setAccessToken={setAccessToken} setUserInfo={setUserInfo} accessToken={accessToken} userInfo={userInfo} />}</Stack.Screen>
         <Stack.Screen
           name="HomePage"
           component={TabStack}
@@ -88,15 +92,14 @@ const AppStack = () => {
             headerShown: false,
           }}
         />
-        {/* <Stack.Screen 
-          name="Details Page"
-          component={DetailScreen}
-          options={({ route }) => ({
-            title: route.params.title,
-            headerBackTitle: "Back to List",
+        <Stack.Screen
+          name="Restaurant Page"
+          component={RestaurantScreen}
+          options={() => ({
+            headerBackTitle: "Back",
           })}
-        /> */}
-       
+        />
+
       </Stack.Navigator>
     </NavigationContainer>
   )
