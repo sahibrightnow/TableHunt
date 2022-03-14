@@ -1,8 +1,12 @@
-import { Box, Stack, Text, Heading, Image } from 'native-base'
+import { Box, Stack, Text, Heading, Image, VStack, Button } from 'native-base'
 import { API_KEY } from 'react-native-dotenv'
+import { useNavigation } from '@react-navigation/native';
+
 
 
 const RestaurantCard = ({ restaurantName, key, photoRef }) => {
+  const navigation = useNavigation();
+
   return (
     <Box bg="white" shadow={2} rounded="lg" maxWidth="260px" m={'10px'} key={key}>
       <Image
@@ -22,6 +26,17 @@ const RestaurantCard = ({ restaurantName, key, photoRef }) => {
           With lush green meadows, rivers clear as crystal, pine-covered hills
         </Text>
       </Stack>
+
+      <VStack alignItems="center">
+        <Button
+          width="100%"
+          onPress={() =>
+            navigation.navigate("Restaurant Page", { restaurantName })
+          }
+        >
+          More Details
+        </Button>
+      </VStack>
     </Box>
   )
 }

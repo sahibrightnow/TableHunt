@@ -8,11 +8,13 @@ import ProfileScreen from '../screens/ProfileScreen'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import SvgUri from 'react-native-svg-uri'
 import Authentication from '../layout/authentication'
+import RestaurantScreen from '../screens/RestaurantScreen'
 
 const Tab = createBottomTabNavigator()
 
 const TabStack = () => (
-  <Tab.Navigator>
+
+  < Tab.Navigator >
     <Tab.Screen
       name="Home"
       component={HomeScreen}
@@ -61,7 +63,7 @@ const TabStack = () => (
         ),
       }}
     />
-  </Tab.Navigator>
+  </Tab.Navigator >
 )
 
 const Stack = createNativeStackNavigator()
@@ -74,6 +76,7 @@ const AppStack = () => {
   const [userInfo, setUserInfo] = useState();
 
   return (
+
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Authentication'>
         <Stack.Screen
@@ -89,14 +92,13 @@ const AppStack = () => {
             headerShown: false,
           }}
         />
-        {/* <Stack.Screen 
-          name="Details Page"
-          component={DetailScreen}
-          options={({ route }) => ({
-            title: route.params.title,
-            headerBackTitle: "Back to List",
+        <Stack.Screen
+          name="Restaurant Page"
+          component={RestaurantScreen}
+          options={() => ({
+            headerBackTitle: "Back",
           })}
-        /> */}
+        />
 
       </Stack.Navigator>
     </NavigationContainer>
