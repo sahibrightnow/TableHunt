@@ -47,13 +47,12 @@ const HomeScreenContainer = ({ data }) => {
   useEffect(() => {
     axios
       .get(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?radius=50000&type=restaurant&keyword=italian&key=${API_KEY}&maxprice=4&minprice=2&location=${
-          location ? location.latitude : null
+        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?radius=50000&type=restaurant&keyword=italian&key=${API_KEY}&maxprice=4&minprice=2&location=${location ? location.latitude : null
         }%2C${location ? location.longitude : null}`
       )
       .then((result) => {
         setNearbyPlaces(result.data.results)
-        // console.log('setNearbyPlaces', result.data.results)
+        console.log('setNearbyPlaces', result.data.results)
       })
       .catch((error) => {
         console.log(error)
@@ -64,6 +63,7 @@ const HomeScreenContainer = ({ data }) => {
     <>
       <GooglePlacesInput />
       <MapInput />
+
       <RestaurantList nearbyPlaces={nearbyPlaces} />
     </>
   )
