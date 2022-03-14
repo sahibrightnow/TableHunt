@@ -39,7 +39,7 @@ const RestaurantList = ({ nearbyPlaces }) => {
       <ScrollView horizontal={true}>
         {nearbyPlaces && nearbyPlaces.map((el, index) => (
           // console.log(el.photos[0].photo_reference)
-          <RestaurantCard restaurantName={el.name} key={index} photoRef={el.photos[0].photo_reference} />
+          <RestaurantCard restaurant={el} key={index} />
         ))}
       </ScrollView>
     </View>
