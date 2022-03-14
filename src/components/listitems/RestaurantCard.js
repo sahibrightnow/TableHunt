@@ -1,14 +1,13 @@
 import { Box, Stack, Text, Heading, Image } from 'native-base'
-import React from 'react'
+import { API_KEY } from 'react-native-dotenv'
 
 
-const RestaurantCard = ({restaurantName, key}) => {
-  console.log("hello form card component ", Math.random())
+const RestaurantCard = ({ restaurantName, key, photoRef }) => {
   return (
     <Box bg="white" shadow={2} rounded="lg" maxWidth="260px" m={'10px'} key={key}>
       <Image
         source={{
-          uri: 'https://sample-example.nativebase.io/static/media/dawki-river.ebbf5434.png',
+          uri: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoRef}&key=${API_KEY}`
         }}
         alt="image base"
         resizeMode="cover"
@@ -16,15 +15,11 @@ const RestaurantCard = ({restaurantName, key}) => {
         roundedTop="md"
       />
       <Stack space={4} p={[4, 4, 8]}>
-        <Text color="gray.400">June 22, 2021</Text>
         <Heading size={['md', 'lg', 'md']} noOfLines={2}>
-          {/* The Stunning Dawki River in Meghalaya is So Clear That Boats Appear
-          Floating in Air */}
-          {restaurantName ? restaurantName : "something"}
+          {restaurantName ? restaurantName : "Name not fetched"}
         </Heading>
         <Text noOfLines={[4, 4, 2]} color="gray.700" lineHeight={'22px'}>
-          With lush green meadows, rivers clear as crystal, pine-covered hills,
-          gorgeous waterfalls, lakes and majestic forests, the mesmerizing…
+          With lush green meadows, rivers clear as crystal, pine-covered hills
         </Text>
       </Stack>
     </Box>

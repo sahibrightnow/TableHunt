@@ -27,18 +27,22 @@
 // export default BottomList;
 
 import RestaurantCard from '../listitems/RestaurantCard'
-import { Container, ScrollView, Text} from 'native-base'
+import FilterButtonsList from '../lists/FilterButtonsList'
+import { Container, ScrollView, View, Text } from 'native-base'
 import React from 'react'
+
 
 const RestaurantList = ({ nearbyPlaces }) => {
   return (
-    <Container flex={1}>
+    <View flex={1} p={'10px'}>
+      <FilterButtonsList totalMatchedRestaurants={nearbyPlaces.length} />
       <ScrollView horizontal={true}>
         {nearbyPlaces && nearbyPlaces.map((el, index) => (
-          <RestaurantCard restaurantName={el.name} key={index}/>
-        ))} 
+          // console.log(el.photos[0].photo_reference)
+          <RestaurantCard restaurantName={el.name} key={index} photoRef={el.photos[0].photo_reference} />
+        ))}
       </ScrollView>
-     </Container>
+    </View>
   )
 }
 
