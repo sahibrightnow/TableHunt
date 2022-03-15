@@ -1,8 +1,6 @@
 import { Box, Stack, Text, Heading, Image, VStack, Button } from 'native-base'
 import { API_KEY } from 'react-native-dotenv'
-import { useNavigation } from '@react-navigation/native';
-
-
+import { useNavigation } from '@react-navigation/native'
 
 const RestaurantCard = ({ restaurant }) => {
   const navigation = useNavigation()
@@ -86,17 +84,6 @@ const RestaurantCard = ({ restaurant }) => {
         </Text>
 
       </Stack>
-
-      <VStack alignItems="center">
-        {/* <Button
-          width="100%"
-          onPress={() =>
-            navigation.navigate("Restaurant Page", { restaurantName })
-          }
-        >
-          More Details
-        </Button> */}
-      </VStack>
     </Box>
   )
 }

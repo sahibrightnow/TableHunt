@@ -5,13 +5,19 @@ import {
     Stack,
     Heading,
     Text,
+    Button,
     Box,
     AspectRatio,
     Image,
 } from "native-base";
 import React from "react";
+import { MaterialIcons } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native';
+
 
 const RestaurantContainer = ({ data }) => {
+    const navigation = useNavigation()
+
     return (
         <VStack space={5} py={3} px={5}>
             <Stack p="6" space={2}>
@@ -51,6 +57,21 @@ const RestaurantContainer = ({ data }) => {
                         </Text>
                     </Stack>
                 </HStack>
+
+                {/* <Button bgColor="danger.200" ml={2} h={'34px'} w={16} alignItems="flex-end">
+                    Book
+                </Button> */}
+
+                <Button
+                    width="33%"
+                    bgColor={'green.300'}
+                    onPress={() =>
+                        navigation.navigate("Booking Page")
+                        // { restaurantName })
+                    }
+                >
+                    View Menu
+                </Button>
             </Stack>
         </VStack>
     );

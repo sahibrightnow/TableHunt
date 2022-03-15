@@ -101,6 +101,14 @@ const AppStack = () => {
           })}
         />
 
+        <Stack.Screen
+          name="Booking Page"
+          component={BookingsScreen}
+          options={() => ({
+            headerBackTitle: "Back",
+          })}
+        />
+
       </Stack.Navigator>
     </NavigationContainer>
   )

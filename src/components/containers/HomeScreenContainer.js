@@ -26,8 +26,8 @@ const HomeScreenContainer = ({ data }) => {
   // NEARBY PLACES
   const [nearbyPlaces, setNearbyPlaces] = useState([])
   const [location, setLocation] = useState()
-  const [mapRadius, setMapRadius] = useState(50000)
-  const [searchKeyword, setSearchKeyword] = useState('french')
+  const [mapRadius, setMapRadius] = useState(30000)
+  const [searchKeyword, setSearchKeyword] = useState('punjabi')
   const mapRef = useRef()
 
 

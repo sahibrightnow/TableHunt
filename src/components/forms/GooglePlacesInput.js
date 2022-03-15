@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { StyleSheet } from 'react-native'
-import { HStack, useDisclose, } from 'native-base'
+import { HStack, useDisclose, Button } from 'native-base'
 import Constants from 'expo-constants'
 import { API_KEY } from 'react-native-dotenv'
 import axios from 'axios'
@@ -75,6 +75,9 @@ const GooglePlacesInput = ({ location, setLocation }) => {
       // currentLocationLabel='Current location'
       // getAddressText={(data) => data.description}
       />
+      {/* <Button bgColor="danger.200" ml={2} h={'34px'} w={12} alignItems="flex-end">
+        <MaterialIcons name="filter-list" size={20} color="white" />
+      </Button> */}
 
     </HStack>
   )
