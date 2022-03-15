@@ -5,34 +5,7 @@ import * as Location from 'expo-location'
 import React, { useState, useEffect, createRef } from 'react'
 import { TouchableOpacity, Image } from "react-native";
 
-const MapInput = ({ navigation, nearbyPlaces }) => {
-  const [location, setLocation] = useState()
-  const mapRef = createRef()
-
-
-  const getLocation = async () => {
-    try {
-      const { granted } = await Location.requestPermissionsAsync()
-      if (!granted) return
-      const {
-        coords: { latitude, longitude },
-      } = await Location.getCurrentPositionAsync()
-      setLocation({ latitude, longitude })
-
-      mapRef.current.animateToRegion({
-        latitude: latitude,
-        longitude: longitude,
-        latitudeDelta: 0.005,
-        longitudeDelta: 0.005
-      });
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  useEffect(() => {
-    getLocation()
-  }, [])
+const MapInput = ({ navigation, nearbyPlaces, location, getLocation, mapRef }) => {
   return (
     <MapView
       ref={mapRef}
@@ -65,6 +38,7 @@ const MapInput = ({ navigation, nearbyPlaces }) => {
       {
         nearbyPlaces && nearbyPlaces.map((el, index) => (
           <MapView.Marker
+            key={index}
             coordinate={{
               latitude: el.geometry.location.lat,
               longitude: el.geometry.location.lng

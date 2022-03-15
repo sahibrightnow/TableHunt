@@ -1,5 +1,5 @@
 import { Center, VStack, Text, ScrollView, View } from 'native-base'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import GooglePlacesInput from '../forms/GooglePlacesInput'
 import MapInput from '../forms/MapInput'
 import axios from 'axios'
@@ -26,33 +26,45 @@ const HomeScreenContainer = ({ data }) => {
   // NEARBY PLACES
   const [nearbyPlaces, setNearbyPlaces] = useState([])
   const [location, setLocation] = useState()
+  const [mapRadius, setMapRadius] = useState(50000)
+  const [searchKeyword, setSearchKeyword] = useState('french')
+  const mapRef = useRef()
 
 
   const getLocation = async () => {
     try {
-      const { granted } = await Location.requestPermissionsAsync()
+      const { granted } = await Location.requestForegroundPermissionsAsync()
       if (!granted) return
       const {
         coords: { latitude, longitude },
       } = await Location.getCurrentPositionAsync()
       setLocation({ latitude, longitude })
+
+      mapRef.current.animateToRegion({
+        latitude: latitude,
+        longitude: longitude,
+        latitudeDelta: 0.005,
+        longitudeDelta: 0.005
+      })
     } catch (error) {
       console.log(error)
     }
   }
 
   useEffect(() => {
+    // show results based on users current location
     getLocation()
   }, [])
 
   useEffect(() => {
+    // get Nearby Places
     axios
       .get(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?radius=50000&type=restaurant&keyword=italian&key=${API_KEY}&maxprice=4&minprice=2&location=${location ? location.latitude : null
+        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?radius=${mapRadius}&type=restaurant&keyword=${searchKeyword}&key=${API_KEY}&maxprice=4&minprice=2&location=${location ? location.latitude : null
         }%2C${location ? location.longitude : null}`
       )
       .then((result) => {
-        setNearbyPlaces(result.data.results)
+        setNearbyPlaces(result?.data?.results)
       })
       .catch((error) => {
         console.log(error)
@@ -61,8 +73,8 @@ const HomeScreenContainer = ({ data }) => {
 
   return (
     <>
-      <GooglePlacesInput />
-      <MapInput nearbyPlaces={nearbyPlaces} />
+      <GooglePlacesInput location={location} setLocation={setLocation} />
+      <MapInput nearbyPlaces={nearbyPlaces} location={location} getLocation={getLocation} mapRef={mapRef} />
       <RestaurantList nearbyPlaces={nearbyPlaces} />
     </>
   )

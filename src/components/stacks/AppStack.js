@@ -85,6 +85,7 @@ const AppStack = () => {
             headerShown: false,
           }}
         >{() => <Authentication setAccessToken={setAccessToken} setUserInfo={setUserInfo} accessToken={accessToken} userInfo={userInfo} />}</Stack.Screen>
+
         <Stack.Screen
           name="HomePage"
           component={TabStack}

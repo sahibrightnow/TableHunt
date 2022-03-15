@@ -22,27 +22,18 @@ const Authentication = ({ setAccessToken, setUserInfo, userInfo, accessToken }) 
         scopes: ["profile", "email"]
       });
 
-
       if (result.type === "success") {
         setAccessToken(result.accessToken);
-
-
         navigation.navigate('HomePage', {
           accessToken: result.accessToken,
         })
-
-
       } else {
         console.log("Permission denied");
       }
     } catch (e) {
       console.log(e);
     }
-
   }
-
-
-
 
   async function getUserData() {
     let userInfoResponse = await fetch("https://www.googleapis.com/userinfo/v2/me", {

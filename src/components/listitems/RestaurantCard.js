@@ -4,14 +4,14 @@ import { useNavigation } from '@react-navigation/native';
 
 
 
-const RestaurantCard = ({ key, restaurant }) => {
+const RestaurantCard = ({ restaurant }) => {
   const navigation = useNavigation()
 
-  const restaurantName = restaurant.name
-  const photoRef = restaurant.photos[0].photo_reference
-  const restaurantRating = restaurant.rating
-  const totalUserReviews = restaurant.user_ratings_total
-  const priceLevel = restaurant.price_level
+  const restaurantName = restaurant?.name
+  const photoRef = restaurant?.photos[0]?.photo_reference
+  const restaurantRating = restaurant?.rating
+  const totalUserReviews = restaurant?.user_ratings_total
+  const priceLevel = restaurant?.price_level
   let priceRating
   let ratingDescription
 
@@ -50,7 +50,7 @@ const RestaurantCard = ({ key, restaurant }) => {
   }
 
   return (
-    <Box bg="white" shadow={2} rounded="lg" width="300px" m={'10px'} key={key}>
+    <Box bg="white" shadow={2} rounded="lg" width="300px" m={'10px'}>
       <Image
         source={{
           uri: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoRef}&key=${API_KEY}`
