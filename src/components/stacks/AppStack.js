@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,  useContext } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import HomeScreen from '../screens/HomeScreen'
@@ -10,11 +10,16 @@ import SvgUri from 'react-native-svg-uri'
 import Authentication from '../layout/authentication'
 import RestaurantScreen from '../screens/RestaurantScreen'
 
+
+
+
+
 const Tab = createBottomTabNavigator()
 
 const TabStack = () => (
+ 
 
-  < Tab.Navigator >
+  <Tab.Navigator>
     <Tab.Screen
       name="Home"
       component={HomeScreen}
@@ -55,13 +60,15 @@ const TabStack = () => (
     />
     <Tab.Screen
       name="Profile"
-      component={ProfileScreen}
+      component={()=> <ProfileScreen/>}
       options={{
         headerShown: false,
         tabBarIcon: ({ focused, color, size }) => (
           <SvgUri source={require('../assets/nav_icons/profileIcon.svg')} />
         ),
       }}
+     
+
     />
   </Tab.Navigator >
 )
@@ -91,7 +98,7 @@ const AppStack = () => {
           options={{
             headerShown: false,
           }}
-        />
+       />
         <Stack.Screen
           name="Restaurant Page"
           component={RestaurantScreen}
@@ -99,7 +106,6 @@ const AppStack = () => {
             headerBackTitle: "Back",
           })}
         />
-
       </Stack.Navigator>
     </NavigationContainer>
   )
