@@ -4,6 +4,8 @@ import { Dimensions } from 'react-native'
 import * as Location from 'expo-location'
 import React, { useState, useEffect, createRef } from 'react'
 import { TouchableOpacity, Image } from "react-native";
+import SvgUri from 'react-native-svg-uri'
+
 
 const MapInput = ({ navigation, nearbyPlaces, location, getLocation, mapRef }) => {
   return (
@@ -27,11 +29,8 @@ const MapInput = ({ navigation, nearbyPlaces, location, getLocation, mapRef }) =
         width: 40, height: 40,
         position: "absolute", bottom: 20, right: 20, borderRadius: 30, backgroundColor: "#d2d2d2"
       }}>
-        {/* <Image
-          style={{ width: 60, height: 60, position: "absolute", bottom: 20, right: 20, borderRadius: 30 }}
-          source={require('../assets/current-location-icon.png')}
+        <SvgUri source={require('../assets/findLocation.svg')} />
 
-        /> */}
       </TouchableOpacity>
 
 

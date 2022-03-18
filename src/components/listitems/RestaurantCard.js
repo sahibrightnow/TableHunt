@@ -1,6 +1,8 @@
-import { Box, Stack, Text, Heading, Image, VStack, Button } from 'native-base'
+import { Box, Stack, Text, Heading, Image, Center, Button } from 'native-base'
 import { API_KEY } from 'react-native-dotenv'
 import { useNavigation } from '@react-navigation/native'
+import SvgUri from 'react-native-svg-uri'
+
 
 const RestaurantCard = ({ restaurant }) => {
   const navigation = useNavigation()
@@ -62,27 +64,33 @@ const RestaurantCard = ({ restaurant }) => {
         width="33%"
         bgColor={'green.300'}
         style={{
-          position: "absolute", bottom: 170, right: 15
+          position: "absolute", bottom: 125, right: 8
         }}
         onPress={() =>
-          navigation.navigate("Restaurant Page", { restaurantName })
+          navigation.navigate("Restaurant Page", { restaurant })
         }
       >
         View Menu
       </Button>
 
 
-      <Stack space={4} p={[4, 4, 8]}>
-        <Heading size={['md', 'lg', 'md']} noOfLines={2}>
-          {restaurantName ? restaurantName : "Name not fetched"}
+      <Stack space={2} p={[3, 3, 6]}>
+        <Heading size={'md'} noOfLines={2}>
+          {restaurantName ? restaurantName : "Name not Available"}
         </Heading>
-        <Text noOfLines={[4, 4, 2]} color="gray.700" lineHeight={'22px'}>
-          ⭐️ {restaurantRating} {ratingDescription}({totalUserReviews}) | Change later
-        </Text>
-        <Text noOfLines={[4, 4, 2]} color="danger.200" lineHeight={'20px'}>
-          {priceRating}
-        </Text>
+        <Stack space={1} mt={'auto'}>
+          <Text color="green.300">
+            <SvgUri source={require('../assets/star.svg')} />
+            {restaurantRating} {ratingDescription}
 
+            <Text color="gray.600">
+              ({totalUserReviews}) | Change later
+            </Text>
+          </Text>
+          <Text color="danger.300" ml={1}>
+            {priceRating}
+          </Text>
+        </Stack>
       </Stack>
     </Box>
   )

@@ -3,7 +3,7 @@ import { NativeBaseProvider, extendTheme } from 'native-base'
 import AppStack from './src/components/stacks/AppStack'
 import AppLoading from 'expo-app-loading'
 import { StyleSheet, Text, View, Image, Button } from 'react-native'
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import Authentication from './src/components/layout/authentication'
 import {
   useFonts,
@@ -65,6 +65,7 @@ const App = () => {
       danger: {
         100: '#ffd7dc',
         200: '#ef233c',
+        300: '#924344'
       },
       warning: {
         100: '#fff7db',
