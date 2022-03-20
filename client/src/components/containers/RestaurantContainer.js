@@ -107,7 +107,7 @@ const RestaurantContainer = ({ data }) => {
                 </Center>
             </VStack>
             {/* </VStack> */}
-        </ScrollView >
+        </ScrollView>
     );
 };
 
