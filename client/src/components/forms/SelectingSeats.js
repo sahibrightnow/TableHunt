@@ -371,7 +371,7 @@ const SelecingSeats = () => {
                 {/* Third column */}
                 <Container display="flex" ml="2" mt="-174">
                     {/* Table 7 */}
-                    <HStack mt="5" mb="5" display="flex" justifyContent="center" w="100">
+                    <HStack mt="5" mb="5" display="flex" justifyContent="center" w="103" borderWidth="1" borderColor="black">
                         <VStack display="flex" justifyContent="center">
                             <Box w="35" h="35" mr="2" borderColor="coolGray.400" borderWidth="1" _dark={{
                                 borderColor: "coolGray.600",
