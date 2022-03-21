@@ -1,17 +1,18 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import * as Google from 'expo-google-app-auth'
-import * as WebBrowser from 'expo-web-browser';
+
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, } from 'react-native';
 import { HStack, Button, VStack, Flex, Stack, Center, Divider, Link } from 'native-base';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import SvgUri from 'react-native-svg-uri'
+import { LoginContext } from '../context/LoginContext'
 
 
 
-const Authentication = ({ setAccessToken, setUserInfo, userInfo, accessToken }) => {
 
+const Authentication = () => {
+  const [accessToken, setAccessToken, userInfo, setUserInfo] = useContext(LoginContext)
   const navigation = useNavigation();
 
   async function signInWithGoogleAsync() {
@@ -26,9 +27,10 @@ const Authentication = ({ setAccessToken, setUserInfo, userInfo, accessToken }) 
 
       if (result.type === "success") {
         setAccessToken(result.accessToken);
-        navigation.navigate('HomePage', {
-          accessToken: result.accessToken,
-        })
+        getUserData();
+        navigation.navigate('HomePage')
+
+
       } else {
         console.log("Permission denied");
       }
@@ -65,21 +67,14 @@ const Authentication = ({ setAccessToken, setUserInfo, userInfo, accessToken }) 
       <Flex alignItems="center">
         <View style={styles.container}>
           {showUserInfo()}
-          {/* <Heading style={styles.tableHunt} ml={'auto'} mr={'auto'} mt={'100px'}>Table Hunt</Heading> */}
-          <Stack alignItems="center" style={styles.tableHunt} mt={'100px'} mb={'20'} >
-            <SvgUri source={require('../assets/app_logo.svg')} />
-          </Stack>
-          <Text bold style={styles.subheading} noOfLines={3}>Find your seating in seconds for your next occasion</Text>
-          <Text style={styles.subtitle}>You signup, We reserve. Quick!</Text>
-
-          <Button style={styles.button} borderRadius={8} width='100%' mt='5' onPress={() => signInWithGoogleAsync()} alignItems='center'>
-            <HStack space={2}>
-              {/* <MaterialCommunityIcons name="google" size={26} color="green" /> */}
-              <SvgUri source={require('../assets/google_logo.svg')} />
-              <Center>
-                <Text>{accessToken ? "Logging in..." : "SignUp with Google"}</Text>
-              </Center>
-            </HStack>
+          <Heading style={styles.tableHunt}>TableHunt</Heading>
+          <Text style={styles.subheading}>Choose your seating in seconds for your next occasion</Text>
+          <Text style={styles.subtitle}>You signup, we reserve. Quick!</Text>
+          <Button borderRadius={8} width='50%' mt='5' height='50' onPress={() => accessToken ? getUserData : signInWithGoogleAsync} >Continue with email</Button>
+         
+          <Button style={styles.button} borderRadius={8} width='30%' mt='5' onPress={() => signInWithGoogleAsync()}>
+            <MaterialCommunityIcons name="google" size={24} color="black" />
+            <Text>{accessToken ? "Get user data" : "Continue with Google"}</Text>
           </Button>
 
           <Divider m={'5'} thickness="1" />

@@ -1,12 +1,30 @@
-import { Center, VStack } from "native-base";
-import React from "react";
+import { View, Image, Text, Center } from "native-base";
+import React, {useContext} from "react";
+import { StyleSheet } from "react-native";
+import { LoginContext } from "../context/LoginContext";
 
-const ProfileScreenContainer = ({ data }) => {
+
+const ProfileScreenContainer = () => {
+  const [userInfo] = useContext(LoginContext)
   return (
-    <VStack space={5} py={10} px={5}>
-      <Center>Profile SCREEN</Center>
-    </VStack>
+    <View style={styles.userInfo}>
+
+          <Image source={{ uri: userInfo.picture }} style={styles.profilePic} />
+          <Text style={{ fontSize: 14 }}>Welcome {userInfo.name}</Text>
+          <Text>{userInfo.email}</Text>
+        </View>
   );
 };
 
 export default ProfileScreenContainer;
+
+const styles = StyleSheet.create({
+  userInfo: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  profilePic: {
+    width: 50,
+    height: 50
+  }
+ })
