@@ -72,8 +72,7 @@ const AppStack = () => {
   // temporarily hides all warnings
   console.disableYellowBox = true;
 
-  const [accessToken, setAccessToken] = useState();
-  const [userInfo, setUserInfo] = useState();
+
 
   return (
 
@@ -84,7 +83,7 @@ const AppStack = () => {
           options={{
             headerShown: false,
           }}
-        >{() => <Authentication setAccessToken={setAccessToken} setUserInfo={setUserInfo} accessToken={accessToken} userInfo={userInfo} />}</Stack.Screen>
+        >{() => <Authentication />}</Stack.Screen>
 
         <Stack.Screen
           name="HomePage"
