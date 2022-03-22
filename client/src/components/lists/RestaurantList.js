@@ -1,19 +1,31 @@
 import RestaurantCard from '../listitems/RestaurantCard'
 import FilterButtonsList from '../lists/FilterButtonsList'
-import { Container, ScrollView, View, Text } from 'native-base'
+import { HStack, ScrollView, View, VStack, Skeleton } from 'native-base'
+import SkeletonCard from '../listitems/SkeletonCard'
 import React from 'react'
 
+const RestaurantList = ({ nearbyPlaces, isLoaded, setIsLoaded }) => {
 
-const RestaurantList = ({ nearbyPlaces }) => {
+
   return (
     <View flex={1} p={'10px'}>
-      <FilterButtonsList totalMatchedRestaurants={nearbyPlaces.length} />
-      <ScrollView horizontal={true}>
-        {nearbyPlaces && nearbyPlaces.map((el, index) => (
-          // console.log(el.photos[0].photo_reference)
-          <RestaurantCard key={index} restaurant={el} />
-        ))}
-      </ScrollView>
+      <FilterButtonsList
+        totalMatchedRestaurants={nearbyPlaces.length} isLoaded={isLoaded} />
+      {/* {nearbyPlaces.length > 0 ? setIsLoaded(true) : setIsLoaded(false)} */}
+
+      {isLoaded
+        ?
+        <ScrollView horizontal={true}>
+          {nearbyPlaces.map((el, index) => (
+            <RestaurantCard key={index} restaurant={el} />
+          ))}
+        </ScrollView>
+        :
+        <HStack space={4}>
+          <SkeletonCard />
+          <SkeletonCard />
+        </HStack>
+      }
     </View>
   )
 }

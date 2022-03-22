@@ -2,17 +2,20 @@ import React, { useState } from 'react'
 import { View, Button, useDisclose, Heading, Actionsheet, Box, Text, Slider, Radio, Stack } from 'native-base'
 import { MaterialIcons } from '@expo/vector-icons'
 
-const FilterButtonsList = ({ totalMatchedRestaurants }) => {
+const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded }) => {
     const [onChangeRadius, setOnChangeRadius] = useState(20);
     const [onChangeRating, setOnChangeRating] = useState(3);
 
     const { isOpen, onOpen, onClose } = useDisclose()
     // console.log("totalMatchedRestaurants", totalMatchedRestaurants)
+    // { totalMatchedRestaurants > 0 ? setIsLoaded(true) : setIsLoaded(false) }
+    // { console.log("TotalMatchedRestaurants in FilterBUttonsList Page", totalMatchedRestaurants) }
     return (
         // <ScrollView horizontal={true}>
         //     <FilterButtons />
+
         <View display={'flex'} justifyContent="space-between" flexDirection={'row'}>
-            <Heading size="md" pt={'3px'}> {totalMatchedRestaurants ? `${totalMatchedRestaurants} Restaurants found` : `Looking up restaurants...`}</Heading>
+            <Heading size="md" pt={'3px'}> {isLoaded && totalMatchedRestaurants ? `${totalMatchedRestaurants} Restaurants found` : `Finding Restaurants...`}</Heading>
             <Button bgColor="danger.300" ml={2} h={'34px'} onPress={onOpen} w={12} alignItems="flex-end">
                 <MaterialIcons name="filter-list" size={20} color="white" />
             </Button>

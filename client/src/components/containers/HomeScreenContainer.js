@@ -28,17 +28,20 @@ const HomeScreenContainer = ({ data }) => {
   const [location, setLocation] = useState()
   const [mapRadius, setMapRadius] = useState(30000)
   const [searchKeyword, setSearchKeyword] = useState('english')
+  const [isLoaded, setIsLoaded] = useState(false)
   const mapRef = useRef()
 
 
   const getLocation = async () => {
     try {
+      setIsLoaded(false)
       const { granted } = await Location.requestForegroundPermissionsAsync()
       if (!granted) return
       const {
         coords: { latitude, longitude },
       } = await Location.getCurrentPositionAsync()
       setLocation({ latitude, longitude })
+      setIsLoaded(true)
 
       mapRef.current.animateToRegion({
         latitude: latitude,
@@ -58,6 +61,8 @@ const HomeScreenContainer = ({ data }) => {
 
   useEffect(() => {
     // get Nearby Places
+    setIsLoaded(false)
+
     axios
       .get(
         `https://maps.googleapis.com/maps/api/place/nearbysearch/json?radius=${mapRadius}&type=restaurant&keyword=${searchKeyword}&key=${API_KEY}&maxprice=4&minprice=2&location=${location ? location.latitude : null
@@ -65,6 +70,7 @@ const HomeScreenContainer = ({ data }) => {
       )
       .then((result) => {
         setNearbyPlaces(result?.data?.results)
+        setIsLoaded(true)
       })
       .catch((error) => {
         console.log(error)
@@ -75,7 +81,7 @@ const HomeScreenContainer = ({ data }) => {
     <>
       <GooglePlacesInput location={location} setLocation={setLocation} />
       <MapInput nearbyPlaces={nearbyPlaces} location={location} getLocation={getLocation} mapRef={mapRef} />
-      <RestaurantList nearbyPlaces={nearbyPlaces} />
+      <RestaurantList nearbyPlaces={nearbyPlaces} isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
     </>
   )
 }

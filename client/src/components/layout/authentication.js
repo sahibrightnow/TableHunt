@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import * as Google from 'expo-google-app-auth'
-import * as WebBrowser from 'expo-web-browser';
+
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, } from 'react-native';
 import { HStack, Button, VStack, Flex, Stack, Center, Divider, Link } from 'native-base';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 import { useNavigation } from '@react-navigation/native';
 import SvgUri from 'react-native-svg-uri'
+import { LoginContext } from '../context/LoginContext'
 
 
+const Authentication = () => {
 
-const Authentication = ({ setAccessToken, setUserInfo, userInfo, accessToken }) => {
-
+  const [accessToken, setAccessToken, userInfo, setUserInfo] = useContext(LoginContext)
   const navigation = useNavigation();
 
   async function signInWithGoogleAsync() {
@@ -26,9 +27,8 @@ const Authentication = ({ setAccessToken, setUserInfo, userInfo, accessToken }) 
 
       if (result.type === "success") {
         setAccessToken(result.accessToken);
-        navigation.navigate('HomePage', {
-          accessToken: result.accessToken,
-        })
+        // getUserData();
+        navigation.navigate('HomePage')
       } else {
         console.log("Permission denied");
       }
@@ -77,7 +77,7 @@ const Authentication = ({ setAccessToken, setUserInfo, userInfo, accessToken }) 
               {/* <MaterialCommunityIcons name="google" size={26} color="green" /> */}
               <SvgUri source={require('../assets/google_logo.svg')} />
               <Center>
-                <Text>{accessToken ? "Logging in..." : "SignUp with Google"}</Text>
+                <Text>{accessToken ? "Logging in..." : "Sign Up with Google"}</Text>
               </Center>
             </HStack>
           </Button>

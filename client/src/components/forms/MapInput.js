@@ -30,7 +30,6 @@ const MapInput = ({ navigation, nearbyPlaces, location, getLocation, mapRef }) =
         position: "absolute", bottom: 20, right: 20, borderRadius: 30, backgroundColor: "#d2d2d2"
       }}>
         <SvgUri source={require('../assets/findLocation.svg')} />
-
       </TouchableOpacity>
 
 

@@ -2,9 +2,11 @@ import { StatusBar } from 'expo-status-bar'
 import { NativeBaseProvider, extendTheme } from 'native-base'
 import AppStack from './src/components/stacks/AppStack'
 import AppLoading from 'expo-app-loading'
-import { StyleSheet, Text, View, Image, Button } from 'react-native'
-import React, { useState } from 'react'
-import Authentication from './src/components/layout/authentication'
+import { StyleSheet } from 'react-native'
+import React from 'react'
+import { LoginProvider } from './src/components/context/LoginContext'
+
+
 import {
   useFonts,
   Poppins_400Regular,
@@ -23,8 +25,7 @@ const styles = StyleSheet.create({
 })
 
 const App = () => {
-  const [accessToken, setAccessToken] = useState();
-  const [userInfo, setUserInfo] = useState();
+
   // Color Palette
   // black = #14110F
   // singletons.white = #FFFFFF
@@ -98,12 +99,10 @@ const App = () => {
 
   return (
     <NativeBaseProvider theme={theme}>
-      <AppStack />
+      <LoginProvider>
+        <AppStack />
+      </LoginProvider>
       <StatusBar style="light" />
-      {/* <View style={styles.container}>
-        <Authentication setAccessToken={setAccessToken} setUserInfo={setUserInfo} userInfo={userInfo} accessToken={accessToken} />
-        <StatusBar style="auto" />
-      </View> */}
     </NativeBaseProvider>
   )
 }
