@@ -10,7 +10,7 @@ import * as Location from 'expo-location'
 import { MaterialIcons } from '@expo/vector-icons'
 // import BottomList from '../lists/BottomList';
 
-const GooglePlacesInput = ({ location, setLocation }) => {
+const GooglePlacesInput = ({ location, setLocation, searchRestuarant }) => {
   const { isOpen, onOpen, onClose } = useDisclose()
   const [placeID, setPlaceID] = useState()
 
@@ -44,40 +44,77 @@ const GooglePlacesInput = ({ location, setLocation }) => {
     // bg="green.200"
     // flex={1}
     >
-      <GooglePlacesAutocomplete
-        placeholder="Search location"
-        query={{
-          key: API_KEY,
-          language: 'en', // language of the results
-          location: location
-            ? `${location.latitude},${location.longitude}`
-            : '49.246292,-123.116226',
-          radius: 1000,
-          components: 'country:ca', // only Canada
-          // types: 'establishment',
-        }}
-        GooglePlacesSearchQuery={{
-          // rankby: 'distance',
-          types: ['restaurant', 'cafe'],
-        }}
-        onPress={(data = null) => {
-          setPlaceID(data.place_id)
-          console.log("Place id", data.place_id)
-        }}
-        // onPress={onOpen}
-        onFail={(error) => console.error(error)}
-        requestUrl={{
-          url: 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api',
-          useOnPlatform: 'web',
-        }} // this in only required for use on the web. See https://git.io/JflFv more for details.
-        enablePoweredByContainer={false}
-      // currentLocation={true}
-      // currentLocationLabel='Current location'
-      // getAddressText={(data) => data.description}
-      />
-      {/* <Button bgColor="danger.200" ml={2} h={'34px'} w={12} alignItems="flex-end">
-        <MaterialIcons name="filter-list" size={20} color="white" />
-      </Button> */}
+      {searchRestuarant
+        ?
+        <GooglePlacesAutocomplete
+
+          placeholder='Search Restaurants'
+          query={{
+            key: API_KEY,
+            language: 'en', // language of the results
+            location: location
+              ? `${location.latitude},${location.longitude}`
+              : '49.246292,-123.116226',
+            radius: 100000,
+            components: 'country:ca', // only Canada
+            types: 'establishment',
+          }}
+          GooglePlacesSearchQuery={{
+            // rankby: 'distance',
+            types: ['restaurant', 'cafe'],
+          }}
+          onPress={(data = null) => {
+            setPlaceID(data.place_id)
+            console.log("Place id", data.place_id)
+          }}
+          // onPress={onOpen}
+          onFail={(error) => console.error(error)}
+          requestUrl={{
+            url: 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api',
+            useOnPlatform: 'web',
+          }} // this in only required for use on the web. See https://git.io/JflFv more for details.
+          enablePoweredByContainer={false}
+        // currentLocation={true}
+        // currentLocationLabel='Current location'
+        // getAddressText={(data) => data.description}
+        />
+
+        :
+
+        <GooglePlacesAutocomplete
+
+          placeholder='Search location'
+          query={{
+            key: API_KEY,
+            language: 'en', // language of the results
+            location: location
+              ? `${location.latitude},${location.longitude}`
+              : '49.246292,-123.116226',
+            radius: 1000,
+            components: 'country:ca', // only Canada
+            // types: 'establishment',
+          }}
+          GooglePlacesSearchQuery={{
+            // rankby: 'distance',
+            types: ['restaurant', 'cafe'],
+          }}
+          onPress={(data = null) => {
+            setPlaceID(data.place_id)
+            console.log("Place id", data.place_id)
+          }}
+          // onPress={onOpen}
+          onFail={(error) => console.error(error)}
+          requestUrl={{
+            url: 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api',
+            useOnPlatform: 'web',
+          }} // this in only required for use on the web. See https://git.io/JflFv more for details.
+          enablePoweredByContainer={false}
+        // currentLocation={true}
+        // currentLocationLabel='Current location'
+        // getAddressText={(data) => data.description}
+        />
+      }
+
 
     </HStack>
   )
