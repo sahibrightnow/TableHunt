@@ -12,14 +12,16 @@ import {
     Divider,
     Image,
 } from "native-base";
-import React from "react";
+import React, { useEffect } from "react";
 import { API_KEY } from 'react-native-dotenv'
 import { MaterialIcons } from '@expo/vector-icons'
 import SvgUri from 'react-native-svg-uri'
 import { useNavigation } from '@react-navigation/native';
+import axios from "axios";
 
 
 const RestaurantContainer = ({ data }) => {
+
     const navigation = useNavigation()
     const restaurant = data.restaurant
     console.log("restContainer", restaurant)
@@ -27,6 +29,24 @@ const RestaurantContainer = ({ data }) => {
     const photoRef = restaurant?.photos[0]?.photo_reference
     const priceLevel = restaurant?.price_level
     let priceRating
+
+    const placeID = restaurant?.place_id
+    const placeDetailsURL = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeID}&key=${API_KEY}`
+
+    const getPlaceDetails = () => {
+        axios
+            .get(placeDetailsURL)
+            .then((result) => {
+                console.log("placeDetailsRESULTS", result)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    useEffect(() => {
+        getPlaceDetails()
+    }, [])
 
     switch (priceLevel) {
         case 1:
