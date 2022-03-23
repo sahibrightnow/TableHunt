@@ -16,7 +16,7 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded }) => {
 
         <View display={'flex'} justifyContent="space-between" flexDirection={'row'}>
             <Heading size="md" pt={'3px'}> {isLoaded && totalMatchedRestaurants ? `${totalMatchedRestaurants} Restaurants found` : `Finding Restaurants...`}</Heading>
-            <Button bgColor="danger.300" ml={2} h={'34px'} onPress={onOpen} w={12} alignItems="flex-end">
+            <Button bgColor="danger.300" mr={1} h={'34px'} onPress={onOpen} w={12} alignItems="flex-end">
                 <MaterialIcons name="filter-list" size={20} color="white" />
             </Button>
 

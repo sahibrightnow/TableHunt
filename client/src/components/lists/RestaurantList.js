@@ -8,20 +8,21 @@ const RestaurantList = ({ nearbyPlaces, isLoaded, setIsLoaded }) => {
 
 
   return (
-    <View flex={1} p={'10px'}>
+    <View flex={1} p={'6px'}>
       <FilterButtonsList
         totalMatchedRestaurants={nearbyPlaces.length} isLoaded={isLoaded} />
       {/* {nearbyPlaces.length > 0 ? setIsLoaded(true) : setIsLoaded(false)} */}
 
       {isLoaded
         ?
-        <ScrollView horizontal={true}>
+        <ScrollView horizontal={true}
+          showsHorizontalScrollIndicator={false}>
           {nearbyPlaces.map((el, index) => (
             <RestaurantCard key={index} restaurant={el} />
           ))}
         </ScrollView>
         :
-        <HStack space={4}>
+        <HStack space={4} ml={2}>
           <SkeletonCard />
           <SkeletonCard />
         </HStack>
