@@ -22,7 +22,7 @@ const RestaurantList = ({ nearbyPlaces, isLoaded, setIsLoaded }) => {
           ))}
         </ScrollView>
         :
-        <HStack space={4} ml={2}>
+        <HStack space={5} ml={2}>
           <SkeletonCard />
           <SkeletonCard />
         </HStack>
