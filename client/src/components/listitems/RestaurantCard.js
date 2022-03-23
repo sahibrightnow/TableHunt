@@ -64,7 +64,7 @@ const RestaurantCard = ({ restaurant }) => {
         width="33%"
         bgColor={'green.300'}
         style={{
-          position: "absolute", bottom: 125, right: 8
+          position: "absolute", bottom: 130, right: 8
         }}
         onPress={() =>
           navigation.navigate("Restaurant Page", { restaurant })
