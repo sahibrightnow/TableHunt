@@ -2,35 +2,28 @@ import {
     Center,
     VStack,
     HStack,
-    Stack,
     Heading,
     Text,
     Button,
-    Box,
-    AspectRatio,
     ScrollView,
     Divider,
     Image,
 } from "native-base";
 import React, { useEffect } from "react";
 import { API_KEY } from 'react-native-dotenv'
-import { MaterialIcons } from '@expo/vector-icons'
 import SvgUri from 'react-native-svg-uri'
-import { useNavigation } from '@react-navigation/native';
 import axios from "axios";
 
 
-const RestaurantContainer = ({ data }) => {
-
-    const navigation = useNavigation()
-    const restaurant = data.restaurant
-    console.log("restContainer", restaurant)
-
-    const photoRef = restaurant?.photos[0]?.photo_reference
-    const priceLevel = restaurant?.price_level
+const RestaurantContainer = ({ data, navigation }) => {
     let priceRating
 
+    // console.log("restContainer", restaurant)
+    const restaurant = data.restaurant
+    const photoRef = restaurant?.photos[0]?.photo_reference
+    const priceLevel = restaurant?.price_level
     const placeID = restaurant?.place_id
+
     const placeDetailsURL = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeID}&key=${API_KEY}`
 
     const getPlaceDetails = () => {
@@ -79,7 +72,6 @@ const RestaurantContainer = ({ data }) => {
                     roundedTop="lg"
                 />
 
-                {/* <VStack p="6" space={1}> */}
                 <HStack p={6} pb={3}>
                     <Heading size="md" mr="60px">
                         {restaurant.name}
@@ -126,7 +118,6 @@ const RestaurantContainer = ({ data }) => {
                     </Button>
                 </Center>
             </VStack>
-            {/* </VStack> */}
         </ScrollView>
     );
 };

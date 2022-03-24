@@ -1,4 +1,3 @@
-import { Center, VStack, Text, ScrollView, View } from 'native-base'
 import React, { useState, useEffect, useRef } from 'react'
 import GooglePlacesInput from '../forms/GooglePlacesInput'
 import MapInput from '../forms/MapInput'
@@ -16,7 +15,7 @@ import RestaurantList from '../lists/RestaurantList'
 //   Poppins_700Bold,
 // } from '@expo-google-fonts/poppins';
 
-const HomeScreenContainer = ({ data }) => {
+const HomeScreenContainer = ({ navigation }) => {
   // let [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_700Bold });
 
   // if (!fontsLoaded) {
@@ -27,7 +26,7 @@ const HomeScreenContainer = ({ data }) => {
   const [nearbyPlaces, setNearbyPlaces] = useState([])
   const [location, setLocation] = useState()
   const [mapRadius, setMapRadius] = useState(30000)
-  const [searchKeyword, setSearchKeyword] = useState('greek')
+  const [searchKeyword, setSearchKeyword] = useState('english')
   const [isLoaded, setIsLoaded] = useState(false)
   const mapRef = useRef()
 
@@ -55,7 +54,6 @@ const HomeScreenContainer = ({ data }) => {
   }
 
   useEffect(() => {
-    // show results based on users current location
     getLocation()
   }, [])
 
@@ -81,7 +79,7 @@ const HomeScreenContainer = ({ data }) => {
     <>
       <GooglePlacesInput location={location} setLocation={setLocation} />
       <MapInput nearbyPlaces={nearbyPlaces} location={location} getLocation={getLocation} mapRef={mapRef} />
-      <RestaurantList nearbyPlaces={nearbyPlaces} isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
+      <RestaurantList nearbyPlaces={nearbyPlaces} isLoaded={isLoaded} type={'homepage'} navigation={navigation} />
     </>
   )
 }
