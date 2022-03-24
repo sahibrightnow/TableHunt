@@ -11,17 +11,12 @@ import * as Location from 'expo-location'
 import CuisinesStack from '../stacks/CuisinesStack'
 
 const SearchScreenContainer = ({ navigation }) => {
-  const {
-    isOpen,
-    onOpen,
-    onClose
-  } = useDisclose();
+  const { isOpen, onOpen, onClose } = useDisclose();
 
   const [restaurantType, setRestaurantType] = useState()
   const [nearbyPlaces, setNearbyPlaces] = useState([])
   const [location, setLocation] = useState()
   const [isLoaded, setIsLoaded] = useState(false)
-
 
   const getLocation = async () => {
     try {
@@ -33,6 +28,20 @@ const SearchScreenContainer = ({ navigation }) => {
       } = await Location.getCurrentPositionAsync()
       setLocation({ latitude, longitude })
       setIsLoaded(true)
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getNearbyPlaces = async () => {
+    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?radius=40000&type=restaurant&keyword=${restaurantType}&key=${API_KEY}&maxprice=4&minprice=2&location=${location ? location.latitude : null
+      }%2C${location ? location.longitude : null}`
+
+    try {
+      const request = await axios.get(url)
+      setNearbyPlaces(request?.data?.results)
+      setIsLoaded(true)
     } catch (error) {
       console.log(error)
     }
@@ -42,24 +51,11 @@ const SearchScreenContainer = ({ navigation }) => {
     getLocation()
   }, [])
 
-
   useEffect(() => {
+    // get Nearby Places
     setIsLoaded(false)
-    axios
-      .get(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?radius=40000&type=restaurant&keyword=${restaurantType}&key=${API_KEY}&maxprice=4&minprice=2&location=${location ? location.latitude : null
-        }%2C${location ? location.longitude : null}`
-      )
-      .then((result) => {
-        setNearbyPlaces(result?.data?.results)
-        console.log("NEARBY serach restaurants", result?.data?.results)
-        setIsLoaded(true)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    getNearbyPlaces()
   }, [restaurantType])
-
 
   return (
     <VStack space={10} py={20} px={5}>

@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import GooglePlacesInput from '../forms/GooglePlacesInput'
 import MapInput from '../forms/MapInput'
+import RestaurantList from '../lists/RestaurantList'
+import { getLocation, getNearbyPlaces, LocationAndPlacesNearby } from '../services/LocationAndPlacesNearby'
 import axios from 'axios'
 import { API_KEY } from 'react-native-dotenv'
 import * as Location from 'expo-location'
-import RestaurantList from '../lists/RestaurantList'
+
 // import AppLoading from 'expo-app-loading';
 
 // import {
@@ -53,6 +55,19 @@ const HomeScreenContainer = ({ navigation }) => {
     }
   }
 
+  const getNearbyPlaces = async () => {
+    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?radius=${mapRadius}&type=restaurant&keyword=${searchKeyword}&key=${API_KEY}&maxprice=4&minprice=2&location=${location ? location.latitude : null
+      }%2C${location ? location.longitude : null}`
+
+    try {
+      const request = await axios.get(url)
+      setNearbyPlaces(request?.data?.results)
+      setIsLoaded(true)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   useEffect(() => {
     getLocation()
   }, [])
@@ -60,26 +75,14 @@ const HomeScreenContainer = ({ navigation }) => {
   useEffect(() => {
     // get Nearby Places
     setIsLoaded(false)
-
-    axios
-      .get(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?radius=${mapRadius}&type=restaurant&keyword=${searchKeyword}&key=${API_KEY}&maxprice=4&minprice=2&location=${location ? location.latitude : null
-        }%2C${location ? location.longitude : null}`
-      )
-      .then((result) => {
-        setNearbyPlaces(result?.data?.results)
-        setIsLoaded(true)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }, [location])
+    getNearbyPlaces()
+  }, [location, mapRadius])
 
   return (
     <>
       <GooglePlacesInput location={location} setLocation={setLocation} />
       <MapInput nearbyPlaces={nearbyPlaces} location={location} getLocation={getLocation} mapRef={mapRef} />
-      <RestaurantList nearbyPlaces={nearbyPlaces} isLoaded={isLoaded} type={'homepage'} navigation={navigation} />
+      <RestaurantList nearbyPlaces={nearbyPlaces} isLoaded={isLoaded} type={'homepage'} navigation={navigation} setMapRadius={setMapRadius} />
     </>
   )
 }

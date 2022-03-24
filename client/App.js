@@ -51,6 +51,7 @@ const App = () => {
         // white: "#FFFFFF",
       },
       gray: {
+        50: '#c5cad4',
         100: '#9CA3AF',
       },
       light: {

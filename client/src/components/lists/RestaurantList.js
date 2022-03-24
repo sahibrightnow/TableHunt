@@ -4,12 +4,12 @@ import { HStack, ScrollView, View } from 'native-base'
 import SkeletonCard from '../listitems/SkeletonCard'
 import React from 'react'
 
-const RestaurantList = ({ nearbyPlaces, isLoaded, type, navigation }) => {
+const RestaurantList = ({ nearbyPlaces, isLoaded, type, navigation, setMapRadius }) => {
 
   return (
     < View flex={1} p={'10px'} >
       <FilterButtonsList
-        totalMatchedRestaurants={nearbyPlaces.length} isLoaded={isLoaded} />
+        totalMatchedRestaurants={nearbyPlaces.length} isLoaded={isLoaded} setMapRadius={setMapRadius} />
 
       {
         isLoaded
