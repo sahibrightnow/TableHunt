@@ -263,7 +263,7 @@ const SelecingSeats = () => {
                     {/* End of table 3 */}
                     {/* Table 4 */}
                     <HStack mt="5" display="flex" alignItems="center" w="148">
-                        <VStack display="flex" >
+                        <VStack display="flex" mr="2" >
                             <Box w="35" h="35" mb="2" borderColor="coolGray.400" borderWidth="1" _dark={{
                                 borderColor: "coolGray.600",
                                 backgroundColor: "gray.700"
@@ -297,7 +297,7 @@ const SelecingSeats = () => {
                         }}>
                         </Box> */}
                         <Checkbox value="table4" colorScheme="success" accessibilityLabel="This is table 4" style={styles.checkbox3} />
-                        <VStack display="flex" >
+                        <VStack display="flex" ml="2" >
                             <Box w="35" h="35" mb="2" borderColor="coolGray.400" borderWidth="1" _dark={{
                                 borderColor: "coolGray.600",
                                 backgroundColor: "gray.700"
@@ -327,7 +327,7 @@ const SelecingSeats = () => {
                 {/* Second column */}
                 <Container display="flex" ml="-8" mt="-3">
                     {/* Table 5 */}
-                    <VStack mt="5" display="flex" justifyContent="center" w="62">
+                    <VStack mt="5" display="flex" justifyContent="center" w="62" >
                         <HStack display="flex" justifyContent="center" >
                             <Box w="35" h="35" borderColor="coolGray.400" borderWidth="1" _dark={{
                                 borderColor: "coolGray.600",
