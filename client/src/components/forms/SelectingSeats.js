@@ -55,14 +55,18 @@ const SelecingSeats = () => {
     const [selectedDate, setSelectedDate] = useState("");
     const [notes, setNotes] = useState("");
     const handleChange = text => setNotes(text);
+    const [camera1Pic, setCamera1Pic] = useState()
+    const [camera2Pic, setCamera2Pic] = useState()
+    const [camera3Pic, setCamera3Pic] = useState()
+    const [camera4Pic, setCamera4Pic] = useState()
 
     return (
         <View display="flex" mt="-8">
             {/* Top camera buttons */}
             <HStack display="flex" justifyContent="space-between" alignItems="center" mb="2">
-                <CameraButton />
+                <CameraButton name="Camera 1" cameraPic={camera1Pic} setCameraPic={setCamera1Pic} />
                 <Text>KITCHEN AREA</Text>
-                <CameraButton />
+                <CameraButton name="Camera 2" cameraPic={camera2Pic} setCameraPic={setCamera2Pic} />
             </HStack>
             {/* End of top camera buttons */}
 
@@ -413,7 +417,7 @@ const SelecingSeats = () => {
                 {/* End of second column */}
 
                 {/* Third column */}
-                <Container display="flex" ml="2" mt="-174">
+                <Container display="flex" ml="2" mt="-50">
                     {/* Table 7 */}
                     <HStack mt="5" mb="5" display="flex" justifyContent="center" w="103" >
                         <VStack display="flex" justifyContent="center">
@@ -472,7 +476,7 @@ const SelecingSeats = () => {
                     {/* End of table 7 */}
 
                     {/* Table 8 */}
-                    <VStack mt="5" display="flex" justifyContent="center" w="102" >
+                    <VStack display="flex" justifyContent="center" w="102" >
                         <HStack display="flex" justifyContent="center">
                             <Box w="35" h="35" mr="2" borderColor="coolGray.400" borderWidth="1" _dark={{
                                 borderColor: "coolGray.600",
@@ -531,26 +535,44 @@ const SelecingSeats = () => {
                         </HStack>
                     </VStack>
                     {/* End of table 8 */}
+                    {/* Door */}
+                    <Box w="8" h="100" mt="10" ml="16" borderColor="coolGray.400" zIndex="2" borderWidth="1" display="flex" flexDirection="column" alignItems="center" justifyContent="center" _dark={{
+                        borderColor: "coolGray.600",
+                        backgroundColor: "gray.700"
+                    }} _web={{
+                        shadow: 2,
+                        borderWidth: 0
+                    }} _light={{
+                        backgroundColor: "gray.50"
+                    }}>
+                        <Text>D</Text>
+                        <Text>O</Text>
+                        <Text>O</Text>
+                        <Text>R</Text>
+                    </Box>
+                    {/* End of door */}
                 </Container>
                 {/* End of third column */}
 
-                <Container display="flex" alignItems="center" ml="1">
+                <Container >
                     {/* <Text borderWidth="1" ml="-7" mr="-2" style={{
                         transform: [{ rotate: '270deg' }],
                     }}>WINDOW</Text> */}
-                    <Text>W</Text>
-                    <Text>I</Text>
-                    <Text>N</Text>
-                    <Text>D</Text>
-                    <Text>O</Text>
-                    <Text>W</Text>
+                    <View display="flex" alignItems="center" ml="1">
+                        <Text>W</Text>
+                        <Text>I</Text>
+                        <Text>N</Text>
+                        <Text>D</Text>
+                        <Text>O</Text>
+                        <Text>W</Text>
+                    </View>
                 </Container>
             </HStack>
 
             {/* Bottom Camera buttons */}
             <HStack display="flex" justifyContent="space-between" mt="2">
-                <CameraButton />
-                <CameraButton />
+                <CameraButton name="Camera 3" cameraPic={camera3Pic} setCameraPic={setCamera3Pic} />
+                <CameraButton name="Camera 4" cameraPic={camera4Pic} setCameraPic={setCamera4Pic} />
             </HStack>
             {/* End of bottom camera buttons */}
             {/* Actionsheet */}
@@ -663,28 +685,7 @@ const SelecingSeats = () => {
                         {/* Time picker */}
                         <Actionsheet.Item>
                             <Text fontSize="18" ml="2">Select Time</Text>
-
-                            {/* <Button my="3" mx="2" bgColor="white" variant="outline"
-                                        _text={{
-                                            color: "danger.500"
-                                        }}
-                                        style={{
-                                            borderColor: "#f43f5e",
-                                            borderWidth: "1",
-                                            borderRadius: "4",
-                                        }}
-                                    >
-                                        {time}
-                                    </Button> */}
-                            {/* {timings.map((time, index) => {
-                                return (
-                                    
-                                )
-                            }
-                            )} */}
-
                             <RadioButton data={timingsData} />
-
                         </Actionsheet.Item>
                         {/* End of time picker */}
                         <Actionsheet.Item>
@@ -705,7 +706,7 @@ const SelecingSeats = () => {
             </Actionsheet>
             {/* End of Actionsheet */}
 
-        </View >
+        </View>
     )
 }
 
