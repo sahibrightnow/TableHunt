@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { HStack, useDisclose, Button, VStack, Box, View, Container, Text, Checkbox, Actionsheet, ScrollView } from 'native-base'
+import { HStack, useDisclose, Button, VStack, Box, View, Container, Text, Checkbox, Actionsheet, ScrollView, TextArea } from 'native-base'
 import SvgUri from 'react-native-svg-uri'
 import React, { useState } from 'react'
 import SelectDropdown from 'react-native-select-dropdown'
@@ -47,8 +47,13 @@ const SelecingSeats = () => {
         { value: "11:00 PM" },
         { value: "11:30 PM" },
     ]
+    const requestsData = [
+        { value: "High-Chair" },
+        { value: "Wheel-chair access" },
+    ]
     const [selectedDate, setSelectedDate] = useState("");
-    const [selectedTime, setSelectedTime] = useState(false);
+    const [notes, setNotes] = useState("");
+    const handleChange = text => setNotes(text);
 
     return (
         <View display="flex" mt="-8">
@@ -558,6 +563,7 @@ const SelecingSeats = () => {
             {/* Actionsheet */}
             <Button mt="5" onPress={onOpen}>OPTIONS</Button>
             <Actionsheet isOpen={isOpen} onClose={onClose}>
+                {/* Booking for number of people */}
                 <Actionsheet.Content>
                     <ScrollView>
                         <Actionsheet.Item>
@@ -608,6 +614,8 @@ const SelecingSeats = () => {
                             </Box>
 
                         </Actionsheet.Item>
+                        {/* End of booking for number of people */}
+                        {/* Date picker */}
                         <Actionsheet.Item>
                             <Box display="flex" flexDirection="row" w="80" rounded="lg" px="5" py="5" overflow="hidden" borderColor="coolGray.200" borderWidth="1" shadow="9"
                                 _dark={{
@@ -658,8 +666,10 @@ const SelecingSeats = () => {
                                 </View>
                             </Box>
                         </Actionsheet.Item>
+                        {/* End of date picker */}
+                        {/* Time picker */}
                         <Actionsheet.Item>
-                            <Text fontSize="18" ml="4">Select Time</Text>
+                            <Text fontSize="18" ml="2">Select Time</Text>
 
                             {/* <Button my="3" mx="2" bgColor="white" variant="outline"
                                         _text={{
@@ -683,10 +693,15 @@ const SelecingSeats = () => {
                             <RadioButton data={timingsData} />
 
                         </Actionsheet.Item>
+                        {/* End of time picker */}
                         <Actionsheet.Item>
-                            <Text fontSize="18" ml="4" mt="-3">Testing seat selection checkbox</Text>
+                            <Text fontSize="18" ml="2" mt="-3">Requests</Text>
+                            <RadioButton data={requestsData} />
                         </Actionsheet.Item>
-                        <Actionsheet.Item>Cancel</Actionsheet.Item>
+                        <Actionsheet.Item>
+                            <Text fontSize="18" ml="2" mt="-3">Extra Notes</Text>
+                            <TextArea value={notes} ml="2" mt="4" w="320" h="100" onChangeText={handleChange} placeholder="Any special requests?" />
+                        </Actionsheet.Item>
                     </ScrollView>
                 </Actionsheet.Content>
             </Actionsheet>

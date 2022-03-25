@@ -28,7 +28,7 @@ const RadioButton = ({ data, onSelect }) => {
                     );
                 })}
             </ScrollView>
-            <Text mt="4"> User option: {userOption}</Text>
+            {/* <Text mt="4"> User option: {userOption}</Text> */}
         </View>
     );
 }
