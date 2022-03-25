@@ -59,7 +59,7 @@ const CameraButton = ({ name, cameraPic, setCameraPic }) => {
             </Button>
             <Actionsheet isOpen={isOpen} onClose={onClose}>
                 <Actionsheet.Content>
-                    <Actionsheet.Item onPress={() => setShowImageModal(true)}>Look Inside</Actionsheet.Item>
+                    {cameraPic ? <Actionsheet.Item onPress={() => setShowImageModal(true)}>Look Inside</Actionsheet.Item> : null}
                     <Actionsheet.Item>Choose from Gallery</Actionsheet.Item>
                     <Actionsheet.Item onPress={() => {
                         setShowCameraModal(true);
