@@ -6,6 +6,7 @@ import SelectDropdown from 'react-native-select-dropdown'
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { ModalDatePicker } from "react-native-material-date-picker";
 import RadioButton from '../listitems/RadioButton'
+import CameraButton from '../listitems/CameraButton'
 
 const SelecingSeats = () => {
     const {
@@ -59,13 +60,9 @@ const SelecingSeats = () => {
         <View display="flex" mt="-8">
             {/* Top camera buttons */}
             <HStack display="flex" justifyContent="space-between" alignItems="center" mb="2">
-                <Button>
-                    <SvgUri source={require('../assets/cameraIcon.svg')} />
-                </Button>
+                <CameraButton />
                 <Text>KITCHEN AREA</Text>
-                <Button>
-                    <SvgUri source={require('../assets/cameraIcon.svg')} />
-                </Button>
+                <CameraButton />
             </HStack>
             {/* End of top camera buttons */}
 
@@ -85,7 +82,7 @@ const SelecingSeats = () => {
                 {/* First column */}
                 <Container display="flex">
                     {/* Table 1 */}
-                    <HStack display="flex" alignItems="center" w="188">
+                    <HStack display="flex" alignItems="center" w="188" >
                         <Box w="35" h="35" borderColor="coolGray.400" borderWidth="1" _dark={{
                             borderColor: "coolGray.600",
                             backgroundColor: "gray.700"
@@ -123,7 +120,7 @@ const SelecingSeats = () => {
 
                     {/* Table 2 */}
 
-                    <VStack mt="5" display="flex" justifyContent="center" w="102">
+                    <VStack mt="5" display="flex" justifyContent="center" w="102" >
                         <HStack display="flex" justifyContent="center">
                             <Box w="35" h="35" mr="2" borderColor="coolGray.400" borderWidth="1" _dark={{
                                 borderColor: "coolGray.600",
@@ -184,7 +181,7 @@ const SelecingSeats = () => {
                     {/* End of table 2 */}
 
                     {/* Table 3 */}
-                    <VStack mt="5" display="flex" justifyContent="center" w="142">
+                    <VStack mt="5" display="flex" justifyContent="center" w="142" >
                         <HStack display="flex" justifyContent="center">
                             <Box w="35" h="35" mr="2" borderColor="coolGray.400" borderWidth="1" _dark={{
                                 borderColor: "coolGray.600",
@@ -265,9 +262,9 @@ const SelecingSeats = () => {
 
                     {/* End of table 3 */}
                     {/* Table 4 */}
-                    <HStack mt="5" display="flex" alignItems="center" w="156">
+                    <HStack mt="5" display="flex" alignItems="center" w="148">
                         <VStack display="flex" >
-                            <Box w="35" h="35" mr="2" mb="2" borderColor="coolGray.400" borderWidth="1" _dark={{
+                            <Box w="35" h="35" mb="2" borderColor="coolGray.400" borderWidth="1" _dark={{
                                 borderColor: "coolGray.600",
                                 backgroundColor: "gray.700"
                             }} _web={{
@@ -299,9 +296,9 @@ const SelecingSeats = () => {
                             backgroundColor: "gray.50"
                         }}>
                         </Box> */}
-                        <Checkbox value="table4" colorScheme="success" accessibilityLabel="This is table 4" mx="2" style={styles.checkbox3} />
+                        <Checkbox value="table4" colorScheme="success" accessibilityLabel="This is table 4" style={styles.checkbox3} />
                         <VStack display="flex" >
-                            <Box w="35" h="35" mr="2" mb="2" borderColor="coolGray.400" borderWidth="1" _dark={{
+                            <Box w="35" h="35" mb="2" borderColor="coolGray.400" borderWidth="1" _dark={{
                                 borderColor: "coolGray.600",
                                 backgroundColor: "gray.700"
                             }} _web={{
@@ -331,8 +328,8 @@ const SelecingSeats = () => {
                 <Container display="flex" ml="-8" mt="-3">
                     {/* Table 5 */}
                     <VStack mt="5" display="flex" justifyContent="center" w="62">
-                        <HStack display="flex" justifyContent="center">
-                            <Box w="35" h="35" mr="2" borderColor="coolGray.400" borderWidth="1" _dark={{
+                        <HStack display="flex" justifyContent="center" >
+                            <Box w="35" h="35" borderColor="coolGray.400" borderWidth="1" _dark={{
                                 borderColor: "coolGray.600",
                                 backgroundColor: "gray.700"
                             }} _web={{
@@ -356,7 +353,7 @@ const SelecingSeats = () => {
                         </Box> */}
                         <Checkbox value="table5" colorScheme="success" accessibilityLabel="This is table 5" my="2" style={styles.checkbox3} />
                         <HStack display="flex" justifyContent="center">
-                            <Box w="35" h="35" mr="2" borderColor="coolGray.400" borderWidth="1" _dark={{
+                            <Box w="35" h="35" borderColor="coolGray.400" borderWidth="1" _dark={{
                                 borderColor: "coolGray.600",
                                 backgroundColor: "gray.700"
                             }} _web={{
@@ -374,7 +371,7 @@ const SelecingSeats = () => {
                     {/* Table 6 */}
                     <VStack mt="5" display="flex" justifyContent="center" w="62">
                         <HStack display="flex" justifyContent="center">
-                            <Box w="35" h="35" mr="2" borderColor="coolGray.400" borderWidth="1" _dark={{
+                            <Box w="35" h="35" borderColor="coolGray.400" borderWidth="1" _dark={{
                                 borderColor: "coolGray.600",
                                 backgroundColor: "gray.700"
                             }} _web={{
@@ -398,7 +395,7 @@ const SelecingSeats = () => {
                         </Box> */}
                         <Checkbox value="table6" colorScheme="success" accessibilityLabel="This is table 6" my="2" style={styles.checkbox3} />
                         <HStack display="flex" justifyContent="center">
-                            <Box w="35" h="35" mr="2" borderColor="coolGray.400" borderWidth="1" _dark={{
+                            <Box w="35" h="35" borderColor="coolGray.400" borderWidth="1" _dark={{
                                 borderColor: "coolGray.600",
                                 backgroundColor: "gray.700"
                             }} _web={{
@@ -418,7 +415,7 @@ const SelecingSeats = () => {
                 {/* Third column */}
                 <Container display="flex" ml="2" mt="-174">
                     {/* Table 7 */}
-                    <HStack mt="5" mb="5" display="flex" justifyContent="center" w="103">
+                    <HStack mt="5" mb="5" display="flex" justifyContent="center" w="103" >
                         <VStack display="flex" justifyContent="center">
                             <Box w="35" h="35" mr="2" borderColor="coolGray.400" borderWidth="1" _dark={{
                                 borderColor: "coolGray.600",
@@ -431,9 +428,9 @@ const SelecingSeats = () => {
                             }}>
                             </Box>
                         </VStack>
-                        <VStack display="flex" justifyContent="center">
+                        <VStack display="flex" justifyContent="center" >
                             <HStack display="flex" justifyContent="center">
-                                <Box w="35" h="35" mr="2" borderColor="coolGray.400" borderWidth="1" _dark={{
+                                <Box w="35" h="35" borderColor="coolGray.400" borderWidth="1" _dark={{
                                     borderColor: "coolGray.600",
                                     backgroundColor: "gray.700"
                                 }} _web={{
@@ -458,7 +455,7 @@ const SelecingSeats = () => {
                             </Box> */}
                             <Checkbox value="table7" colorScheme="success" accessibilityLabel="This is table 7" my="2" style={styles.checkbox3} />
                             <HStack display="flex" justifyContent="center">
-                                <Box w="35" h="35" mr="2" borderColor="coolGray.400" borderWidth="1" _dark={{
+                                <Box w="35" h="35" borderColor="coolGray.400" borderWidth="1" _dark={{
                                     borderColor: "coolGray.600",
                                     backgroundColor: "gray.700"
                                 }} _web={{
@@ -475,7 +472,7 @@ const SelecingSeats = () => {
                     {/* End of table 7 */}
 
                     {/* Table 8 */}
-                    <VStack mt="5" display="flex" justifyContent="center" w="102">
+                    <VStack mt="5" display="flex" justifyContent="center" w="102" >
                         <HStack display="flex" justifyContent="center">
                             <Box w="35" h="35" mr="2" borderColor="coolGray.400" borderWidth="1" _dark={{
                                 borderColor: "coolGray.600",
@@ -552,16 +549,12 @@ const SelecingSeats = () => {
 
             {/* Bottom Camera buttons */}
             <HStack display="flex" justifyContent="space-between" mt="2">
-                <Button>
-                    <SvgUri source={require('../assets/cameraIcon.svg')} />
-                </Button>
-                <Button>
-                    <SvgUri source={require('../assets/cameraIcon.svg')} />
-                </Button>
+                <CameraButton />
+                <CameraButton />
             </HStack>
             {/* End of bottom camera buttons */}
             {/* Actionsheet */}
-            <Button mt="5" onPress={onOpen}>OPTIONS</Button>
+            <Button mt="5" bgColor="danger.300" onPress={onOpen}>BOOK NOW</Button>
             <Actionsheet isOpen={isOpen} onClose={onClose}>
                 {/* Booking for number of people */}
                 <Actionsheet.Content>
@@ -702,12 +695,17 @@ const SelecingSeats = () => {
                             <Text fontSize="18" ml="2" mt="-3">Extra Notes</Text>
                             <TextArea value={notes} ml="2" mt="4" w="320" h="100" onChangeText={handleChange} placeholder="Any special requests?" />
                         </Actionsheet.Item>
+                        <Actionsheet.Item>
+                            <Button w="340" size="lg" variant="outline" borderColor="#f43f5e">
+                                <Text color="#f43f5e" fontSize="17px" py="1">CONFIRM BOOKING</Text>
+                            </Button>
+                        </Actionsheet.Item>
                     </ScrollView>
                 </Actionsheet.Content>
             </Actionsheet>
             {/* End of Actionsheet */}
 
-        </View>
+        </View >
     )
 }
 
