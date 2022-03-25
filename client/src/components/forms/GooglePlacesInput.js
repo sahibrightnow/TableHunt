@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet } from 'react-native'
 import { HStack, useDisclose, Button } from 'native-base'
 import Constants from 'expo-constants'
 import { API_KEY } from 'react-native-dotenv'

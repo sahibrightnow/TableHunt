@@ -1,6 +1,11 @@
 import { StyleSheet } from 'react-native'
-import { HStack, useDisclose, Button, VStack, Box, View, Container, Text, Checkbox, Actionsheet } from 'native-base'
+import { HStack, useDisclose, Button, VStack, Box, View, Container, Text, Checkbox, Actionsheet, ScrollView } from 'native-base'
 import SvgUri from 'react-native-svg-uri'
+import React, { useState } from 'react'
+import SelectDropdown from 'react-native-select-dropdown'
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { ModalDatePicker } from "react-native-material-date-picker";
+import RadioButton from '../listitems/RadioButton'
 
 const SelecingSeats = () => {
     const {
@@ -8,6 +13,43 @@ const SelecingSeats = () => {
         onOpen,
         onClose
     } = useDisclose();
+
+    // const [numberOfPeople, setNumberOfPeople] = useState(1)
+    const numberOfPeople = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    const timingsData = [
+        { value: "9:30 AM" },
+        { value: "10:00 AM" },
+        { value: "10:30 AM" },
+        { value: "11:00 AM" },
+        { value: "11:30 AM" },
+        { value: "12:00 PM" },
+        { value: "12:30 PM" },
+        { value: "1:00 PM" },
+        { value: "1:30 PM" },
+        { value: "2:00 PM" },
+        { value: "2:30 PM" },
+        { value: "3:00 PM" },
+        { value: "3:30 PM" },
+        { value: "4:00 PM" },
+        { value: "4:30 PM" },
+        { value: "5:00 PM" },
+        { value: "5:30 PM" },
+        { value: "6:00 PM" },
+        { value: "6:30 PM" },
+        { value: "7:00 PM" },
+        { value: "7:30 PM" },
+        { value: "8:00 PM" },
+        { value: "8:30 PM" },
+        { value: "9:00 PM" },
+        { value: "9:30 PM" },
+        { value: "10:00 PM" },
+        { value: "10:30 PM" },
+        { value: "11:00 PM" },
+        { value: "11:30 PM" },
+    ]
+    const [selectedDate, setSelectedDate] = useState("");
+    const [selectedTime, setSelectedTime] = useState(false);
+
     return (
         <View display="flex" mt="-8">
             {/* Top camera buttons */}
@@ -517,18 +559,135 @@ const SelecingSeats = () => {
             <Button mt="5" onPress={onOpen}>OPTIONS</Button>
             <Actionsheet isOpen={isOpen} onClose={onClose}>
                 <Actionsheet.Content>
-                    <Box w="100%" h={60} px={4} justifyContent="center">
-                        <Text fontSize="16" color="gray.500" _dark={{
-                            color: "gray.300"
-                        }}>
-                            Albums
-                        </Text>
-                    </Box>
-                    <Actionsheet.Item>Delete</Actionsheet.Item>
-                    <Actionsheet.Item>Share</Actionsheet.Item>
-                    <Actionsheet.Item>Play</Actionsheet.Item>
-                    <Actionsheet.Item>Favourite</Actionsheet.Item>
-                    <Actionsheet.Item>Cancel</Actionsheet.Item>
+                    <ScrollView>
+                        <Actionsheet.Item>
+                            <Box display="flex" flexDirection="row" w="80" rounded="lg" px="5" py="2" overflow="hidden" borderColor="coolGray.200" borderWidth="1" shadow="9"
+                                _dark={{
+                                    borderColor: "coolGray.600",
+                                    backgroundColor: "gray.700"
+                                }} _web={{
+                                    shadow: 9,
+                                    borderWidth: 0
+                                }} _light={{
+                                    backgroundColor: "#FFF"
+                                }}>
+                                <SvgUri source={require('../assets/PersonIcon.svg')} height="50" width="30" />
+                                <View ml="2">
+                                    <Text fontSize="18" ml="4">Booking for</Text>
+
+                                    <SelectDropdown
+                                        data={numberOfPeople}
+                                        onSelect={(selectedItem, index) => {
+                                            console.log(selectedItem, index)
+                                        }}
+                                        defaultButtonText={"Number of people"}
+                                        buttonTextAfterSelection={(selectedItem, index) => {
+                                            return selectedItem
+                                        }}
+                                        rowTextForSelection={(item, index) => {
+                                            return item
+                                        }}
+                                        buttonStyle={styles.dropdown1BtnStyle}
+                                        buttonTextStyle={styles.dropdown1BtnTxtStyle}
+                                        renderDropdownIcon={(isOpened) => {
+                                            return (
+                                                <FontAwesome
+                                                    name={isOpened ? "chevron-up" : "chevron-down"}
+                                                    color={"#444"}
+                                                    size={18}
+                                                />
+                                            );
+                                        }}
+                                        dropdownIconPosition={"right"}
+                                        dropdownStyle={styles.dropdown1DropdownStyle}
+                                        rowStyle={styles.dropdown1RowStyle}
+                                        rowTextStyle={styles.dropdown1RowTxtStyle}
+
+                                    />
+                                </View>
+                            </Box>
+
+                        </Actionsheet.Item>
+                        <Actionsheet.Item>
+                            <Box display="flex" flexDirection="row" w="80" rounded="lg" px="5" py="5" overflow="hidden" borderColor="coolGray.200" borderWidth="1" shadow="9"
+                                _dark={{
+                                    borderColor: "coolGray.600",
+                                    backgroundColor: "gray.700"
+                                }} _web={{
+                                    shadow: 9,
+                                    borderWidth: 0
+                                }} _light={{
+                                    backgroundColor: "#FFF"
+                                }}>
+                                <ModalDatePicker
+                                    button={<SvgUri source={require('../assets/DatePickerIcon.svg')} height="40" width="28" />}
+                                    locale="en"
+                                    onSelect={(date) => {
+                                        console.log(date);
+                                        setSelectedDate(date.toDateString())
+                                    }}
+                                    isHideOnSelect={true}
+                                    initialDate={new Date()}
+                                    color="#6a994e"
+                                />
+                                <View ml="2" display="flex" flexDirection="row" >
+                                    <View mr="9">
+                                        <Text fontSize="18" ml="4" mt="-3">Date</Text>
+                                        <Text fontSize="18" ml="4" mt="3" fontWeight="700">{selectedDate || (new Date()).toDateString()}</Text>
+                                    </View>
+                                    <View mt="8">
+                                        <ModalDatePicker
+                                            button={
+                                                <FontAwesome
+                                                    // name={isOpened ? "chevron-up" : "chevron-down"}
+                                                    name={"chevron-down"}
+                                                    color={"#444"}
+                                                    size={18}
+                                                />
+                                            }
+                                            locale="en"
+                                            onSelect={(date) => {
+                                                console.log(date);
+                                                setSelectedDate(date.toDateString())
+                                            }}
+                                            isHideOnSelect={true}
+                                            initialDate={new Date()}
+                                            color="#6a994e"
+                                        />
+                                    </View>
+                                </View>
+                            </Box>
+                        </Actionsheet.Item>
+                        <Actionsheet.Item>
+                            <Text fontSize="18" ml="4">Select Time</Text>
+
+                            {/* <Button my="3" mx="2" bgColor="white" variant="outline"
+                                        _text={{
+                                            color: "danger.500"
+                                        }}
+                                        style={{
+                                            borderColor: "#f43f5e",
+                                            borderWidth: "1",
+                                            borderRadius: "4",
+                                        }}
+                                    >
+                                        {time}
+                                    </Button> */}
+                            {/* {timings.map((time, index) => {
+                                return (
+                                    
+                                )
+                            }
+                            )} */}
+
+                            <RadioButton data={timingsData} />
+
+                        </Actionsheet.Item>
+                        <Actionsheet.Item>
+                            <Text fontSize="18" ml="4" mt="-3">Testing seat selection checkbox</Text>
+                        </Actionsheet.Item>
+                        <Actionsheet.Item>Cancel</Actionsheet.Item>
+                    </ScrollView>
                 </Actionsheet.Content>
             </Actionsheet>
             {/* End of Actionsheet */}
@@ -559,6 +718,21 @@ const styles = StyleSheet.create({
         borderColor: '#9ca3af',
         borderRadius: 0,
     },
+    dropdown1BtnStyle: {
+        width: "70%",
+        height: 50,
+        backgroundColor: "#FFF",
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: "#FFF",
+    },
+    dropdown1BtnTxtStyle: { color: "#444", textAlign: "left", fontWeight: "700" },
+    dropdown1DropdownStyle: { backgroundColor: "#EFEFEF" },
+    dropdown1RowStyle: {
+        backgroundColor: "#EFEFEF",
+        borderBottomColor: "#C5C5C5",
+    },
+    dropdown1RowTxtStyle: { color: "#444", textAlign: "left" },
 });
 
 export default SelecingSeats
