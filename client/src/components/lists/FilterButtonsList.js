@@ -38,7 +38,7 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius }) 
                     </Box>
 
 
-                    <Slider defaultValue={20} colorScheme='green' mt="0" maxValue={50}
+                    <Slider defaultValue={20} colorScheme='green' mt="0" minValue={1} maxValue={50}
                         m={'20px'} size="lg"
                         onChange={v => {
                             setOnChangeRadius(Math.floor(v));
