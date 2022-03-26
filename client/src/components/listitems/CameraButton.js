@@ -3,6 +3,7 @@ import { Pressable, StyleSheet } from 'react-native';
 import { Button, useDisclose, Actionsheet, View, Modal, VStack, HStack, Text, Image } from 'native-base';
 import SvgUri from 'react-native-svg-uri'
 import { Camera } from 'expo-camera';
+import * as ImagePicker from 'expo-image-picker';
 
 const CameraButton = ({ name, cameraPic, setCameraPic }) => {
     const {
@@ -23,6 +24,8 @@ const CameraButton = ({ name, cameraPic, setCameraPic }) => {
             const { status } = await Camera.requestCameraPermissionsAsync();
             setHasPermission(status === 'granted');
         })();
+
+
     }, []);
 
     if (hasPermission === null) {
@@ -52,15 +55,37 @@ const CameraButton = ({ name, cameraPic, setCameraPic }) => {
         }
     };
 
+    // function to pick an image
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+            setCameraPic(result.uri);
+        }
+    };
+
     return (
         <View>
             <Button borderRadius="20" px="4" py="2" bgColor="danger.300" onPress={onOpen}>
                 <SvgUri source={require('../assets/CameraIcon.svg')} />
             </Button>
+            {/* Camera Button actionsheet */}
             <Actionsheet isOpen={isOpen} onClose={onClose}>
                 <Actionsheet.Content>
-                    {cameraPic ? <Actionsheet.Item onPress={() => setShowImageModal(true)}>Look Inside</Actionsheet.Item> : null}
-                    <Actionsheet.Item>Choose from Gallery</Actionsheet.Item>
+                    {cameraPic ? <Actionsheet.Item onPress={() => setShowImageModal(true)}>
+                        Look Inside
+                    </Actionsheet.Item> : null}
+                    <Actionsheet.Item onPress={pickImage}>
+                        Choose from Gallery
+                    </Actionsheet.Item>
                     <Actionsheet.Item onPress={() => {
                         setShowCameraModal(true);
                         setType(
@@ -68,10 +93,14 @@ const CameraButton = ({ name, cameraPic, setCameraPic }) => {
                                 ? Camera.Constants.Type.front
                                 : Camera.Constants.Type.back
                         );
-                    }}>Camera</Actionsheet.Item>
+                    }}>
+                        Camera
+                    </Actionsheet.Item>
                 </Actionsheet.Content>
             </Actionsheet>
+            {/* End of camera button actionsheet */}
 
+            {/* Opens display image modal */}
             <Modal isOpen={showImageModal} onClose={() => setShowImageModal(false)}>
                 <Modal.Content w="500" h="800">
                     <Modal.CloseButton />
@@ -90,6 +119,9 @@ const CameraButton = ({ name, cameraPic, setCameraPic }) => {
 
                 </Modal.Content>
             </Modal>
+            {/* End of display image modal */}
+
+            {/* Open camera modal */}
             <Modal isOpen={showCameraModal} onClose={() => setShowCameraModal(false)}>
                 <Modal.Content w="500" h="800">
                     <Modal.CloseButton />
@@ -129,6 +161,7 @@ const CameraButton = ({ name, cameraPic, setCameraPic }) => {
                     </Modal.Footer>
                 </Modal.Content>
             </Modal>
+            {/* End of camera modal */}
         </View>
     )
 }
