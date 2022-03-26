@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { HStack, useDisclose, Button, VStack, Box, View, Container, Text, Checkbox, Actionsheet, ScrollView, TextArea } from 'native-base'
+import { HStack, useDisclose, Button, VStack, Box, View, Container, Text, Checkbox, Pressable, Actionsheet, ScrollView, TextArea, Center } from 'native-base'
 import SvgUri from 'react-native-svg-uri'
 import React, { useState } from 'react'
 import SelectDropdown from 'react-native-select-dropdown'
@@ -581,8 +581,9 @@ const SelecingSeats = () => {
                 {/* Booking for number of people */}
                 <Actionsheet.Content>
                     <ScrollView>
-                        <Actionsheet.Item>
-                            <Box display="flex" flexDirection="row" w="80" rounded="lg" px="5" py="2" overflow="hidden" borderColor="coolGray.200" borderWidth="1" shadow="9"
+                        {/* <Actionsheet.Item> */}
+                        <Center mt="2">
+                            <Box display="flex" flexDirection="row" w="80" rounded="lg" px="4" py="2" overflow="hidden" borderColor="coolGray.200" borderWidth="1" shadow="9"
                                 _dark={{
                                     borderColor: "coolGray.600",
                                     backgroundColor: "gray.700"
@@ -592,47 +593,52 @@ const SelecingSeats = () => {
                                 }} _light={{
                                     backgroundColor: "#FFF"
                                 }}>
-                                <SvgUri source={require('../assets/PersonIcon.svg')} height="50" width="30" />
-                                <View ml="2">
-                                    <Text fontSize="18" ml="4">Booking for</Text>
+                                <SvgUri source={require('../assets/PersonIcon.svg')} height="50" width="26" />
+                                <View ml="2" mb={0}>
+                                    <Text fontSize="18" ml="2" mt="-1" mb="-1">Booking for</Text>
+                                    <View ml="-2" mb={-3}>
+                                        <SelectDropdown
+                                            data={numberOfPeople}
+                                            onSelect={(selectedItem, index) => {
+                                                console.log(selectedItem, index)
+                                            }}
+                                            defaultButtonText={"Number of people"}
+                                            buttonTextAfterSelection={(selectedItem, index) => {
+                                                return `${selectedItem} people`
+                                            }}
+                                            rowTextForSelection={(item, index) => {
+                                                return item
+                                            }}
+                                            buttonStyle={styles.dropdown1BtnStyle}
+                                            buttonTextStyle={styles.dropdown1BtnTxtStyle}
+                                            renderDropdownIcon={(isOpened) => {
+                                                return (
+                                                    <FontAwesome
+                                                        name={isOpened ? "chevron-up" : "chevron-down"}
+                                                        color={"#444"}
+                                                        size={12}
+                                                        style={{ marginRight: 25 }}
+                                                    />
+                                                );
+                                            }}
+                                            dropdownIconPosition={"right"}
+                                            dropdownStyle={styles.dropdown1DropdownStyle}
+                                            rowStyle={styles.dropdown1RowStyle}
+                                            rowTextStyle={styles.dropdown1RowTxtStyle}
 
-                                    <SelectDropdown
-                                        data={numberOfPeople}
-                                        onSelect={(selectedItem, index) => {
-                                            console.log(selectedItem, index)
-                                        }}
-                                        defaultButtonText={"Number of people"}
-                                        buttonTextAfterSelection={(selectedItem, index) => {
-                                            return selectedItem
-                                        }}
-                                        rowTextForSelection={(item, index) => {
-                                            return item
-                                        }}
-                                        buttonStyle={styles.dropdown1BtnStyle}
-                                        buttonTextStyle={styles.dropdown1BtnTxtStyle}
-                                        renderDropdownIcon={(isOpened) => {
-                                            return (
-                                                <FontAwesome
-                                                    name={isOpened ? "chevron-up" : "chevron-down"}
-                                                    color={"#444"}
-                                                    size={18}
-                                                />
-                                            );
-                                        }}
-                                        dropdownIconPosition={"right"}
-                                        dropdownStyle={styles.dropdown1DropdownStyle}
-                                        rowStyle={styles.dropdown1RowStyle}
-                                        rowTextStyle={styles.dropdown1RowTxtStyle}
-
-                                    />
+                                        />
+                                    </View>
                                 </View>
                             </Box>
-
-                        </Actionsheet.Item>
+                        </Center>
+                        {/* </Actionsheet.Item> */}
                         {/* End of booking for number of people */}
                         {/* Date picker */}
-                        <Actionsheet.Item>
-                            <Box display="flex" flexDirection="row" w="80" rounded="lg" px="5" py="5" overflow="hidden" borderColor="coolGray.200" borderWidth="1" shadow="9"
+                        {/* <Actionsheet.Item> */}
+                        <Center mt="3">
+                            {/* <Pressable onPress={(date) =>
+                                setSelectedDate(date.toDateString())}> */}
+                            <Box display="flex" flexDirection="row" w="80" rounded="lg" px="4" py="2" overflow="hidden" borderColor="coolGray.200" borderWidth="1" shadow="9"
                                 _dark={{
                                     borderColor: "coolGray.600",
                                     backgroundColor: "gray.700"
@@ -643,7 +649,7 @@ const SelecingSeats = () => {
                                     backgroundColor: "#FFF"
                                 }}>
                                 <ModalDatePicker
-                                    button={<SvgUri source={require('../assets/DatePickerIcon.svg')} height="40" width="28" />}
+                                    button={<SvgUri source={require('../assets/DatePickerIcon.svg')} height="50" width="25" />}
                                     locale="en"
                                     onSelect={(date) => {
                                         console.log(date);
@@ -654,18 +660,18 @@ const SelecingSeats = () => {
                                     color="#6a994e"
                                 />
                                 <View ml="2" display="flex" flexDirection="row" >
-                                    <View mr="9">
-                                        <Text fontSize="18" ml="4" mt="-3">Date</Text>
-                                        <Text fontSize="18" ml="4" mt="3" fontWeight="700">{selectedDate || (new Date()).toDateString()}</Text>
+                                    <View mr="10">
+                                        <Text fontSize="18" ml="1" mt="-1">Date</Text>
+                                        <Text fontSize="16" ml="1" mt="1" fontWeight="700">{selectedDate || (new Date()).toDateString()}</Text>
                                     </View>
-                                    <View mt="8">
+                                    {/* <View mt="8">
                                         <ModalDatePicker
                                             button={
                                                 <FontAwesome
                                                     // name={isOpened ? "chevron-up" : "chevron-down"}
                                                     name={"chevron-down"}
                                                     color={"#444"}
-                                                    size={18}
+                                                    size={12}
                                                 />
                                             }
                                             locale="en"
@@ -677,22 +683,24 @@ const SelecingSeats = () => {
                                             initialDate={new Date()}
                                             color="#6a994e"
                                         />
-                                    </View>
+                                    </View> */}
                                 </View>
                             </Box>
-                        </Actionsheet.Item>
+                            {/* </Pressable> */}
+                        </Center>
+                        {/* </Actionsheet.Item> */}
                         {/* End of date picker */}
                         {/* Time picker */}
-                        <Actionsheet.Item>
+                        <Actionsheet.Item mt={0}>
                             <Text fontSize="18" ml="2">Select Time</Text>
                             <RadioButton data={timingsData} />
                         </Actionsheet.Item>
                         {/* End of time picker */}
-                        <Actionsheet.Item>
+                        <Actionsheet.Item mt={-4}>
                             <Text fontSize="18" ml="2" mt="-3">Requests</Text>
                             <RadioButton data={requestsData} />
                         </Actionsheet.Item>
-                        <Actionsheet.Item>
+                        <Actionsheet.Item mt={-4}>
                             <Text fontSize="18" ml="2" mt="-3">Extra Notes</Text>
                             <TextArea value={notes} ml="2" mt="4" w="320" h="100" onChangeText={handleChange} placeholder="Any special requests?" />
                         </Actionsheet.Item>
@@ -706,7 +714,7 @@ const SelecingSeats = () => {
             </Actionsheet>
             {/* End of Actionsheet */}
 
-        </View>
+        </View >
     )
 }
 

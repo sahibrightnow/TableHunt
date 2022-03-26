@@ -75,7 +75,7 @@ const CameraButton = ({ name, cameraPic, setCameraPic }) => {
     return (
         <View>
             <Button borderRadius="20" px="4" py="2" bgColor="danger.300" onPress={onOpen}>
-                <SvgUri source={require('../assets/CameraIcon.svg')} />
+                <SvgUri source={require('../assets/cameraIcon.svg')} />
             </Button>
             {/* Camera Button actionsheet */}
             <Actionsheet isOpen={isOpen} onClose={onClose}>
