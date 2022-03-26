@@ -9,6 +9,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import SvgUri from 'react-native-svg-uri'
 import Authentication from '../layout/authentication'
 import RestaurantScreen from '../screens/RestaurantScreen'
+import RestaurantOwnerScreen from '../screens/RestaurantOwnerScreen'
 
 const Tab = createBottomTabNavigator()
 
@@ -106,6 +107,11 @@ const AppStack = () => {
           options={() => ({
             headerBackTitle: "Back",
           })}
+        />
+
+        <Stack.Screen
+        name="Restaurant Owner"
+        component={RestaurantOwnerScreen}
         />
 
       </Stack.Navigator>
