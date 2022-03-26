@@ -2,14 +2,13 @@ import React, { useState } from 'react'
 import { View, Button, useDisclose, Heading, Actionsheet, Box, Text, Slider, Radio, Stack } from 'native-base'
 import { MaterialIcons } from '@expo/vector-icons'
 
-const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded }) => {
+
+const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius }) => {
     const [onChangeRadius, setOnChangeRadius] = useState(20);
-    const [onChangeRating, setOnChangeRating] = useState(3);
+    const [onChangeEndRadius, setOnChangeEndRadius] = useState();
+    // const [onChangeRating, setOnChangeRating] = useState(3);
 
     const { isOpen, onOpen, onClose } = useDisclose()
-    // console.log("totalMatchedRestaurants", totalMatchedRestaurants)
-    // { totalMatchedRestaurants > 0 ? setIsLoaded(true) : setIsLoaded(false) }
-    // { console.log("TotalMatchedRestaurants in FilterBUttonsList Page", totalMatchedRestaurants) }
     return (
         // <ScrollView horizontal={true}>
         //     <FilterButtons />
@@ -20,17 +19,17 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded }) => {
                 <MaterialIcons name="filter-list" size={20} color="white" />
             </Button>
 
-            <Actionsheet isOpen={isOpen} onClose={onClose} hideDragIndicator>
-                <Actionsheet.Content borderTopRadius="0">
-                    <Box w="100%" h={60} px={4} justifyContent="center">
-                        <Text fontSize="25" color="gray.900" _dark={{
+            <Actionsheet isOpen={isOpen} onClose={onClose} hideDragIndicator >
+                <Actionsheet.Content borderTopRadius="0" p={4}>
+                    <Box w="100%" h={60} px={0} justifyContent="center">
+                        <Text bold fontSize="30" color="gray.600" _dark={{
                             color: "gray.300"
                         }}>
                             Filters
                         </Text>
                     </Box>
 
-                    <Box w="100%" h={30} px={4} justifyContent="center">
+                    <Box w="100%" h={30} px={0} justifyContent="center">
                         <Text fontSize="15" color="gray.700" _dark={{
                             color: "gray.300"
                         }}>
@@ -38,28 +37,32 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded }) => {
                         </Text>
                     </Box>
 
-                    <Text textAlign="center">{onChangeRadius} km</Text>
-                    <Slider defaultValue={20} colorScheme="green" maxValue={50}
-                        m={'20px'}
+
+                    <Slider defaultValue={20} colorScheme='green' mt="0" minValue={1} maxValue={50}
+                        m={'20px'} size="lg"
                         onChange={v => {
                             setOnChangeRadius(Math.floor(v));
                         }}
-                    >
+                        onChangeEnd={v => {
+                            v && setOnChangeEndRadius(Math.floor(v));
+                        }}>
                         <Slider.Track>
                             <Slider.FilledTrack />
                         </Slider.Track>
                         <Slider.Thumb />
                     </Slider>
+                    <Text textAlign="center" mt="-4">{onChangeRadius} km</Text>
 
-                    <Box w="100%" h={30} px={4} justifyContent="center">
+
+                    {/* <Box w="100%" h={30} px={4} justifyContent="center">
                         <Text fontSize="15" color="gray.700" _dark={{
                             color: "gray.300"
                         }}>
                             Rating
                         </Text>
-                    </Box>
+                    </Box> */}
 
-                    <Text textAlign="center">{onChangeRating} ⭐️</Text>
+                    {/* <Text textAlign="center">{onChangeRating} ⭐️</Text>
                     <Slider defaultValue={3} colorScheme="green" maxValue={5}
                         m={'20px'}
                         onChange={v => {
@@ -70,9 +73,9 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded }) => {
                             <Slider.FilledTrack />
                         </Slider.Track>
                         <Slider.Thumb />
-                    </Slider>
+                    </Slider> */}
 
-                    <Box w="100%" h={30} px={4} justifyContent="center">
+                    {/* <Box w="100%" h={30} px={4} justifyContent="center">
                         <Text fontSize="15" color="gray.700" _dark={{
                             color: "gray.300"
                         }}>
@@ -97,13 +100,26 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded }) => {
                                 $31+
                             </Radio>
                         </Stack>
-                    </Radio.Group>
+                    </Radio.Group> */}
+
+                    <Button w="100%"
+                        bgColor={'danger.300'}
+                        mt={5}
+                        onPress={() => {
+                            onClose();
+                            setMapRadius(onChangeEndRadius * 1000);
+                        }}
+                    > Save</Button>
+                    <Button w="100%"
+                        bgColor={'gray.50'}
+                        mt={2}
+                        onPress={onClose}
+                    > Cancel</Button>
                 </Actionsheet.Content>
             </Actionsheet>
 
 
         </View >
-        // </ScrollView>
     )
 }
 

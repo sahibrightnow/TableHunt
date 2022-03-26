@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet } from 'react-native'
-import { HStack, useDisclose, Button } from 'native-base'
-import Constants from 'expo-constants'
+import { HStack } from 'native-base'
 import { API_KEY } from 'react-native-dotenv'
 import axios from 'axios'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
-// import Geolocation from 'react-native-geolocation-service';
-import * as Location from 'expo-location'
-import { MaterialIcons } from '@expo/vector-icons'
-// import BottomList from '../lists/BottomList';
 
 const GooglePlacesInput = ({ location, setLocation, searchRestuarant }) => {
-  const { isOpen, onOpen, onClose } = useDisclose()
   const [placeID, setPlaceID] = useState()
 
 
@@ -48,7 +41,7 @@ const GooglePlacesInput = ({ location, setLocation, searchRestuarant }) => {
         ?
         <GooglePlacesAutocomplete
 
-          placeholder='Search Restaurants'
+          placeholder='Search for Restaurants'
           query={{
             key: API_KEY,
             language: 'en', // language of the results
@@ -83,7 +76,7 @@ const GooglePlacesInput = ({ location, setLocation, searchRestuarant }) => {
 
         <GooglePlacesAutocomplete
 
-          placeholder='Search location'
+          placeholder='Search a location'
           query={{
             key: API_KEY,
             language: 'en', // language of the results
@@ -92,7 +85,7 @@ const GooglePlacesInput = ({ location, setLocation, searchRestuarant }) => {
               : '49.246292,-123.116226',
             radius: 1000,
             components: 'country:ca', // only Canada
-            // types: 'establishment',
+            types: 'address',
           }}
           GooglePlacesSearchQuery={{
             // rankby: 'distance',

@@ -2,59 +2,53 @@ import {
     Center,
     VStack,
     HStack,
-    Stack,
     Heading,
     Text,
     Button,
-    Box,
-    AspectRatio,
     ScrollView,
     Divider,
     Image,
-    
-    
+    Box
+
 } from "native-base";
 import React, { useEffect, useState, useRef } from "react";
 import { API_KEY } from 'react-native-dotenv'
-import { MaterialIcons } from '@expo/vector-icons'
 import SvgUri from 'react-native-svg-uri'
-import { useNavigation } from '@react-navigation/native';
 import axios from "axios";
 import { StyleSheet, Dimensions, View } from "react-native";
 import { Rating } from "react-native-ratings"
-import Carousel, {ParallaxImage} from 'react-native-snap-carousel';
+import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
 
 
 
 
-const RestaurantContainer = ({ data }) => {
+const RestaurantContainer = ({ data, navigation }) => {
     // carousel stuff
 
     const carouselRef = useRef(null);
-    const {width: screenWidth} = Dimensions.get('window');
+    const { width: screenWidth } = Dimensions.get('window');
     const goForward = () => {
         carouselRef.current.snapToNext();
-      };
-      const renderItem = ({item, index}, parallaxProps) => {
+    };
+    const renderItem = ({ item, index }, parallaxProps) => {
         return (
-          <View style={styles.item}>
-            <ParallaxImage
-              source={{uri: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${item.photo_reference}&key=${API_KEY}`}}
-              containerStyle={styles.imageContainer}
-              style={styles.image}
-              parallaxFactor={0.4}
-              {...parallaxProps}
-            />
-          
-          </View>
+            <View style={styles.item}>
+                <ParallaxImage
+                    source={{ uri: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${item.photo_reference}&key=${API_KEY}` }}
+                    containerStyle={styles.imageContainer}
+                    style={styles.image}
+                    parallaxFactor={0.4}
+                    {...parallaxProps}
+                />
+
+            </View>
         );
-      };
-    
+    };
+
 
     // break
     const [details, setDetails] = useState();
 
-    const navigation = useNavigation()
     const restaurant = data.restaurant
     console.log("restContainer", restaurant)
 
@@ -62,16 +56,19 @@ const RestaurantContainer = ({ data }) => {
     const priceLevel = restaurant?.price_level
     let priceRating
 
+    // console.log("restContainer", restaurant)
+
     const placeID = restaurant?.place_id
+
     const placeDetailsURL = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeID}&key=${API_KEY}`
-  
+
     const getPlaceDetails = () => {
         axios
             .get(placeDetailsURL)
             .then((result) => {
                 // console.log("placeDetailsRESULTS", result?.data?.result?.opening_hours?.weekday_text)
                 setDetails(result?.data?.result)
-                
+
             })
             .catch((error) => {
                 console.log(error)
@@ -80,7 +77,7 @@ const RestaurantContainer = ({ data }) => {
 
     useEffect(() => {
         getPlaceDetails();
-        
+
     }, []);
     console.log("details", details?.reviews)
     switch (priceLevel) {
@@ -114,7 +111,6 @@ const RestaurantContainer = ({ data }) => {
                     roundedTop="lg"
                 />
 
-                {/* <VStack p="6" space={1}> */}
                 <HStack p={6} pb={3}>
                     <Heading size="md" mr="60px">
                         {restaurant.name}
@@ -147,64 +143,29 @@ const RestaurantContainer = ({ data }) => {
                         {restaurant.vicinity}
                     </Text>
                 </HStack>
-                    <Divider />
-                    <VStack ml={5} mr={5} mt={5}>
+                <Divider />
+                <VStack ml={5} mr={5} mt={5}>
 
                     {details && <Carousel
-        ref={carouselRef}
-        sliderWidth={screenWidth}
-        sliderHeight={screenWidth}
-        itemWidth={screenWidth - 60}
-        data={details?.photos}
-        renderItem={renderItem}
-        hasParallaxImages={true}
-      />}
-                    
+                        ref={carouselRef}
+                        sliderWidth={screenWidth}
+                        sliderHeight={screenWidth}
+                        itemWidth={screenWidth - 60}
+                        data={details?.photos}
+                        renderItem={renderItem}
+                        hasParallaxImages={true}
+                    />}
 
-                        <Text style={styles.heading}>Opening hours</Text>
-                        {details?.opening_hours.weekday_text.map((el, index) => <Text fontSize={16} key={index}>{el}</Text>)}
-                        <Text mt={6} fontSize={16}><Text style={styles.heading}>Phone:</Text> {details?.formatted_phone_number}</Text>
-                    </VStack>
-                    <VStack ml={5} mr={5} mt={5}>
-                        <Text style={styles.heading}>{restaurant?.user_ratings_total} Reviews </Text>
-                        {details?.reviews.map((el, index) => <Box mt={5} >
-                            
-                            <HStack>
-                                <Image
-                                    source={{
-                                        uri: el.profile_photo_url
-                                    }}
-                                    alt={el.author_name}
-                                    height={50}
-                                    width={50}
-                                
-                                />
-                                <VStack>
-                                    <Text style={styles.name} key={index}>{el.author_name}</Text>
-                                    <HStack>
-                                        <Rating
-                                            style={{marginLeft:10, marginTop:2}}
-                                            type='star'
-                                            ratingCount={5}
-                                            imageSize={15}
-                                            startingValue={el.rating}
-                                            readonly="true"
-                                            ratingBackgroundColor='black'
-                                        
-                                            />
-                                            <Text style={styles.time}>{el.relative_time_description}</Text>
-                                    </HStack>
-                                </VStack>
-                            </HStack>
-                            
-                            <Text mb={2} mt={4} fontSize={16}>{el.text}</Text>
-                            <Divider/>
-                        </Box>)}
-                    </VStack>
+
+                    <Text style={styles.heading}>Opening hours</Text>
+                    {details?.opening_hours.weekday_text.map((el, index) => <Text fontSize={14} key={index}>{el}</Text>)}
+                    <Text mt={6} fontSize={14}><Text style={styles.heading}>Phone:</Text> {details?.formatted_phone_number}</Text>
+                </VStack>
+
                 <Center pt={10}>
                     <Button
-                        position="relative"
-                        top={10}
+                        // position="absolute"
+                        top={-10}
                         mb={10}
                         width="90%"
                         bgColor={'green.300'}
@@ -215,8 +176,44 @@ const RestaurantContainer = ({ data }) => {
                         Book
                     </Button>
                 </Center>
+                <VStack ml={5} mr={5} mt={-2}>
+                    <Text style={styles.heading}>{restaurant?.user_ratings_total} Reviews </Text>
+                    {details?.reviews.map((el, index) => <Box mt={5} key={index}>
+
+                        <HStack>
+                            <Image
+                                source={{
+                                    uri: el.profile_photo_url
+                                }}
+                                alt={el.author_name}
+                                height={50}
+                                width={50}
+
+                            />
+                            <VStack>
+                                <Text style={styles.name} key={index}>{el.author_name}</Text>
+                                <HStack>
+                                    <Rating
+                                        style={{ marginLeft: 10, marginTop: 2 }}
+                                        type='star'
+                                        ratingCount={5}
+                                        imageSize={15}
+                                        startingValue={el.rating}
+                                        readonly="true"
+                                        ratingBackgroundColor='black'
+
+                                    />
+                                    <Text style={styles.time}>{el.relative_time_description}</Text>
+                                </HStack>
+                            </VStack>
+                        </HStack>
+
+                        <Text mb={2} mt={4} fontSize={14}>{el.text}</Text>
+                        <Divider />
+                    </Box>)}
+                </VStack>
+
             </VStack>
-            {/* </VStack> */}
         </ScrollView>
     );
 };
@@ -227,17 +224,17 @@ const styles = StyleSheet.create({
     heading: {
         fontWeight: 'bold',
         fontSize: 20,
-        marginBottom:10
+        marginBottom: 10
     },
     name: {
         fontWeight: 'bold',
         fontSize: 18,
         marginLeft: 10,
-        marginTop:4
+        marginTop: 4
     },
     time: {
         marginLeft: 120,
-        fontSize:14
+        fontSize: 12
     }
 })
 

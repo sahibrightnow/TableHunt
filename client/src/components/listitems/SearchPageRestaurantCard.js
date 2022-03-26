@@ -1,53 +1,9 @@
 import { VStack, HStack, Text, Heading, Image, Center, Button } from 'native-base'
 import { API_KEY } from 'react-native-dotenv'
-import { useNavigation } from '@react-navigation/native'
-import SvgUri from 'react-native-svg-uri'
 
-
-const SearchPageRestaurantCard = ({ restaurant }) => {
-    // const navigation = useNavigation()
-
-    // const restaurantName = restaurant?.name
-    // const photoRef = restaurant?.photos[0]?.photo_reference
-    // const restaurantRating = restaurant?.rating
-    // const totalUserReviews = restaurant?.user_ratings_total
-    // const priceLevel = restaurant?.price_level
-    // let priceRating
-    // let ratingDescription
-
-    // switch (priceLevel) {
-    //     case 1:
-    //         priceRating = `$5-$10 Per Person`
-    //         break
-    //     case 2:
-    //         priceRating = `$11-$20 Per Person`
-    //         break
-    //     case 3:
-    //         priceRating = `$21-$30 Per Person`
-    //         break
-    //     case 4:
-    //         priceRating = `$31+ Per Person`
-    //         break
-    //     default:
-    //         priceRating = 'Not Available'
-    // }
-
-    // switch (Math.round(restaurantRating)) {
-    //     case 1:
-    //         ratingDescription = `Very Bad`
-    //         break
-    //     case 2:
-    //         ratingDescription = `Bad`
-    //         break
-    //     case 3:
-    //         ratingDescription = `Average`
-    //         break
-    //     case 4:
-    //         ratingDescription = `Good`
-    //         break
-    //     default:
-    //         ratingDescription = 'Excellent'
-    // }
+const SearchPageRestaurantCard = (props) => {
+    const restaurant = props.restaurant
+    const navigation = props.navigation
 
     return (
         <Center w="100%">
@@ -56,34 +12,33 @@ const SearchPageRestaurantCard = ({ restaurant }) => {
             }} _light={{
                 borderColor: "coolGray.200"
             }} p="2">
-                {/* <Image source={require('../assets/searchPage/cuisine_Cantonese.png')}
-                    alt={"alt"} size={'lg'} /> */}
 
                 <Image
-                    source={require('../assets/searchPage/cuisine_Cantonese.png')}
+                    source={{
+                        uri: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${props.photoRef}&key=${API_KEY}`
+                    }}
                     alt="image base"
                     width={110} height={145} resizeMode="cover" rounded="sm"
                 />
-                <VStack ml="2" mt={0} space={1} m="auto">
-                    {/* <Text bold="true" fontSize="lg">
-                        Heading
-
-                    </Text> */}
-                    <Heading size={'md'} noOfLines={1}>
-                        Restaurant Name
+                <VStack ml="2" mt={2} space={1} m="auto">
+                    <Heading size={'sm'} noOfLines={1} maxW={200}>
+                        {props.restaurantName ? props.restaurantName : "Name not Available"}
                     </Heading>
-                    <Text fontSize="sm" >Rating: 4.5 </Text>
-                    <Text fontSize="sm" >Reviews: Good</Text>
-                    <Text fontSize="sm" >$11-$20 per peson</Text>
+                    <Text fontSize="xs">Rating: {props.restaurantRating} </Text>
+                    <Text fontSize="xs">Reviews: {props.ratingDescription} | ({props.totalUserReviews}) </Text>
+                    <Text fontSize="xs">{props.priceRating}</Text>
                     <Button w="100%"
                         bgColor={'green.300'}
-                    // onPress={() =>
-                    //     navigation.navigate("Restaurant Page", { restaurant })
-                    // }
+                        onPress={() => {
+                            props.onClose();
+                            setTimeout(() => {
+                                navigation.navigate("Restaurant Page", { restaurant });
+                            }, 700);
+                        }}
                     > View Menu</Button>
                 </VStack>
             </HStack>
-        </Center>
+        </Center >
     )
 }
 

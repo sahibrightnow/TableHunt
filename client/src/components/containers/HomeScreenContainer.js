@@ -1,11 +1,12 @@
-import { Center, VStack, Text, ScrollView, View } from 'native-base'
 import React, { useState, useEffect, useRef } from 'react'
 import GooglePlacesInput from '../forms/GooglePlacesInput'
 import MapInput from '../forms/MapInput'
+import RestaurantList from '../lists/RestaurantList'
+import { getLocation, getNearbyPlaces, LocationAndPlacesNearby } from '../services/LocationAndPlacesNearby'
 import axios from 'axios'
 import { API_KEY } from 'react-native-dotenv'
 import * as Location from 'expo-location'
-import RestaurantList from '../lists/RestaurantList'
+
 // import AppLoading from 'expo-app-loading';
 
 // import {
@@ -16,7 +17,7 @@ import RestaurantList from '../lists/RestaurantList'
 //   Poppins_700Bold,
 // } from '@expo-google-fonts/poppins';
 
-const HomeScreenContainer = ({ data }) => {
+const HomeScreenContainer = ({ navigation }) => {
   // let [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_700Bold });
 
   // if (!fontsLoaded) {
@@ -27,7 +28,7 @@ const HomeScreenContainer = ({ data }) => {
   const [nearbyPlaces, setNearbyPlaces] = useState([])
   const [location, setLocation] = useState()
   const [mapRadius, setMapRadius] = useState(30000)
-  const [searchKeyword, setSearchKeyword] = useState('greek')
+  const [searchKeyword, setSearchKeyword] = useState('english')
   const [isLoaded, setIsLoaded] = useState(false)
   const mapRef = useRef()
 
@@ -54,34 +55,34 @@ const HomeScreenContainer = ({ data }) => {
     }
   }
 
+  const getNearbyPlaces = async () => {
+    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?radius=${mapRadius}&type=restaurant&keyword=${searchKeyword}&key=${API_KEY}&maxprice=4&minprice=2&location=${location ? location.latitude : null
+      }%2C${location ? location.longitude : null}`
+
+    try {
+      const request = await axios.get(url)
+      setNearbyPlaces(request?.data?.results)
+      setIsLoaded(true)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   useEffect(() => {
-    // show results based on users current location
     getLocation()
   }, [])
 
   useEffect(() => {
     // get Nearby Places
     setIsLoaded(false)
-
-    axios
-      .get(
-        `https://maps.googleapis.com/maps/api/place/nearbysearch/json?radius=${mapRadius}&type=restaurant&keyword=${searchKeyword}&key=${API_KEY}&maxprice=4&minprice=2&location=${location ? location.latitude : null
-        }%2C${location ? location.longitude : null}`
-      )
-      .then((result) => {
-        setNearbyPlaces(result?.data?.results)
-        setIsLoaded(true)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }, [location])
+    getNearbyPlaces()
+  }, [location, mapRadius])
 
   return (
     <>
       <GooglePlacesInput location={location} setLocation={setLocation} />
       <MapInput nearbyPlaces={nearbyPlaces} location={location} getLocation={getLocation} mapRef={mapRef} />
-      <RestaurantList nearbyPlaces={nearbyPlaces} isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
+      <RestaurantList nearbyPlaces={nearbyPlaces} isLoaded={isLoaded} type={'homepage'} navigation={navigation} setMapRadius={setMapRadius} />
     </>
   )
 }

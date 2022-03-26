@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import HomeScreen from '../screens/HomeScreen'
@@ -22,14 +21,6 @@ const TabStack = () => (
       options={{
         headerShown: false,
         tabBarIcon: ({ focused, color, size }) => (
-          //   // <Image
-          //   //   source={require("../assets/nav_icons/home_png.png")}
-          //   //   alt="Home Nav Icon"
-          //   //   style={{
-          //   //     width: size,
-          //   //     height: size,
-          //   //   }}
-          //   // />
           <SvgUri source={require('../assets/nav_icons/homeIcon.svg')} />
         ),
       }}
@@ -73,8 +64,6 @@ const AppStack = () => {
   // temporarily hides all warnings
   console.disableYellowBox = true;
 
-
-
   return (
 
     <NavigationContainer>
@@ -97,7 +86,7 @@ const AppStack = () => {
           name="Restaurant Page"
           component={RestaurantScreen}
           options={() => ({
-            headerBackTitle: "Back",
+            headerTitle: "Restaurant Details",
           })}
         />
 
@@ -106,6 +95,7 @@ const AppStack = () => {
           component={BookingsScreen}
           options={() => ({
             headerBackTitle: "Back",
+            headerTitle: "Choose your table",
           })}
         />
 
