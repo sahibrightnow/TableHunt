@@ -702,13 +702,15 @@ const SelecingSeats = () => {
                         </Actionsheet.Item>
                         <Actionsheet.Item mt={-4}>
                             <Text fontSize="18" ml="2" mt="-3">Extra Notes</Text>
-                            <TextArea value={notes} ml="2" mt="4" w="320" h="100" onChangeText={handleChange} placeholder="Any special requests?" />
+                            <TextArea value={notes} ml="2" mt="4" w="325" h="100" onChangeText={handleChange} placeholder="Any special requests?" />
                         </Actionsheet.Item>
-                        <Actionsheet.Item>
-                            <Button w="340" size="lg" variant="outline" borderColor="#f43f5e">
+                        {/* <Actionsheet.Item> */}
+                        <Center>
+                            <Button w="330" size="lg" variant="outline" borderColor="#f43f5e">
                                 <Text color="#f43f5e" fontSize="17px" py="1">CONFIRM BOOKING</Text>
                             </Button>
-                        </Actionsheet.Item>
+                        </Center>
+                        {/* </Actionsheet.Item> */}
                     </ScrollView>
                 </Actionsheet.Content>
             </Actionsheet>
