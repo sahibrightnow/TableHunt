@@ -8,7 +8,7 @@ import { ModalDatePicker } from "react-native-material-date-picker";
 import RadioButton from '../listitems/RadioButton'
 import CameraButton from '../listitems/CameraButton'
 
-const SelecingSeats = () => {
+const SelecingSeats = ({ navigation }) => {
     const {
         isOpen,
         onOpen,
@@ -706,7 +706,7 @@ const SelecingSeats = () => {
                         </Actionsheet.Item>
                         {/* <Actionsheet.Item> */}
                         <Center>
-                            <Button w="330" size="lg" variant="outline" borderColor="#f43f5e">
+                            <Button w="330" size="lg" variant="outline" borderColor="#f43f5e" onPress={() => navigation.navigate("Reservations")}>
                                 <Text color="#f43f5e" fontSize="17px" py="1">CONFIRM BOOKING</Text>
                             </Button>
                         </Center>

@@ -90,7 +90,7 @@ const Authentication = () => {
           <Text >Not a member?<Link>Sign up</Link></Text>
           <StatusBar style="auto" />
 
-          <Text style={styles.text}>Are you a restaurant owner? <Text onPress={() => navigation.navigate("Restaurant Owner")}style={styles.text2}>Sign in</Text></Text>
+          <Text style={styles.text}>Are you a restaurant owner? <Text onPress={() => navigation.navigate("Restaurant Owner")} style={styles.text2}>Sign in</Text></Text>
           {/* <Button height='50' borderRadius={8} width='50%' mt='5'>Continue with email</Button>
           <Button height='50' borderRadius={8} width='50%' mt='5' onPress={accessToken ? getUserData : signInWithGoogleAsync}>
             {accessToken ? "Get user data" : "Continue with google"}
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: 216,
     height: 21,
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: "normal",
     fontStyle: "normal",
     letterSpacing: 0,
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     color: 'rgb(0,0,0)'
   },
   text2: {
-    color: '#924344'
+    color: '#924344', width: 216, fontSize: 14,
   }
 });
 

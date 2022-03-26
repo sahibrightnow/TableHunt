@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import HomeScreen from '../screens/HomeScreen'
 import SearchScreen from '../screens/SearchScreen'
+import ReservationsScreen from '../screens/ReservationsScreen'
 import BookingsScreen from '../screens/BookingsScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
@@ -36,8 +37,8 @@ const TabStack = () => (
       }}
     />
     <Tab.Screen
-      name="Bookings"
-      component={BookingsScreen}
+      name="Reservations"
+      component={ReservationsScreen}
       options={{
         headerShown: false,
         tabBarIcon: ({ focused, color, size }) => (
@@ -100,8 +101,8 @@ const AppStack = () => {
         />
 
         <Stack.Screen
-        name="Restaurant Owner"
-        component={RestaurantOwnerScreen}
+          name="Restaurant Owner"
+          component={RestaurantOwnerScreen}
         />
 
       </Stack.Navigator>
