@@ -27,6 +27,7 @@ const HomeScreenContainer = ({ navigation }) => {
   // NEARBY PLACES
   const [nearbyPlaces, setNearbyPlaces] = useState([])
   const [location, setLocation] = useState()
+  const [rating, setRating] = useState(4)
   const [mapRadius, setMapRadius] = useState(30000)
   const [searchKeyword, setSearchKeyword] = useState('english')
   const [isLoaded, setIsLoaded] = useState(false)
@@ -61,8 +62,11 @@ const HomeScreenContainer = ({ navigation }) => {
 
     try {
       const request = await axios.get(url)
-      setNearbyPlaces(request?.data?.results)
+      setNearbyPlaces(request?.data?.results.filter(el => {
+        return el.rating >= rating && el.rating < rating + 1
+      }))
       setIsLoaded(true)
+      console.log("nearbyPlaces", data)
     } catch (error) {
       console.log(error)
     }
@@ -76,13 +80,13 @@ const HomeScreenContainer = ({ navigation }) => {
     // get Nearby Places
     setIsLoaded(false)
     getNearbyPlaces()
-  }, [location, mapRadius])
+  }, [location, rating, mapRadius])
 
   return (
     <>
       <GooglePlacesInput location={location} setLocation={setLocation} />
       <MapInput nearbyPlaces={nearbyPlaces} location={location} getLocation={getLocation} mapRef={mapRef} />
-      <RestaurantList nearbyPlaces={nearbyPlaces} isLoaded={isLoaded} type={'homepage'} navigation={navigation} setMapRadius={setMapRadius} />
+      <RestaurantList nearbyPlaces={nearbyPlaces} isLoaded={isLoaded} type={'homepage'} navigation={navigation} setMapRadius={setMapRadius} setRating={setRating} rating={rating} />
     </>
   )
 }

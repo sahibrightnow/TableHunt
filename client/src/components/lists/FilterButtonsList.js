@@ -3,10 +3,11 @@ import { View, Button, useDisclose, Heading, Actionsheet, Box, Text, Slider, Rad
 import { MaterialIcons } from '@expo/vector-icons'
 
 
-const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius }) => {
+const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, setRating, rating }) => {
     const [onChangeRadius, setOnChangeRadius] = useState(20);
     const [onChangeEndRadius, setOnChangeEndRadius] = useState();
-    // const [onChangeRating, setOnChangeRating] = useState(3);
+    const [onChangeRating, setOnChangeRating] = useState(rating);
+    const [onChangeEndRating, setOnChangeEndRating] = useState(rating)
 
     const { isOpen, onOpen, onClose } = useDisclose()
     return (
@@ -39,7 +40,7 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius }) 
 
 
                     <Slider defaultValue={20} colorScheme='green' mt="0" minValue={1} maxValue={50}
-                        m={'20px'} size="lg"
+                        m={'5px'} ml={0} size="lg"
                         onChange={v => {
                             setOnChangeRadius(Math.floor(v));
                         }}
@@ -51,29 +52,32 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius }) 
                         </Slider.Track>
                         <Slider.Thumb />
                     </Slider>
-                    <Text textAlign="center" mt="-4">{onChangeRadius} km</Text>
+                    <Text textAlign="center" mt="-1">{onChangeRadius} km</Text>
 
 
-                    {/* <Box w="100%" h={30} px={4} justifyContent="center">
+                    <Box w="100%" h={30} px={0} justifyContent="center">
                         <Text fontSize="15" color="gray.700" _dark={{
                             color: "gray.300"
                         }}>
                             Rating
                         </Text>
-                    </Box> */}
+                    </Box>
 
-                    {/* <Text textAlign="center">{onChangeRating} ⭐️</Text>
-                    <Slider defaultValue={3} colorScheme="green" maxValue={5}
-                        m={'20px'}
+
+                    <Slider defaultValue={rating} colorScheme="green" minValue={1} maxValue={5}
+                        m={'20px'} mt={0} size="lg"
                         onChange={v => {
                             setOnChangeRating(Math.floor(v));
                         }}
-                    >
+                        onChangeEnd={v => {
+                            v && setOnChangeEndRating(Math.floor(v));
+                        }}>
                         <Slider.Track>
                             <Slider.FilledTrack />
                         </Slider.Track>
                         <Slider.Thumb />
-                    </Slider> */}
+                    </Slider>
+                    <Text mt={-5} textAlign="center">{onChangeRating}</Text>
 
                     {/* <Box w="100%" h={30} px={4} justifyContent="center">
                         <Text fontSize="15" color="gray.700" _dark={{
@@ -108,6 +112,7 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius }) 
                         onPress={() => {
                             onClose();
                             setMapRadius(onChangeEndRadius * 1000);
+                            setRating(onChangeEndRating - 1);
                         }}
                     > Save</Button>
                     <Button w="100%"
