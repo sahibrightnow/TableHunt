@@ -28,6 +28,7 @@ const HomeScreenContainer = ({ navigation }) => {
   const [nearbyPlaces, setNearbyPlaces] = useState([])
   const [location, setLocation] = useState()
   const [rating, setRating] = useState(4)
+  const [priceFilter, setPriceFilter] = useState(2)
   const [mapRadius, setMapRadius] = useState(30000)
   const [searchKeyword, setSearchKeyword] = useState('english')
   const [isLoaded, setIsLoaded] = useState(false)
@@ -57,7 +58,7 @@ const HomeScreenContainer = ({ navigation }) => {
   }
 
   const getNearbyPlaces = async () => {
-    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?radius=${mapRadius}&type=restaurant&keyword=${searchKeyword}&key=${API_KEY}&maxprice=4&minprice=2&location=${location ? location.latitude : null
+    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?radius=${mapRadius}&type=restaurant&keyword=${searchKeyword}&key=${API_KEY}&maxprice=${priceFilter}&minprice=${priceFilter}&location=${location ? location.latitude : null
       }%2C${location ? location.longitude : null}`
 
     try {
@@ -80,13 +81,13 @@ const HomeScreenContainer = ({ navigation }) => {
     // get Nearby Places
     setIsLoaded(false)
     getNearbyPlaces()
-  }, [location, rating, mapRadius])
+  }, [location, rating, mapRadius, priceFilter])
 
   return (
     <>
       <GooglePlacesInput location={location} setLocation={setLocation} />
       <MapInput nearbyPlaces={nearbyPlaces} location={location} getLocation={getLocation} mapRef={mapRef} />
-      <RestaurantList nearbyPlaces={nearbyPlaces} isLoaded={isLoaded} type={'homepage'} navigation={navigation} setMapRadius={setMapRadius} setRating={setRating} rating={rating} />
+      <RestaurantList nearbyPlaces={nearbyPlaces} isLoaded={isLoaded} type={'homepage'} navigation={navigation} setMapRadius={setMapRadius} setRating={setRating} rating={rating} priceFilter={priceFilter} setPriceFilter={setPriceFilter} />
     </>
   )
 }

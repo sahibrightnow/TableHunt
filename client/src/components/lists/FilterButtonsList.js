@@ -1,15 +1,23 @@
 import React, { useState } from 'react'
 import { View, Button, useDisclose, Heading, Actionsheet, Box, Text, Slider, Radio, Stack } from 'native-base'
 import { MaterialIcons } from '@expo/vector-icons'
+import RadioButton from '../listitems/RadioButton'
 
 
-const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, setRating, rating }) => {
+const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, setRating, rating, setPriceFilter, priceFilter }) => {
     const [onChangeRadius, setOnChangeRadius] = useState(20);
     const [onChangeEndRadius, setOnChangeEndRadius] = useState();
     const [onChangeRating, setOnChangeRating] = useState(rating);
     const [onChangeEndRating, setOnChangeEndRating] = useState(rating)
-
     const { isOpen, onOpen, onClose } = useDisclose()
+
+    const priceArray = [
+        { value: "$5-$10" },
+        { value: "$11-$20" },
+        { value: "$21-$30" },
+        { value: "$31+" },
+    ]
+
     return (
         // <ScrollView horizontal={true}>
         //     <FilterButtons />
@@ -31,7 +39,7 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, se
                     </Box>
 
                     <Box w="100%" h={30} px={0} justifyContent="center">
-                        <Text fontSize="15" color="gray.700" _dark={{
+                        <Text bold fontSize="15" color="gray.700" _dark={{
                             color: "gray.300"
                         }}>
                             Radius
@@ -56,7 +64,7 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, se
 
 
                     <Box w="100%" h={30} px={0} justifyContent="center">
-                        <Text fontSize="15" color="gray.700" _dark={{
+                        <Text bold fontSize="15" color="gray.700" _dark={{
                             color: "gray.300"
                         }}>
                             Rating
@@ -79,14 +87,20 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, se
                     </Slider>
                     <Text mt={-5} textAlign="center">{onChangeRating}</Text>
 
-                    {/* <Box w="100%" h={30} px={4} justifyContent="center">
-                        <Text fontSize="15" color="gray.700" _dark={{
+                    {/* <Box w="100%" h={30} px={0} justifyContent="center">
+                        
+                    </Box> */}
+
+                    <Actionsheet.Item mt={-6}>
+                        <Text ml={-4} bold fontSize="15" color="gray.700" _dark={{
                             color: "gray.300"
                         }}>
                             Price
                         </Text>
-                    </Box>
-                    <Radio.Group name="exampleGroup" defaultValue="1" accessibilityLabel="pick a size">
+                        <RadioButton data={priceArray} type={'filterModal'} setPriceFilter={setPriceFilter} priceFilter={setPriceFilter} />
+                    </Actionsheet.Item>
+
+                    {/* <Radio.Group name="exampleGroup" defaultValue="1" accessibilityLabel="pick a size">
                         <Stack direction={{
                             base: "row",
                             md: "row"
@@ -108,18 +122,23 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, se
 
                     <Button w="100%"
                         bgColor={'danger.300'}
-                        mt={5}
+                        mt={0}
                         onPress={() => {
                             onClose();
                             setMapRadius(onChangeEndRadius * 1000);
                             setRating(onChangeEndRating - 1);
                         }}
-                    > Save</Button>
-                    <Button w="100%"
-                        bgColor={'gray.50'}
+                    >
+                        <Text color="#FFFFFF" fontSize="16px" py="0.5">Save</Text>
+                    </Button>
+
+                    <Button w="100%" variant="outline" borderColor="danger.300"
                         mt={2}
+                        mb={-3}
                         onPress={onClose}
-                    > Cancel</Button>
+                    >
+                        <Text color="danger.300" fontSize="14px" py="0">Cancel</Text>
+                    </Button>
                 </Actionsheet.Content>
             </Actionsheet>
 
