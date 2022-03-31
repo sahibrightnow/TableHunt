@@ -8,6 +8,7 @@ import { ModalDatePicker } from "react-native-material-date-picker";
 import RadioButton from '../listitems/RadioButton'
 import CameraButton from '../listitems/CameraButton'
 import TableMap from '../forms/TableMap'
+import * as ImagePicker from 'expo-image-picker';
 
 const SelecingSeats = ({ navigation }) => {
     const {
@@ -53,25 +54,53 @@ const SelecingSeats = ({ navigation }) => {
         { value: "High-Chair" },
         { value: "Wheel-chair access" },
     ]
+    // let request;
+    // let timing;
+    const [request, setRequest] = useState('No request')
+    const [timing, setTiming] = useState('Select a time')
     const [selectedDate, setSelectedDate] = useState("");
-    const [notes, setNotes] = useState("");
+    const [notes, setNotes] = useState("none");
     const handleChange = text => setNotes(text);
+
     const [camera1Pic, setCamera1Pic] = useState()
     const [camera2Pic, setCamera2Pic] = useState()
     const [camera3Pic, setCamera3Pic] = useState()
     const [camera4Pic, setCamera4Pic] = useState()
 
+    const [selectedNumOfPeople, setSelectedNumOfPeople] = useState(1)
+    const [vaccineCardImg, setVaccineCardImg] = useState()
+    const [selectedVaccineCardImg, setSelectedVaccineCardImg] = useState(false)
+
+    // function to pick an image
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+            setVaccineCardImg(result.uri);
+        }
+    };
+
     return (
         <View display="flex" mt="-8">
             {/* Top camera buttons */}
-            <HStack display="flex" justifyContent="space-between" alignItems="center" mb="2">
+            <HStack display="flex" justifyContent="space-between" alignItems="center" mb="2" overflow="hidden">
                 <CameraButton name="Camera 1" cameraPic={camera1Pic} setCameraPic={setCamera1Pic} />
                 <Text>KITCHEN AREA</Text>
                 <CameraButton name="Camera 2" cameraPic={camera2Pic} setCameraPic={setCamera2Pic} />
             </HStack>
             {/* End of top camera buttons */}
 
+            {/* Table map */}
             <TableMap />
+            {/* End of table map */}
 
             {/* Bottom Camera buttons */}
             <HStack display="flex" justifyContent="space-between" mt="2">
@@ -79,7 +108,9 @@ const SelecingSeats = ({ navigation }) => {
                 <CameraButton name="Camera 4" cameraPic={camera4Pic} setCameraPic={setCamera4Pic} />
             </HStack>
             {/* End of bottom camera buttons */}
-            {/* Actionsheet */}
+
+
+            {/* Book NOW Actionsheet */}
             <Button mt="5" bgColor="danger.300" onPress={onOpen}>BOOK NOW</Button>
             <Actionsheet isOpen={isOpen} onClose={onClose}>
                 {/* Booking for number of people */}
@@ -104,11 +135,16 @@ const SelecingSeats = ({ navigation }) => {
                                         <SelectDropdown
                                             data={numberOfPeople}
                                             onSelect={(selectedItem, index) => {
-                                                console.log(selectedItem, index)
+                                                console.log("selected numberOfPeople", selectedItem)
+                                                setSelectedNumOfPeople(selectedItem)
                                             }}
                                             defaultButtonText={"Number of people"}
                                             buttonTextAfterSelection={(selectedItem, index) => {
-                                                return `${selectedItem} people`
+                                                if (selectedItem == 1) {
+                                                    return `${selectedItem} person`
+                                                } else {
+                                                    return `${selectedItem} people`
+                                                }
                                             }}
                                             rowTextForSelection={(item, index) => {
                                                 return item
@@ -156,8 +192,14 @@ const SelecingSeats = ({ navigation }) => {
                                     button={<SvgUri source={require('../assets/DatePickerIcon.svg')} height="50" width="25" />}
                                     locale="en"
                                     onSelect={(date) => {
-                                        console.log(date);
-                                        setSelectedDate(date.toDateString())
+                                        console.log("date selected", date.toDateString());
+                                        const newDate = new Date();
+                                        console.log("new date", newDate.toDateString());
+                                        if (date < newDate) {
+                                            setSelectedDate(newDate.toDateString())
+                                        } else {
+                                            setSelectedDate(date.toDateString())
+                                        }
                                     }}
                                     isHideOnSelect={true}
                                     initialDate={new Date()}
@@ -197,12 +239,27 @@ const SelecingSeats = ({ navigation }) => {
                         {/* Time picker */}
                         <Actionsheet.Item mt={0}>
                             <Text fontSize="18" ml="2">Select Time</Text>
-                            <RadioButton data={timingsData} />
+                            <RadioButton data={timingsData} setData={setTiming} selectedData={timing} />
                         </Actionsheet.Item>
                         {/* End of time picker */}
                         <Actionsheet.Item mt={-4}>
                             <Text fontSize="18" ml="2" mt="-3">Requests</Text>
-                            <RadioButton data={requestsData} />
+                            <RadioButton data={requestsData} setData={setRequest} selectedData={request} />
+                        </Actionsheet.Item>
+                        <Actionsheet.Item mt={-4}>
+                            <Text fontSize="18" ml="2" mt="-3">Vaccine Proof</Text>
+                            <ScrollView display="flex" flexDirection="row" w="80" px="4" py="2" horizontal={true} showsHorizontalScrollIndicator={false} >
+                                {[...Array(selectedNumOfPeople)].map((_, index) => (
+                                    <Pressable mr="5" key={index} onPress={() => {
+                                        pickImage()
+                                        setSelectedVaccineCardImg(true)
+                                    }}>
+                                        {!selectedVaccineCardImg ? <SvgUri source={require('../assets/vaccineCardNotSubmitted.svg')} height="50" width="26" /> : <SvgUri source={require('../assets/vaccineCardSubmitted.svg')} height="50" width="26" />}
+
+                                    </Pressable>
+                                )
+                                )}
+                            </ScrollView>
                         </Actionsheet.Item>
                         <Actionsheet.Item mt={-4}>
                             <Text fontSize="18" ml="2" mt="-3">Extra Notes</Text>
@@ -210,7 +267,7 @@ const SelecingSeats = ({ navigation }) => {
                         </Actionsheet.Item>
                         {/* <Actionsheet.Item> */}
                         <Center>
-                            <Button w="330" size="lg" variant="outline" borderColor="#f43f5e" onPress={() => navigation.navigate("Reservations")}>
+                            <Button w="330" size="lg" variant="outline" borderColor="#f43f5e" onPress={() => navigation.navigate("Reservations", { selectedNumOfPeople, notes, selectedDate, timing, request })}>
                                 <Text color="#f43f5e" fontSize="17px" py="1">CONFIRM BOOKING</Text>
                             </Button>
                         </Center>
@@ -218,9 +275,9 @@ const SelecingSeats = ({ navigation }) => {
                     </ScrollView>
                 </Actionsheet.Content>
             </Actionsheet>
-            {/* End of Actionsheet */}
+            {/* End of BOOK NOW Actionsheet */}
 
-        </View >
+        </View>
     )
 }
 

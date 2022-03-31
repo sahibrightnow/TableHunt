@@ -1,61 +1,93 @@
-import { Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider } from "native-base";
+import { Box, Heading, Divider, Image, Text, Center, HStack, Stack, VStack, View, Pressable, ScrollView } from "native-base"
+import SvgUri from 'react-native-svg-uri'
 
-const BookingCard = () => {
-    return <Box alignItems="center" mt={20}>
-        <Box maxW="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
-            borderColor: "coolGray.600",
-            backgroundColor: "gray.700"
-        }} _web={{
-            shadow: 2,
-            borderWidth: 0
-        }} _light={{
-            backgroundColor: "gray.50"
-        }}>
-            <Box>
-                <AspectRatio w="100%" ratio={16 / 9}>
-                    <Image source={{
-                        uri: "https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg"
-                    }} alt="image" />
-                </AspectRatio>
-                <Center bg="violet.500" _dark={{
-                    bg: "violet.400"
-                }} _text={{
-                    color: "warmGray.50",
-                    fontWeight: "700",
-                    fontSize: "xs"
-                }} position="absolute" bottom="0" px="3" py="1.5">
-                    PHOTOS
-                </Center>
-            </Box>
-            <Stack p="4" space={3}>
-                <Stack space={2}>
-                    <Heading size="md" ml="-1">
-                        The Garden City
-                    </Heading>
-                    <Text fontSize="xs" _light={{
-                        color: "violet.500"
-                    }} _dark={{
-                        color: "violet.400"
-                    }} fontWeight="500" ml="-0.5" mt="-1">
-                        The Silicon Valley of India.
-                    </Text>
+const BookingCard = ({ data, navigation }) => {
+    return (
+        <Box alignItems="center" mt={15}>
+            <Box rounded="lg" overflow="hidden" w="85%"
+                borderColor="coolGray.200" borderWidth="1" >
+
+                <Stack space={3}>
+                    <Stack space={2} px="4" pt="4" pb="3">
+                        <View display="flex" flexDirection="row" alignItems="center" justifyContent="space-between">
+                            <View display="flex" flexDirection="row" alignItems="center">
+                                <Image source={require('../assets/vectorConfirmedIcon.png')} mr="3" />
+                                <Text fontSize="15" color="green.300" fontWeight="500">
+                                    Booking Confirmed
+                                </Text>
+                            </View>
+                            <Pressable>
+                                <Text fontSize="15" color="danger.300" fontWeight="500" >Edit</Text>
+                            </Pressable>
+                        </View>
+                        <Heading size="md" ml="-1" mt="3" mb="2">
+                            Whitespot Kingsway
+                        </Heading>
+                        <View display="flex" flexDirection="row" justifyContent="space-between" >
+                            <View display="flex" flexDirection="row" alignItems="center">
+                                <SvgUri source={require('../assets/person.svg')} />
+                                <Text fontSize="15" color="gray.500" fontWeight="500" ml="2">
+                                    {data.selectedNumOfPeople}
+                                </Text>
+                            </View>
+                            <View display="flex" flexDirection="row" alignItems="center">
+                                <SvgUri source={require('../assets/DatePickerIcon.svg')} />
+                                <VStack>
+                                    <Text fontSize="15" color="gray.500" fontWeight="500" ml="2">
+                                        {/* {new Date().toDateString()}, Monday */}
+                                        {data.selectedDate || new Date().toDateString()}
+                                    </Text>
+                                    <Text fontSize="15" color="gray.500" fontWeight="500" ml="2">
+                                        {data.timing}
+                                    </Text>
+                                </VStack>
+                            </View>
+                        </View>
+                    </Stack>
+                    <Divider />
+                    <Stack space={2} px="4" pt="2" pb="3">
+                        <HStack display="flex" justifyContent="space-between" alignItems="center">
+                            <VStack display="flex" justifyContent="space-between" alignItems="center">
+                                <Heading size="sm" mb="2" >
+                                    Requests
+                                </Heading>
+                                <Text fontWeight="400" height="50" mt="3">
+                                    {data.request || 'No request'}
+
+                                </Text>
+                            </VStack>
+                            <VStack maxWidth="50%" >
+                                <Heading size="sm" mb="2">
+                                    Vaccine Proof
+                                </Heading>
+                                <ScrollView display="flex" flexDirection="row" horizontal={true} showsHorizontalScrollIndicator={false} >
+                                    {[...Array(data.selectedNumOfPeople)].map((_, index) => (
+                                        <Pressable mr="5" key={index}>
+                                            <SvgUri source={require('../assets/vaccineCardSubmitted.svg')} height="50" width="26" />
+                                        </Pressable>
+                                    )
+                                    )}
+                                </ScrollView>
+
+                            </VStack>
+                        </HStack>
+                        <VStack>
+                            <Heading size="sm" mb="2">
+                                Extra notes
+                            </Heading>
+                            <Text fontWeight="400">
+                                {data.notes}
+                            </Text>
+                        </VStack>
+
+                    </Stack>
+
+
                 </Stack>
-                <Text fontWeight="400">
-                    Bengaluru (also called Bangalore) is the center of India's high-tech
-                    industry. The city is also known for its parks and nightlife.
-                </Text>
-                <HStack alignItems="center" space={4} justifyContent="space-between">
-                    <HStack alignItems="center">
-                        <Text color="coolGray.600" _dark={{
-                            color: "warmGray.200"
-                        }} fontWeight="400">
-                            6 mins ago
-                        </Text>
-                    </HStack>
-                </HStack>
-            </Stack>
+            </Box>
         </Box>
-    </Box>;
+
+    )
 };
 
 export default BookingCard;

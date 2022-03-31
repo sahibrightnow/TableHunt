@@ -15,7 +15,7 @@ const Tab = createBottomTabNavigator()
 
 const TabStack = () => (
 
-  < Tab.Navigator >
+  <Tab.Navigator>
     <Tab.Screen
       name="Home"
       component={HomeScreen}
@@ -56,7 +56,7 @@ const TabStack = () => (
         ),
       }}
     />
-  </Tab.Navigator >
+  </Tab.Navigator>
 )
 
 const Stack = createNativeStackNavigator()

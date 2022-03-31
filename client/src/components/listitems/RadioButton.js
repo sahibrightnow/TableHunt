@@ -1,25 +1,32 @@
 import React from 'react';
 import { View, Text, ScrollView, HStack } from 'native-base';
 import { Pressable } from 'react-native';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
 
-const RadioButton = ({ data, onSelect, type, priceFilter, setPriceFilter }) => {
+const RadioButton = ({ data, setData, selectedData }) => {
 
-    const [userOption, setUserOption] = useState(null);
-    const [price, setPrice] = useState()
+    const [userOption, setUserOption] = useState(selectedData);
+    useEffect(() => {
+        setData = setUserOption
+
+        // console.log("selectedData", selectedData)
+    }, [setUserOption, userOption])
+
     return (
-
         <View my="3" mx="1">
-            {type == "filterModal" ? <HStack space={4} ml={1}>
+
+            <ScrollView horizontal={true}
+                showsHorizontalScrollIndicator={false}>
+
                 {data.map((item, index) => {
                     return (
                         /*Change the 'onPress' handler here */
 
-                        <Pressable onPress={() => { setPriceFilter(index + 1); setPrice(index + 1); }} key={index}>
-                            <Text borderWidth="1" p="1" m="1" borderRadius="4" borderColor="danger.300"
+                        <Pressable onPress={() => setUserOption(item.value)} key={index}>
+                            <Text borderWidth="1" p="1" m="1" borderRadius="4" borderColor="danger.500"
                                 style={ //Line 5
-                                    index + 1 === price ? styles.selectedPrice : styles.unselectedPrice
+                                    item.value === userOption ? styles.selected : styles.unselected
                                 }
                             >
                                 {item.value}
@@ -28,30 +35,9 @@ const RadioButton = ({ data, onSelect, type, priceFilter, setPriceFilter }) => {
 
                     );
                 })}
-            </HStack> :
-
-                <ScrollView horizontal={true}
-                    showsHorizontalScrollIndicator={false}>
-
-                    {data.map((item, index) => {
-                        return (
-                            /*Change the 'onPress' handler here */
-
-                            <Pressable onPress={() => setUserOption(item.value)} key={index}>
-                                <Text borderWidth="1" p="1" m="1" borderRadius="4" borderColor="danger.500"
-                                    style={ //Line 5
-                                        item.value === userOption ? styles.selected : styles.unselected
-                                    }
-                                >
-                                    {item.value}
-                                </Text>
-                            </Pressable>
-
-                        );
-                    })}
-                </ScrollView>}
-            {/* <Text mt="4"> User option: {userOption}</Text> */}
-        </View >
+            </ScrollView>
+            <Text mt="4"> User option: {selectedData}</Text>
+        </View>
     );
 }
 

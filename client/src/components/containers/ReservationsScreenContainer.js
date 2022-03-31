@@ -1,9 +1,16 @@
-import { Text } from 'native-base'
 import BookingCard from '../listitems/BookingCard'
-const ReservationsScreenContainer = ({ navigation }) => {
+import { Box, Heading, Divider, Image, Text, Center, HStack, Stack, VStack, View, Spinner } from "native-base"
+
+const ReservationsScreenContainer = ({ navigation, data }) => {
     return (
-        // <Text mt={20} ml={20}>Hello, this is reservations list</Text>
-        <BookingCard />
+        <VStack bgColor="white" height="100%">
+            <Heading size="lg" mt="20" ml="6">
+                Booking List
+            </Heading>
+            <Text fontSize={16} fontWeight="bold" color="gray.500" ml="6" mt="5">Upcoming</Text>
+            {data ? <BookingCard data={data} /> : <Spinner accessibilityLabel="Loading cards" />}
+
+        </VStack>
     );
 };
 
