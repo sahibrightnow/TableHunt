@@ -19,12 +19,7 @@ import { StyleSheet, Dimensions, View } from "react-native";
 import { Rating } from "react-native-ratings"
 import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
 
-
-
-
 const RestaurantContainer = ({ data, navigation }) => {
-    // carousel stuff
-
     const carouselRef = useRef(null);
     const { width: screenWidth } = Dimensions.get('window');
     const goForward = () => {
@@ -44,7 +39,6 @@ const RestaurantContainer = ({ data, navigation }) => {
             </View>
         );
     };
-
 
     // break
     const [details, setDetails] = useState();

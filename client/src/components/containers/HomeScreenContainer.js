@@ -29,7 +29,7 @@ const HomeScreenContainer = ({ navigation }) => {
   const [location, setLocation] = useState()
   const [rating, setRating] = useState(4)
   const [priceFilter, setPriceFilter] = useState(2)
-  const [mapRadius, setMapRadius] = useState(30000)
+  const [mapRadius, setMapRadius] = useState(20000)
   const [searchKeyword, setSearchKeyword] = useState('english')
   const [isLoaded, setIsLoaded] = useState(false)
   const mapRef = useRef()
@@ -63,11 +63,11 @@ const HomeScreenContainer = ({ navigation }) => {
 
     try {
       const request = await axios.get(url)
-      setNearbyPlaces(request?.data?.results.filter(el => {
-        return el.rating >= rating && el.rating < rating + 1
+      const sortedResults = request?.data?.results.sort((a, b) => b.rating - a.rating)
+      setNearbyPlaces(sortedResults.filter(el => {
+        return el.rating >= rating && el.rating <= rating + 1
       }))
       setIsLoaded(true)
-      console.log("nearbyPlaces", data)
     } catch (error) {
       console.log(error)
     }

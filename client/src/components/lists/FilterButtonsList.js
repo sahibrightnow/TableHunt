@@ -6,7 +6,7 @@ import RadioButton from '../listitems/RadioButton'
 
 const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, setRating, rating, setPriceFilter, priceFilter }) => {
     const [onChangeRadius, setOnChangeRadius] = useState(20);
-    const [onChangeEndRadius, setOnChangeEndRadius] = useState();
+    const [onChangeEndRadius, setOnChangeEndRadius] = useState(20);
     const [onChangeRating, setOnChangeRating] = useState(rating);
     const [onChangeEndRating, setOnChangeEndRating] = useState(rating)
     const { isOpen, onOpen, onClose } = useDisclose()
@@ -18,12 +18,12 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, se
         { value: "$31+" },
     ]
 
-    return (
-        // <ScrollView horizontal={true}>
-        //     <FilterButtons />
+    let message = 'Finding Restaurants...'
+    { totalMatchedRestaurants > 0 ? message = 'Finding Restaurants...' : message = 'No Restaurants Found' }
 
+    return (
         <View display={'flex'} justifyContent="space-between" flexDirection={'row'}>
-            <Heading size="md" pt={'3px'}> {isLoaded && totalMatchedRestaurants ? `${totalMatchedRestaurants} Restaurants found` : `Finding Restaurants...`}</Heading>
+            <Heading size="md" pt={'3px'}> {isLoaded && totalMatchedRestaurants > 0 ? `${totalMatchedRestaurants} Restaurants found` : message}</Heading>
             <Button bgColor="danger.300" mr={1} h={'34px'} onPress={onOpen} w={12} alignItems="flex-end">
                 <MaterialIcons name="filter-list" size={20} color="white" />
             </Button>
@@ -45,7 +45,6 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, se
                             Radius
                         </Text>
                     </Box>
-
 
                     <Slider defaultValue={20} colorScheme='green' mt="0" minValue={1} maxValue={50}
                         m={'5px'} ml={0} size="lg"
@@ -71,7 +70,6 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, se
                         </Text>
                     </Box>
 
-
                     <Slider defaultValue={rating} colorScheme="green" minValue={1} maxValue={5}
                         m={'20px'} mt={0} size="lg"
                         onChange={v => {
@@ -87,10 +85,6 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, se
                     </Slider>
                     <Text mt={-5} textAlign="center">{onChangeRating}</Text>
 
-                    {/* <Box w="100%" h={30} px={0} justifyContent="center">
-                        
-                    </Box> */}
-
                     <Actionsheet.Item mt={-6}>
                         <Text ml={-4} bold fontSize="15" color="gray.700" _dark={{
                             color: "gray.300"
@@ -99,26 +93,6 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, se
                         </Text>
                         <RadioButton data={priceArray} type={'filterModal'} setPriceFilter={setPriceFilter} priceFilter={setPriceFilter} />
                     </Actionsheet.Item>
-
-                    {/* <Radio.Group name="exampleGroup" defaultValue="1" accessibilityLabel="pick a size">
-                        <Stack direction={{
-                            base: "row",
-                            md: "row"
-                        }} alignItems="center" space={4} w="100%">
-                            <Radio value="1" colorScheme="green" size="sm" my={1}>
-                                $1-$10
-                            </Radio>
-                            <Radio value="2" colorScheme="green" size="sm" my={1}>
-                                $11-$20
-                            </Radio>
-                            <Radio value="3" colorScheme="green" size="sm" my={1}>
-                                $21-$30
-                            </Radio>
-                            <Radio value="4" colorScheme="green" size="sm" my={1}>
-                                $31+
-                            </Radio>
-                        </Stack>
-                    </Radio.Group> */}
 
                     <Button w="100%"
                         bgColor={'danger.300'}
