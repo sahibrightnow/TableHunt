@@ -2,13 +2,11 @@ import { Center, VStack, Image, Text, Heading, Divider, Button, ChevronRightIcon
 import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
 import { LoginContext } from "../context/LoginContext";
-import { useNavigation } from '@react-navigation/native';
 
 
-const ProfileScreenContainer = () => {
+const ProfileScreenContainer = ({ navigation }) => {
   const [userInfo, setUserInfo] = useState();
   const [accessToken, setAccessToken] = useContext(LoginContext)
-  const navigation = useNavigation();
   async function getUserData() {
     let userInfoResponse = await fetch("https://www.googleapis.com/userinfo/v2/me", {
       headers: { 'Authorization': `Bearer ${accessToken}` }

@@ -12,19 +12,36 @@ import RestaurantScreen from '../screens/RestaurantScreen'
 import RestaurantOwnerScreen from '../screens/RestaurantOwnerScreen'
 import OwnerAuthentication from '../layout/OwnerAuthentication'
 import RestuarantBookings from '../screens/RestuarantBookings'
+import { LogBox } from 'react-native'
 
 const Tab = createBottomTabNavigator()
 
+const navColors = {
+  primary: '#924344',
+  secondary: '#9CA3AF'
+}
+
+const tabScreenOptions = {
+  headerShown: false,
+  tabBarLabelStyle: { fontSize: 10.5, fontWeight: 'bold' },
+}
+
 const TabStack = () => (
 
-  <Tab.Navigator>
+  < Tab.Navigator
+    screenOptions={() => ({
+      tabBarActiveTintColor: navColors.primary,
+      tabBarInactiveTintColor: navColors.secondary,
+    })}
+  >
     <Tab.Screen
       name="Home"
       component={HomeScreen}
       options={{
-        headerShown: false,
+        ...tabScreenOptions,
         tabBarIcon: ({ focused, color, size }) => (
-          <SvgUri source={require('../assets/nav_icons/homeIcon.svg')} />
+          <SvgUri source={require('../assets/nav_icons/homeIcon.svg')}
+            fill={focused ? navColors.primary : navColors.secondary} />
         ),
       }}
     />
@@ -32,9 +49,10 @@ const TabStack = () => (
       name="Search"
       component={SearchScreen}
       options={{
-        headerShown: false,
+        ...tabScreenOptions,
         tabBarIcon: ({ focused, color, size }) => (
-          <SvgUri source={require('../assets/nav_icons/searchIcon.svg')} />
+          <SvgUri source={require('../assets/nav_icons/searchIcon.svg')}
+            fill={focused ? navColors.primary : navColors.secondary} />
         ),
       }}
     />
@@ -42,9 +60,10 @@ const TabStack = () => (
       name="Reservations"
       component={ReservationsScreen}
       options={{
-        headerShown: false,
+        ...tabScreenOptions,
         tabBarIcon: ({ focused, color, size }) => (
-          <SvgUri source={require('../assets/nav_icons/bookingsIcon.svg')} />
+          <SvgUri source={require('../assets/nav_icons/bookingsIcon.svg')}
+            fill={focused ? navColors.primary : navColors.secondary} />
         ),
       }}
     />
@@ -52,9 +71,11 @@ const TabStack = () => (
       name="Profile"
       component={ProfileScreen}
       options={{
-        headerShown: false,
+        ...tabScreenOptions,
         tabBarIcon: ({ focused, color, size }) => (
-          <SvgUri source={require('../assets/nav_icons/profileIcon.svg')} />
+          <SvgUri
+            source={require('../assets/nav_icons/profileIcon.svg')}
+            fill={focused ? navColors.primary : navColors.secondary} />
         ),
       }}
     />
@@ -91,7 +112,8 @@ const Stack = createNativeStackNavigator()
 
 const AppStack = () => {
   // temporarily hides all warnings
-  console.disableYellowBox = true;
+  // console.disableYellowBox = true;
+  LogBox.ignoreAllLogs()
 
   return (
 
