@@ -151,9 +151,9 @@ const RestaurantContainer = ({ data, navigation }) => {
                 <Divider />
 
                 <Button.Group isAttached size="md" m='auto' mb={2} mt={4}>
-                    <Button variant={Cvariant} onPress={() => {setInfo(true); setReviews(false)}}>Info</Button><Button onPress={() => {setInfo(false); setReviews(true)}} variant={variant}>Reviews</Button>
+                    <Button variant="outline" onPress={() => { setInfo(true); setReviews(false) }}>Info</Button><Button onPress={() => { setInfo(false); setReviews(true) }} >Reviews</Button>
 
-                    </Button.Group>
+                </Button.Group>
                 {info && <VStack ml={5} mr={5} mt={5}>
 
                     {details && <Carousel
@@ -166,7 +166,7 @@ const RestaurantContainer = ({ data, navigation }) => {
                         hasParallaxImages={true}
                     />}
 
-                    
+
 
 
                     <Text style={styles.heading}>Opening hours</Text>
@@ -228,7 +228,7 @@ const RestaurantContainer = ({ data, navigation }) => {
             </VStack>
         </ScrollView>
     );
-    
+
 };
 
 export default RestaurantContainer;
