@@ -9,7 +9,7 @@ const RadioButton = ({ data, setData, selectedData }) => {
     const [userOption, setUserOption] = useState(selectedData);
     useEffect(() => {
         setData = setUserOption
-
+        // setData(userOption)
         // console.log("selectedData", selectedData)
     }, [setUserOption, userOption])
 
@@ -45,18 +45,12 @@ export default RadioButton;
 
 const styles = StyleSheet.create({
     unselected: {
-        color: '#f43f5e',
+        color: '#924344',
+        borderColor: '#924344',
     },
     selected: {
-        backgroundColor: '#f43f5e',
-        color: 'white',
-        overflow: 'hidden',
-    },
-    unselectedPrice: {
-        color: '#924344',
-    },
-    selectedPrice: {
         backgroundColor: '#924344',
+        borderColor: '#924344',
         color: 'white',
         overflow: 'hidden',
     },

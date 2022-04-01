@@ -9,6 +9,9 @@ import RadioButton from '../listitems/RadioButton'
 import CameraButton from '../listitems/CameraButton'
 import TableMap from '../forms/TableMap'
 import * as ImagePicker from 'expo-image-picker';
+import Chair from '../listitems/Chair'
+import Window from '../listitems/Window'
+import Door from '../listitems/Door'
 
 const SelecingSeats = ({ navigation }) => {
     const {
@@ -54,6 +57,8 @@ const SelecingSeats = ({ navigation }) => {
         { value: "High-Chair" },
         { value: "Wheel-chair access" },
     ]
+    const tableData = ["Table 1", "Table 2", "Table 3", "Table 4", "Table 5", "Table 6", "Table 7", "Table 8"]
+    const [tableOption, setTableOption] = useState();
     // let request;
     // let timing;
     const [request, setRequest] = useState('No request')
@@ -99,7 +104,234 @@ const SelecingSeats = ({ navigation }) => {
             {/* End of top camera buttons */}
 
             {/* Table map */}
-            <TableMap />
+            {/* <TableMap /> */}
+            <HStack display="flex" alignItems="center">
+                <View ml="-3" mr="3">
+                    <Window />
+                </View>
+                {/* Table numbers start from top to bottom and left to right */}
+                {/* First column */}
+                <Container display="flex">
+                    {/* Table 1 */}
+                    <HStack display="flex" alignItems="center" w="188" >
+                        <Chair />
+                        {/* Table */}
+                        <Pressable onPress={() => setTableOption(tableData[0])}>
+                            <Box w="100" h="60" mx="2" borderColor="coolGray.400" borderWidth="1"
+                                style={
+                                    tableOption === tableData[0] ? { backgroundColor: '#6a994e' } : { backgroundColor: '#eee' }
+                                }
+                            >
+                            </Box>
+                        </Pressable>
+                        {/* <Checkbox value="table1" colorScheme="success" accessibilityLabel="This is table 1" mx="2" style={styles.checkbox1} checkboxTickColor="success.700" /> */}
+                        <Chair />
+                    </HStack>
+                    {/* End of table 1 */}
+
+                    {/* Table 2 */}
+
+                    <VStack mt="5" display="flex" justifyContent="center" w="102" >
+                        <HStack display="flex" justifyContent="center">
+                            <View mr="2" >
+                                <Chair />
+                            </View>
+                            <Chair />
+                        </HStack>
+                        {/* Table */}
+                        <Pressable onPress={() => setTableOption(tableData[1])}>
+                            <Box w="100" h="60" my="2" borderColor="coolGray.400" borderWidth="1"
+                                style={
+                                    tableOption === tableData[1] ? { backgroundColor: '#6a994e' } : { backgroundColor: '#eee' }
+                                }
+                            >
+                            </Box>
+                        </Pressable>
+                        {/* <Checkbox value="table2" colorScheme="success" accessibilityLabel="This is table 2" my="2" style={styles.checkbox1} /> */}
+                        <HStack display="flex" justifyContent="center">
+                            <View mr="2" >
+                                <Chair />
+                            </View>
+
+                            <Chair />
+                        </HStack>
+                    </VStack>
+                    {/* End of table 2 */}
+
+                    {/* Table 3 */}
+                    <VStack mt="5" display="flex" justifyContent="center" w="142" >
+                        <HStack display="flex" justifyContent="center">
+                            <View mr="2" >
+                                <Chair />
+                            </View>
+                            <View mr="2" >
+                                <Chair />
+                            </View>
+                            <Chair />
+                        </HStack>
+                        {/* Table */}
+                        <Pressable onPress={() => setTableOption(tableData[2])}>
+                            <Box w="140" h="70" my="2" borderColor="coolGray.400" borderWidth="1"
+                                style={
+                                    tableOption === tableData[2] ? { backgroundColor: '#6a994e' } : { backgroundColor: '#eee' }
+                                }
+                            >
+                            </Box>
+                        </Pressable>
+                        {/* <Checkbox value="table3" colorScheme="success" accessibilityLabel="This is table 3" my="2" style={styles.checkbox2} /> */}
+                        <HStack display="flex" justifyContent="center">
+                            <View mr="2" >
+                                <Chair />
+                            </View>
+                            <View mr="2" >
+                                <Chair />
+                            </View>
+                            <Chair />
+                        </HStack>
+                    </VStack>
+
+                    {/* End of table 3 */}
+                    {/* Table 4 */}
+                    <HStack mt="5" display="flex" alignItems="center" w="148">
+                        <VStack display="flex" mr="2" >
+                            <View mb="2" >
+                                <Chair />
+                            </View>
+
+                            <Chair />
+                        </VStack>
+                        {/* Table */}
+                        <Pressable onPress={() => setTableOption(tableData[3])}>
+                            <Box h="100" w="60" mx="2" borderColor="coolGray.400" borderWidth="1"
+                                style={
+                                    tableOption === tableData[3] ? { backgroundColor: '#6a994e' } : { backgroundColor: '#eee' }
+                                }
+                            >
+                            </Box>
+                        </Pressable>
+                        {/* <Checkbox value="table4" colorScheme="success" accessibilityLabel="This is table 4" style={styles.checkbox3} /> */}
+                        <VStack display="flex" ml="2" >
+                            <View mb="2" >
+                                <Chair />
+                            </View>
+                            <Chair />
+                        </VStack>
+                    </HStack>
+                    {/* End of table 4 */}
+                </Container>
+                {/* End of first column */}
+
+                {/* Second column */}
+                <Container display="flex" ml="-8" mt="-3">
+                    {/* Table 5 */}
+                    <VStack mt="5" display="flex" justifyContent="center" w="62" >
+                        <HStack display="flex" justifyContent="center" >
+                            <Chair />
+                        </HStack>
+                        {/* Table */}
+                        <Pressable onPress={() => setTableOption(tableData[4])}>
+                            <Box w="60" h="100" my="2" borderColor="coolGray.400" borderWidth="1"
+                                style={
+                                    tableOption === tableData[4] ? { backgroundColor: '#6a994e' } : { backgroundColor: '#eee' }
+                                }
+                            >
+                            </Box>
+                        </Pressable>
+                        {/* <Checkbox value="table5" colorScheme="success" accessibilityLabel="This is table 5" my="2" style={styles.checkbox3} /> */}
+                        <HStack display="flex" justifyContent="center">
+                            <Chair />
+
+                        </HStack>
+                    </VStack>
+                    {/* End of table 5 */}
+
+                    {/* Table 6 */}
+                    <VStack mt="5" display="flex" justifyContent="center" w="62">
+                        <HStack display="flex" justifyContent="center">
+                            <Chair />
+                        </HStack>
+                        {/* Table */}
+                        <Pressable onPress={() => setTableOption(tableData[5])}>
+                            <Box w="60" h="100" my="2" borderColor="coolGray.400" borderWidth="1"
+                                style={
+                                    tableOption === tableData[5] ? { backgroundColor: '#6a994e' } : { backgroundColor: '#eee' }
+                                }
+                            >
+                            </Box>
+                        </Pressable>
+                        {/* <Checkbox value="table6" colorScheme="success" accessibilityLabel="This is table 6" my="2" style={styles.checkbox3} /> */}
+                        <HStack display="flex" justifyContent="center">
+                            <Chair />
+
+                        </HStack>
+                    </VStack>
+                    {/* End of table 6 */}
+                </Container>
+                {/* End of second column */}
+
+                {/* Third column */}
+                <Container display="flex" ml="2" mt="-50">
+                    {/* Table 7 */}
+                    <HStack mt="5" mb="5" display="flex" justifyContent="center" w="103" >
+                        <VStack display="flex" justifyContent="center">
+                            <View mr="2" >
+                                <Chair />
+                            </View>
+                        </VStack>
+                        <VStack display="flex" justifyContent="center" >
+                            <HStack display="flex" justifyContent="center">
+                                <Chair />
+
+                            </HStack>
+                            {/* Table */}
+                            <Pressable onPress={() => setTableOption(tableData[6])}>
+                                <Box w="60" h="100" my="2" borderColor="coolGray.400" borderWidth="1"
+                                    style={
+                                        tableOption === tableData[6] ? { backgroundColor: '#6a994e' } : { backgroundColor: '#eee' }
+                                    }
+                                >
+                                </Box>
+                            </Pressable>
+                            {/* <Checkbox value="table7" colorScheme="success" accessibilityLabel="This is table 7" my="2" style={styles.checkbox3} /> */}
+                            <HStack display="flex" justifyContent="center">
+                                <Chair />
+
+                            </HStack>
+                        </VStack>
+                    </HStack>
+                    {/* End of table 7 */}
+
+                    {/* Table 8 */}
+                    <VStack display="flex" justifyContent="center" w="102" >
+                        <HStack display="flex" justifyContent="center">
+                            <View mr="2" >
+                                <Chair />
+                            </View>
+                            <Chair />
+                        </HStack>
+                        {/* Table */}
+                        <Pressable onPress={() => setTableOption(tableData[7])}>
+                            <Box w="100" h="60" my="2" borderColor="coolGray.400" borderWidth="1"
+                                style={
+                                    tableOption === tableData[7] ? { backgroundColor: '#6a994e' } : { backgroundColor: '#eee' }
+                                }
+                            >
+                            </Box>
+                        </Pressable>
+                        {/* <Checkbox value="table8" colorScheme="success" accessibilityLabel="This is table 8" my="2" style={styles.checkbox1} /> */}
+                        <HStack display="flex" justifyContent="center">
+                            <View mr="2" >
+                                <Chair />
+                            </View>
+                            <Chair />
+                        </HStack>
+                    </VStack>
+                    {/* End of table 8 */}
+                    <Door />
+                </Container>
+                {/* End of third column */}
+                <Window />
+            </HStack>
             {/* End of table map */}
 
             {/* Bottom Camera buttons */}
@@ -267,8 +499,8 @@ const SelecingSeats = ({ navigation }) => {
                         </Actionsheet.Item>
                         {/* <Actionsheet.Item> */}
                         <Center>
-                            <Button w="330" size="lg" variant="outline" borderColor="#f43f5e" onPress={() => navigation.navigate("Reservations", { selectedNumOfPeople, notes, selectedDate, timing, request })}>
-                                <Text color="#f43f5e" fontSize="17px" py="1">CONFIRM BOOKING</Text>
+                            <Button w="330" size="lg" variant="outline" borderColor="#924344" onPress={() => navigation.navigate("Reservations", { selectedNumOfPeople, notes, selectedDate, timing, request })}>
+                                <Text color="#924344" fontSize="17px" py="1">CONFIRM BOOKING</Text>
                             </Button>
                         </Center>
                         {/* </Actionsheet.Item> */}
