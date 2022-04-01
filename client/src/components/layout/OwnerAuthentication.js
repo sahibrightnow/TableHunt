@@ -10,7 +10,7 @@ import SvgUri from 'react-native-svg-uri'
 import { LoginContext } from '../context/LoginContext'
 
 
-const Authentication = () => {
+const OwnerAuthentication = () => {
 
   const [accessToken, setAccessToken, userInfo, setUserInfo] = useContext(LoginContext)
   const navigation = useNavigation();
@@ -28,7 +28,7 @@ const Authentication = () => {
       if (result.type === "success") {
         setAccessToken(result.accessToken);
         // getUserData();
-        navigation.navigate('HomePage')
+        navigation.navigate('OwnerHomepage')
       } else {
         console.log("Permission denied");
       }
@@ -69,8 +69,8 @@ const Authentication = () => {
           <Stack alignItems="center" style={styles.tableHunt} mt={'100px'} mb={'20'} >
             <SvgUri source={require('../assets/app_logo.svg')} />
           </Stack>
-          <Text bold style={styles.subheading} noOfLines={3}>Find your seating in seconds for your next occasion</Text>
-          <Text style={styles.subtitle}>You signup, We reserve. Quick!</Text>
+          <Text bold style={styles.subheading} noOfLines={3}>Manage your restaurant's reservations right here.</Text>
+          <Text style={styles.subtitle}>Sign in to continue</Text>
 
           <Button style={styles.button} borderRadius={8} width='100%' mt='5' onPress={() => signInWithGoogleAsync()} alignItems='center'>
             <HStack space={2}>
@@ -90,19 +90,15 @@ const Authentication = () => {
           <Text >Not a member?<Link>Sign up</Link></Text>
           <StatusBar style="auto" />
 
-          <Text style={styles.text}>Are you a restaurant owner? <Text onPress={() => navigation.navigate("OwnerAuthentication")} style={styles.text2}>Sign in</Text></Text>
-          {/* <Button height='50' borderRadius={8} width='50%' mt='5'>Continue with email</Button>
-          <Button height='50' borderRadius={8} width='50%' mt='5' onPress={accessToken ? getUserData : signInWithGoogleAsync}>
-            {accessToken ? "Get user data" : "Continue with google"}
-          </Button> */}
+          
         </View>
       </Flex>
-    </VStack >
+    </VStack>
 
   )
 }
 
-export default Authentication
+export default OwnerAuthentication
 
 const styles = StyleSheet.create({
   container: {
@@ -188,4 +184,3 @@ const styles = StyleSheet.create({
     color: '#924344', width: 216, fontSize: 14,
   }
 });
-

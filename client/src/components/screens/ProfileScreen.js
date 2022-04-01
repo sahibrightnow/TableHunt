@@ -2,7 +2,7 @@ import React from "react";
 import ProfileScreenContainer from "../containers/ProfileScreenContainer";
 
 const ProfileScreen = () => (
-  <ProfileScreenContainer />
+  <ProfileScreenContainer/>
 );
 
 export default ProfileScreen;
