@@ -1,16 +1,4 @@
-import {
-    Center,
-    VStack,
-    HStack,
-    Heading,
-    Text,
-    Button,
-    ScrollView,
-    Divider,
-    Image,
-    Box
-
-} from "native-base";
+import { Center, VStack, HStack, Heading, Text, Button, ScrollView, Divider, Image, Box } from "native-base";
 import React, { useEffect, useState, useRef } from "react";
 import { API_KEY } from 'react-native-dotenv'
 import SvgUri from 'react-native-svg-uri'

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, Button, useDisclose, Heading, Actionsheet, Box, Text, Slider, Radio, Stack } from 'native-base'
 import { MaterialIcons } from '@expo/vector-icons'
-import RadioButton from '../listitems/RadioButton'
+import RadioButton1 from '../listitems/RadioButton1'
 
 
 const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, setRating, rating, setPriceFilter, priceFilter }) => {
@@ -19,7 +19,7 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, se
     ]
 
     let message = 'Finding Restaurants...'
-    { totalMatchedRestaurants > 0 ? message = 'Finding Restaurants...' : message = 'No Restaurants Found' }
+    // { totalMatchedRestaurants > 0 ? message = 'Finding Restaurants...' : message = 'No Restaurants Found' }
 
     return (
         <View display={'flex'} justifyContent="space-between" flexDirection={'row'}>
@@ -91,7 +91,7 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, se
                         }}>
                             Price
                         </Text>
-                        <RadioButton data={priceArray} type={'filterModal'} setPriceFilter={setPriceFilter} priceFilter={setPriceFilter} />
+                        <RadioButton1 data={priceArray} type={'filterModal'} setPriceFilter={setPriceFilter} priceFilter={setPriceFilter} />
                     </Actionsheet.Item>
 
                     <Button w="100%"
