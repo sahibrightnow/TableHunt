@@ -47,6 +47,10 @@ const RestaurantContainer = ({ data, navigation }) => {
 
 
     // break
+
+    // States for the info/reviews toggle
+    const [info, setInfo] = useState(true);
+    const [reviews, setReviews] = useState(false);
     const [details, setDetails] = useState();
 
     const restaurant = data.restaurant
@@ -78,7 +82,7 @@ const RestaurantContainer = ({ data, navigation }) => {
     useEffect(() => {
         getPlaceDetails();
 
-    }, []);
+    }, [reviews, info]);
     console.log("details", details?.reviews)
     switch (priceLevel) {
         case 1:
@@ -97,6 +101,7 @@ const RestaurantContainer = ({ data, navigation }) => {
             priceRating = 'Not Available'
     }
 
+    console.log("reviews", reviews);
 
     return (
         <ScrollView>
@@ -144,7 +149,12 @@ const RestaurantContainer = ({ data, navigation }) => {
                     </Text>
                 </HStack>
                 <Divider />
-                <VStack ml={5} mr={5} mt={5}>
+
+                <Button.Group isAttached size="md" m='auto' mb={2} mt={4}>
+                    <Button variant={Cvariant} onPress={() => {setInfo(true); setReviews(false)}}>Info</Button><Button onPress={() => {setInfo(false); setReviews(true)}} variant={variant}>Reviews</Button>
+
+                    </Button.Group>
+                {info && <VStack ml={5} mr={5} mt={5}>
 
                     {details && <Carousel
                         ref={carouselRef}
@@ -156,11 +166,13 @@ const RestaurantContainer = ({ data, navigation }) => {
                         hasParallaxImages={true}
                     />}
 
+                    
+
 
                     <Text style={styles.heading}>Opening hours</Text>
                     {details?.opening_hours.weekday_text.map((el, index) => <Text fontSize={14} key={index}>{el}</Text>)}
                     <Text mt={6} fontSize={14}><Text style={styles.heading}>Phone:</Text> {details?.formatted_phone_number}</Text>
-                </VStack>
+                </VStack>}
 
                 <Center pt={10}>
                     <Button
@@ -176,7 +188,7 @@ const RestaurantContainer = ({ data, navigation }) => {
                         Book
                     </Button>
                 </Center>
-                <VStack ml={5} mr={5} mt={-2}>
+                {reviews && <VStack ml={5} mr={5} mt={-2}>
                     <Text style={styles.heading}>{restaurant?.user_ratings_total} Reviews </Text>
                     {details?.reviews.map((el, index) => <Box mt={5} key={index}>
 
@@ -211,11 +223,12 @@ const RestaurantContainer = ({ data, navigation }) => {
                         <Text mb={2} mt={4} fontSize={14}>{el.text}</Text>
                         <Divider />
                     </Box>)}
-                </VStack>
+                </VStack>}
 
             </VStack>
         </ScrollView>
     );
+    
 };
 
 export default RestaurantContainer;
