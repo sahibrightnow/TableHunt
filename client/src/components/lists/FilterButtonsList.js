@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, Button, useDisclose, Heading, Actionsheet, Box, Text, Slider, Radio, Stack } from 'native-base'
 import { MaterialIcons } from '@expo/vector-icons'
-import RadioButton1 from '../listitems/RadioButton1'
+import RadioButton from '../listitems/RadioButton'
 
 
 const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, setRating, rating, setPriceFilter, priceFilter }) => {
@@ -91,7 +91,7 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, se
                         }}>
                             Price
                         </Text>
-                        <RadioButton1 data={priceArray} type={'filterModal'} setPriceFilter={setPriceFilter} priceFilter={setPriceFilter} />
+                        <RadioButton data={priceArray} type={'filterModal'} setPriceFilter={setPriceFilter} priceFilter={setPriceFilter} />
                     </Actionsheet.Item>
 
                     <Button w="100%"

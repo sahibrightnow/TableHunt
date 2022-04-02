@@ -4,7 +4,7 @@ import Chair from '../listitems/Chair'
 import Window from '../listitems/Window'
 import Door from '../listitems/Door'
 
-const TableMap = () => {
+const TableMap = ({ tableOption, setTableOption }) => {
 
     const styles = StyleSheet.create({
         checkbox1: {
@@ -45,6 +45,8 @@ const TableMap = () => {
         dropdown1RowTxtStyle: { color: "#444", textAlign: "left" },
     });
 
+    const tableData = ["Table 1", "Table 2", "Table 3", "Table 4", "Table 5", "Table 6", "Table 7", "Table 8"]
+
     return (
         <HStack display="flex" alignItems="center">
             <View ml="-3" mr="3">
@@ -57,17 +59,15 @@ const TableMap = () => {
                 <HStack display="flex" alignItems="center" w="188" >
                     <Chair />
                     {/* Table */}
-                    {/* <Box w="100" h="60" mx="2" borderColor="coolGray.400" borderWidth="1" _dark={{
-                            borderColor: "coolGray.600",
-                            backgroundColor: "gray.700"
-                        }} _web={{
-                            shadow: 2,
-                            borderWidth: 0
-                        }} _light={{
-                            backgroundColor: "gray.50"
-                        }}>
-                        </Box> */}
-                    <Checkbox value="table1" colorScheme="success" accessibilityLabel="This is table 1" mx="2" style={styles.checkbox1} checkboxTickColor="success.700" />
+                    <Pressable onPress={() => setTableOption(tableData[0])}>
+                        <Box w="100" h="60" mx="2" borderColor="coolGray.400" borderWidth="1"
+                            style={
+                                tableOption === tableData[0] ? { backgroundColor: '#6a994e' } : { backgroundColor: '#eee' }
+                            }
+                        >
+                        </Box>
+                    </Pressable>
+                    {/* <Checkbox value="table1" colorScheme="success" accessibilityLabel="This is table 1" mx="2" style={styles.checkbox1} checkboxTickColor="success.700" /> */}
                     <Chair />
                 </HStack>
                 {/* End of table 1 */}
@@ -82,17 +82,15 @@ const TableMap = () => {
                         <Chair />
                     </HStack>
                     {/* Table */}
-                    {/* <Box w="100" h="60" my="2" borderColor="coolGray.400" borderWidth="1" _dark={{
-                            borderColor: "coolGray.600",
-                            backgroundColor: "gray.700"
-                        }} _web={{
-                            shadow: 2,
-                            borderWidth: 0
-                        }} _light={{
-                            backgroundColor: "gray.50"
-                        }}>
-                        </Box> */}
-                    <Checkbox value="table2" colorScheme="success" accessibilityLabel="This is table 2" my="2" style={styles.checkbox1} />
+                    <Pressable onPress={() => setTableOption(tableData[1])}>
+                        <Box w="100" h="60" my="2" borderColor="coolGray.400" borderWidth="1"
+                            style={
+                                tableOption === tableData[1] ? { backgroundColor: '#6a994e' } : { backgroundColor: '#eee' }
+                            }
+                        >
+                        </Box>
+                    </Pressable>
+                    {/* <Checkbox value="table2" colorScheme="success" accessibilityLabel="This is table 2" my="2" style={styles.checkbox1} /> */}
                     <HStack display="flex" justifyContent="center">
                         <View mr="2" >
                             <Chair />
@@ -115,17 +113,15 @@ const TableMap = () => {
                         <Chair />
                     </HStack>
                     {/* Table */}
-                    {/* <Box w="140" h="70" my="2" borderColor="coolGray.400" borderWidth="1" _dark={{
-                            borderColor: "coolGray.600",
-                            backgroundColor: "gray.700"
-                        }} _web={{
-                            shadow: 2,
-                            borderWidth: 0
-                        }} _light={{
-                            backgroundColor: "gray.50"
-                        }}>
-                        </Box> */}
-                    <Checkbox value="table3" colorScheme="success" accessibilityLabel="This is table 3" my="2" style={styles.checkbox2} />
+                    <Pressable onPress={() => setTableOption(tableData[2])}>
+                        <Box w="140" h="70" my="2" borderColor="coolGray.400" borderWidth="1"
+                            style={
+                                tableOption === tableData[2] ? { backgroundColor: '#6a994e' } : { backgroundColor: '#eee' }
+                            }
+                        >
+                        </Box>
+                    </Pressable>
+                    {/* <Checkbox value="table3" colorScheme="success" accessibilityLabel="This is table 3" my="2" style={styles.checkbox2} /> */}
                     <HStack display="flex" justifyContent="center">
                         <View mr="2" >
                             <Chair />
@@ -148,17 +144,15 @@ const TableMap = () => {
                         <Chair />
                     </VStack>
                     {/* Table */}
-                    {/* <Box h="100" w="60" mx="2" borderColor="coolGray.400" borderWidth="1" _dark={{
-                            borderColor: "coolGray.600",
-                            backgroundColor: "gray.700"
-                        }} _web={{
-                            shadow: 2,
-                            borderWidth: 0
-                        }} _light={{
-                            backgroundColor: "gray.50"
-                        }}>
-                        </Box> */}
-                    <Checkbox value="table4" colorScheme="success" accessibilityLabel="This is table 4" style={styles.checkbox3} />
+                    <Pressable onPress={() => setTableOption(tableData[3])}>
+                        <Box h="100" w="60" mx="2" borderColor="coolGray.400" borderWidth="1"
+                            style={
+                                tableOption === tableData[3] ? { backgroundColor: '#6a994e' } : { backgroundColor: '#eee' }
+                            }
+                        >
+                        </Box>
+                    </Pressable>
+                    {/* <Checkbox value="table4" colorScheme="success" accessibilityLabel="This is table 4" style={styles.checkbox3} /> */}
                     <VStack display="flex" ml="2" >
                         <View mb="2" >
                             <Chair />
@@ -178,17 +172,15 @@ const TableMap = () => {
                         <Chair />
                     </HStack>
                     {/* Table */}
-                    {/* <Box w="60" h="100" my="2" borderColor="coolGray.400" borderWidth="1" _dark={{
-                            borderColor: "coolGray.600",
-                            backgroundColor: "gray.700"
-                        }} _web={{
-                            shadow: 2,
-                            borderWidth: 0
-                        }} _light={{
-                            backgroundColor: "gray.50"
-                        }}>
-                        </Box> */}
-                    <Checkbox value="table5" colorScheme="success" accessibilityLabel="This is table 5" my="2" style={styles.checkbox3} />
+                    <Pressable onPress={() => setTableOption(tableData[4])}>
+                        <Box w="60" h="100" my="2" borderColor="coolGray.400" borderWidth="1"
+                            style={
+                                tableOption === tableData[4] ? { backgroundColor: '#6a994e' } : { backgroundColor: '#eee' }
+                            }
+                        >
+                        </Box>
+                    </Pressable>
+                    {/* <Checkbox value="table5" colorScheme="success" accessibilityLabel="This is table 5" my="2" style={styles.checkbox3} /> */}
                     <HStack display="flex" justifyContent="center">
                         <Chair />
 
@@ -202,17 +194,15 @@ const TableMap = () => {
                         <Chair />
                     </HStack>
                     {/* Table */}
-                    {/* <Box w="60" h="100" my="2" borderColor="coolGray.400" borderWidth="1" _dark={{
-                            borderColor: "coolGray.600",
-                            backgroundColor: "gray.700"
-                        }} _web={{
-                            shadow: 2,
-                            borderWidth: 0
-                        }} _light={{
-                            backgroundColor: "gray.50"
-                        }}>
-                        </Box> */}
-                    <Checkbox value="table6" colorScheme="success" accessibilityLabel="This is table 6" my="2" style={styles.checkbox3} />
+                    <Pressable onPress={() => setTableOption(tableData[5])}>
+                        <Box w="60" h="100" my="2" borderColor="coolGray.400" borderWidth="1"
+                            style={
+                                tableOption === tableData[5] ? { backgroundColor: '#6a994e' } : { backgroundColor: '#eee' }
+                            }
+                        >
+                        </Box>
+                    </Pressable>
+                    {/* <Checkbox value="table6" colorScheme="success" accessibilityLabel="This is table 6" my="2" style={styles.checkbox3} /> */}
                     <HStack display="flex" justifyContent="center">
                         <Chair />
 
@@ -237,17 +227,15 @@ const TableMap = () => {
 
                         </HStack>
                         {/* Table */}
-                        {/* <Box w="60" h="100" my="2" borderColor="coolGray.400" borderWidth="1" _dark={{
-                                borderColor: "coolGray.600",
-                                backgroundColor: "gray.700"
-                            }} _web={{
-                                shadow: 2,
-                                borderWidth: 0
-                            }} _light={{
-                                backgroundColor: "gray.50"
-                            }}>
-                            </Box> */}
-                        <Checkbox value="table7" colorScheme="success" accessibilityLabel="This is table 7" my="2" style={styles.checkbox3} />
+                        <Pressable onPress={() => setTableOption(tableData[6])}>
+                            <Box w="60" h="100" my="2" borderColor="coolGray.400" borderWidth="1"
+                                style={
+                                    tableOption === tableData[6] ? { backgroundColor: '#6a994e' } : { backgroundColor: '#eee' }
+                                }
+                            >
+                            </Box>
+                        </Pressable>
+                        {/* <Checkbox value="table7" colorScheme="success" accessibilityLabel="This is table 7" my="2" style={styles.checkbox3} /> */}
                         <HStack display="flex" justifyContent="center">
                             <Chair />
 
@@ -265,17 +253,15 @@ const TableMap = () => {
                         <Chair />
                     </HStack>
                     {/* Table */}
-                    {/* <Box w="100" h="60" my="2" borderColor="coolGray.400" borderWidth="1" _dark={{
-                            borderColor: "coolGray.600",
-                            backgroundColor: "gray.700"
-                        }} _web={{
-                            shadow: 2,
-                            borderWidth: 0
-                        }} _light={{
-                            backgroundColor: "gray.50"
-                        }}>
-                        </Box> */}
-                    <Checkbox value="table8" colorScheme="success" accessibilityLabel="This is table 8" my="2" style={styles.checkbox1} />
+                    <Pressable onPress={() => setTableOption(tableData[7])}>
+                        <Box w="100" h="60" my="2" borderColor="coolGray.400" borderWidth="1"
+                            style={
+                                tableOption === tableData[7] ? { backgroundColor: '#6a994e' } : { backgroundColor: '#eee' }
+                            }
+                        >
+                        </Box>
+                    </Pressable>
+                    {/* <Checkbox value="table8" colorScheme="success" accessibilityLabel="This is table 8" my="2" style={styles.checkbox1} /> */}
                     <HStack display="flex" justifyContent="center">
                         <View mr="2" >
                             <Chair />
