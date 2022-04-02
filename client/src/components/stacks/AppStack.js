@@ -10,6 +10,8 @@ import SvgUri from 'react-native-svg-uri'
 import Authentication from '../layout/authentication'
 import RestaurantScreen from '../screens/RestaurantScreen'
 import RestaurantOwnerScreen from '../screens/RestaurantOwnerScreen'
+import OwnerAuthentication from '../layout/OwnerAuthentication'
+import RestuarantBookings from '../screens/RestuarantBookings'
 import { LogBox } from 'react-native'
 
 const Tab = createBottomTabNavigator()
@@ -77,7 +79,32 @@ const TabStack = () => (
         ),
       }}
     />
-  </Tab.Navigator >
+  </Tab.Navigator>
+)
+
+const OwnerScreen = () => (
+  <Tab.Navigator>
+    <Tab.Screen
+      name="Bookings"
+      component={RestuarantBookings}
+      options={{
+        headerShown: false,
+        tabBarIcon: ({ focused, color, size }) => (
+          <SvgUri source={require('../assets/nav_icons/bookingsIcon.svg')} />
+        ),
+      }}
+    />
+    <Tab.Screen
+      name="Profile"
+      component={RestaurantOwnerScreen}
+      options={{
+        headerShown: false,
+        tabBarIcon: ({ focused, color, size }) => (
+          <SvgUri source={require('../assets/nav_icons/profileIcon.svg')} />
+        ),
+      }}
+    />
+  </Tab.Navigator>
 )
 
 const Stack = createNativeStackNavigator()
@@ -105,6 +132,14 @@ const AppStack = () => {
             headerShown: false,
           }}
         />
+
+        <Stack.Screen
+          name="OwnerHomepage"
+          component={OwnerScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name="Restaurant Page"
           component={RestaurantScreen}
@@ -125,6 +160,13 @@ const AppStack = () => {
         <Stack.Screen
           name="Restaurant Owner"
           component={RestaurantOwnerScreen}
+        />
+        <Stack.Screen
+          name="OwnerAuthentication"
+          component={OwnerAuthentication}
+          options={{
+            headerShown: false,
+          }}
         />
 
       </Stack.Navigator>

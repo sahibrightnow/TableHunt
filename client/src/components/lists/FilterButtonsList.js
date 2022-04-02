@@ -19,7 +19,7 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, se
     ]
 
     let message = 'Finding Restaurants...'
-    { totalMatchedRestaurants > 0 ? message = 'Finding Restaurants...' : message = 'No Restaurants Found' }
+    // { totalMatchedRestaurants > 0 ? message = 'Finding Restaurants...' : message = 'No Restaurants Found' }
 
     return (
         <View display={'flex'} justifyContent="space-between" flexDirection={'row'}>

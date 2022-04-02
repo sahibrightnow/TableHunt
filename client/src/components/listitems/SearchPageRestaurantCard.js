@@ -38,7 +38,7 @@ const SearchPageRestaurantCard = (props) => {
                     > View Menu</Button>
                 </VStack>
             </HStack>
-        </Center >
+        </Center>
     )
 }
 
