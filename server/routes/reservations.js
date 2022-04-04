@@ -1,16 +1,11 @@
 const router = require('express').Router({ mergeParams: true });
-
+const validateJWT = require('../middlewares/validateJWT')
 const {
     createReservation,
-    getAllReservations
+    getUserReservations
 } = require('../controllers/reservationController');
 
-// delete in final production
-router.get('/', (req, res, next) => {
-    res.send('Reservations Endpoint');
-});
-
-router.route('/').post(createReservation);
-router.route('/list').get(getAllReservations);
+router.post('/', createReservation);
+router.get('/list', validateJWT, getUserReservations);
 
 module.exports = router;

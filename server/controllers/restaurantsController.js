@@ -1,21 +1,24 @@
-const Restaurant = require('../models/restaurants');
+const Restaurants = require('../models/restaurants');
 
 const createRestaurant = async (req, res) => {
     const place_id = req.body.place_id
-    const found = await Restaurant.findOne({ place_id })
+    const found = await Restaurants.findOne({ place_id })
 
     if (!found) {
         try {
-            const restaurant = new Restaurant({ ...req.body });
+            const restaurant = new Restaurants({ ...req.body });
             restaurant.save().then((result) => {
                 res.status(201).json({
                     status: 201,
                     message: 'Restaurant CREATED SUCCESSFULLY!',
                 });
-            }).catch((error) => res.status(500).json({ error: error }));
+            }).catch((error) => res.status(500).json({
+                status: 'ERROR',
+                message: 'Missing parameters in post request body'
+            }));
         } catch (error) {
-            return res.json({
-                status: 500,
+            return res.status(500).json({
+                status: 'ERROR',
                 message: error.message,
             });
         }
@@ -30,7 +33,7 @@ const createRestaurant = async (req, res) => {
 
 const getRestaurantsWithOrders = async (req, res) => {
     try {
-        Restaurant.find({}).then((result) => {
+        Restaurants.find({}).then((result) => {
             res.status(200).json({
                 status: 200,
                 message: 'Sending Restaurants, selected for bookings!',

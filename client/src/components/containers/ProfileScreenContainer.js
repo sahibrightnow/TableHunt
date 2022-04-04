@@ -6,7 +6,7 @@ import { LoginContext } from "../context/LoginContext";
 
 const ProfileScreenContainer = ({ navigation }) => {
   const [userInfo, setUserInfo] = useState();
-  const [accessToken, setAccessToken] = useContext(LoginContext)
+  const [accessToken, setAccessToken, userToken, setUserToken, userId, setUserId] = useContext(LoginContext)
   async function getUserData() {
     let userInfoResponse = await fetch("https://www.googleapis.com/userinfo/v2/me", {
       headers: { 'Authorization': `Bearer ${accessToken}` }
@@ -22,12 +22,12 @@ const ProfileScreenContainer = ({ navigation }) => {
 
   const logOut = () => {
     setAccessToken("");
-    
+    setUserToken("")
+    setUserId("")
+
     setTimeout(() => {
       navigation.navigate("Authentication");
     }, 1000);
-    
-
   }
 
   const icon = [{

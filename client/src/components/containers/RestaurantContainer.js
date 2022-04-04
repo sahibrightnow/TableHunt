@@ -1,13 +1,17 @@
 import { Center, VStack, HStack, Heading, Text, Button, ScrollView, Divider, Image, Box } from "native-base";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { API_KEY, SERVER } from 'react-native-dotenv'
 import SvgUri from 'react-native-svg-uri'
 import axios from "axios";
 import { StyleSheet, Dimensions, View } from "react-native";
 import { Rating } from "react-native-ratings"
 import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
+import { LoginContext } from '../context/LoginContext'
+import logoutUser from "../context/logoutUser";
 
 const RestaurantContainer = ({ data, navigation }) => {
+    const [accessToken, setAccessToken, userInfo, setUserInfo, userToken, setUserToken, userId, setUserId] = useContext(LoginContext)
+
     const carouselRef = useRef(null);
     const { width: screenWidth } = Dimensions.get('window');
     const goForward = () => {
@@ -37,9 +41,15 @@ const RestaurantContainer = ({ data, navigation }) => {
     const [restaurantDetails, setRestaurantDetails] = useState({})
 
     const createRestaurant = () => {
-        axios.post(`${SERVER}/api/v1/restaurants`, restaurantDetails)
-            .then((response) => console.log("Restaurant Created for Bookings"))
-            .catch((error) => console.error)
+        axios.post(`${SERVER}/api/v1/restaurants`, restaurantDetails, {
+            headers: { 'Authorization': userToken }
+        })
+            .then((res) => {
+                console.log('Restaurants created')
+            })
+            .catch((error) => {
+                console.log('error', error);
+            })
     }
 
 

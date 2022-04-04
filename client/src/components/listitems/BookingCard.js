@@ -16,9 +16,9 @@ const BookingCard = ({ data, navigation }) => {
                                     Booking Confirmed
                                 </Text>
                             </View>
-                            <Pressable>
+                            {/* <Pressable>
                                 <Text fontSize="15" color="danger.300" fontWeight="500" >Edit</Text>
-                            </Pressable>
+                            </Pressable> */}
                         </View>
                         <Heading size="md" ml="-1" mt="3" mb="2">
                             {data.restaurantName}
@@ -46,7 +46,7 @@ const BookingCard = ({ data, navigation }) => {
                     </Stack>
                     <Divider />
                     <Stack space={2} px="4" pt="3" pb="3">
-                        <HStack display="flex" justifyContent="space-between" alignItems="center" >
+                        <HStack display="flex" justifyContent="space-around" alignItems="center" >
                             <VStack display="flex" justifyContent="space-around" maxWidth="48%" >
                                 <Heading size="sm" mb="-1">
                                     Requests
@@ -74,7 +74,7 @@ const BookingCard = ({ data, navigation }) => {
                             </VStack>
                         </HStack>
 
-                        <HStack display="flex" justifyContent="space-between" alignItems="center" mt={-3} mb={-5}>
+                        <HStack display="flex" justifyContent="space-around" alignItems="center" mt={-3} mb={-5}>
                             <VStack display="flex" justifyContent="space-around" maxWidth="48%" >
                                 <Heading size="sm" mb="-1">
                                     Extra notes

@@ -39,15 +39,15 @@ const HomepageRestaurantCard = (props) => {
                         {props.restaurantRating} {props.ratingDescription}
 
                         <Text color="gray.600">
-                            ({props.totalUserReviews}) | Change later
+                            ({props.totalUserReviews})
                         </Text>
                     </Text>
-                    <Text color="danger.300" ml={1}>
+                    <Text color="danger.300" ml={1} mt={0.5}>
                         {props.priceRating}
                     </Text>
                 </Stack>
             </Stack>
-        </Box>
+        </Box >
     )
 }
 

@@ -1,7 +1,6 @@
 import { StyleSheet } from 'react-native'
 import { HStack, useDisclose, Button, Box, View, Text, Pressable, Actionsheet, ScrollView, TextArea, Center } from 'native-base'
 import SvgUri from 'react-native-svg-uri'
-import React, { useState, useEffect } from 'react'
 import SelectDropdown from 'react-native-select-dropdown'
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { ModalDatePicker } from "react-native-material-date-picker";
@@ -11,8 +10,12 @@ import TableMap from '../forms/TableMap'
 import * as ImagePicker from 'expo-image-picker';
 import axios from 'axios'
 import { SERVER } from 'react-native-dotenv'
+import React, { useState, useEffect, useContext } from 'react'
+import { LoginContext } from '../context/LoginContext'
 
 const SelecingSeats = ({ data, navigation }) => {
+    const [accessToken, setAccessToken, userInfo, setUserInfo, userToken, setUserToken, userId, setUserId] = useContext(LoginContext)
+
     const {
         isOpen,
         onOpen,
@@ -81,6 +84,7 @@ const SelecingSeats = ({ data, navigation }) => {
             bookingTime: timing,
             tableNumber: tableOption,
             restaurantName: data.restaurantDetails.name,
+            placeId: data.restaurantDetails.place_id,
             vicinity: data.restaurantDetails.vicinity,
             specialRequests: request,
             extraNotes: notes,
@@ -112,7 +116,9 @@ const SelecingSeats = ({ data, navigation }) => {
     };
 
     const createReservation = () => {
-        axios.post(`${SERVER}/api/v1/reservations`, reservationDetails)
+        axios.post(`${SERVER}/api/v1/reservations`, { ...reservationDetails, userId: userId }, {
+            headers: { 'Authorization': userToken }
+        })
             .then(res => console.log("Reservation sucessful"))
             .catch(err => console.log("Error while creating reservation", err))
     }

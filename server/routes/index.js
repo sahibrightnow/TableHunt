@@ -8,7 +8,7 @@ router.use('/restaurants', restaurants);
 router.use('/reservations', reservations);
 
 
-router.get('/', (req, res, next) => {
+router.get('/', (req, res) => {
     res.send('TableHunt Server API V1!');
 });
 

@@ -8,11 +8,13 @@ import { HStack, Button, VStack, Flex, Stack, Center, Divider, Link } from 'nati
 import { useNavigation } from '@react-navigation/native';
 import SvgUri from 'react-native-svg-uri'
 import { LoginContext } from '../context/LoginContext'
+import axios from 'axios'
+import { SERVER } from 'react-native-dotenv'
 
 
 const Authentication = () => {
 
-  const [accessToken, setAccessToken, userInfo, setUserInfo] = useContext(LoginContext)
+  const [accessToken, setAccessToken, userInfo, setUserInfo, userToken, setUserToken, userId, setUserId] = useContext(LoginContext)
   const navigation = useNavigation();
 
   async function signInWithGoogleAsync() {
@@ -28,7 +30,21 @@ const Authentication = () => {
       if (result.type === "success") {
         setAccessToken(result.accessToken);
         // getUserData();
-        navigation.navigate('HomePage')
+        // console.log("RESULT", result);
+        axios.post(`${SERVER}/api/v1/consumers`, {
+          username: result.user.name,
+          email: result.user.email,
+          image: result.user.photoUrl
+        }).then(res => {
+          // console.log("LOGIN SUCCESSFUL!", res)
+          if (res.data.status == "SUCCESS") {
+            setUserId(res.data.userId)
+            setUserToken(res.data.userToken)
+            navigation.navigate('HomePage')
+          }
+        })
+          .catch((error) => console.log(error))
+
       } else {
         console.log("Permission denied");
       }

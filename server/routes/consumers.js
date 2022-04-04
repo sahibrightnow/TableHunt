@@ -1,27 +1,13 @@
 const router = require('express').Router({ mergeParams: true });
 
 const {
-    createUser,
-    getUserLogin,
-    changeUserPassword,
-    logoutUser,
-    getAllReservations,
-    createReservation
+    registerUser,
+    userRegistrations,
 } = require('../controllers/consumersController');
 
-// delete in final production
-router.get('/', (req, res, next) => {
-    res.send('Consumers Endpoint');
-});
+router.route('/').post(registerUser);
 
-router.route('/').post(createUser);
-
-router.route('/login').post(getUserLogin);
-
-router.route('/reservations').get(getAllReservations).post(createReservation);
-
-router.route('/changePassword').post(changeUserPassword);
-
-router.route('/logout').post(logoutUser);
+// Internal API, not in use by Front-end
+// router.route('/registrations').get(userRegistrations);  
 
 module.exports = router;
