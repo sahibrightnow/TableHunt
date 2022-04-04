@@ -14,9 +14,10 @@ var fetch = require('node-fetch');
 //
 // In a production system, you'll want manage it differently
 // 
-module.exports = async function validateJwt(token) {
+module.exports = async function validateJwt(req, res) {
 
     // First need to find out which key id is being used, we can get this from the header
+    let token = req.header.token;
     let d = jwt.decode(token, { complete: true });
     let kid = d.header['kid'];
 
@@ -33,8 +34,10 @@ module.exports = async function validateJwt(token) {
     // We use the PEM cert to verify the token is signed by google
     try {
         let result = await jwt.verify(token, pem);
-        return result;
+        req.user = result;
+        return next();
     } catch (e) {
-        return JSON.parse(`{ "${e.name}": "${e.message}"}`);
+        console.log(JSON.parse(`{ "${e.name}": "${e.message}"}`));
+        return res.sendStatus(401);
     }
 }

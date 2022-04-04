@@ -23,9 +23,7 @@ const HomepageRestaurantCard = (props) => {
                 style={{
                     position: "absolute", bottom: 127, right: 8
                 }}
-                onPress={() =>
-                    navigation.navigate("Restaurant Page", { restaurant })
-                }
+                onPress={() => navigation.navigate("Restaurant Page", { restaurant })}
             >
                 View Menu
             </Button>

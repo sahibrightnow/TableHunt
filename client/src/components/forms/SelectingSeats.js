@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native'
 import { HStack, useDisclose, Button, Box, View, Text, Pressable, Actionsheet, ScrollView, TextArea, Center } from 'native-base'
 import SvgUri from 'react-native-svg-uri'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import SelectDropdown from 'react-native-select-dropdown'
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { ModalDatePicker } from "react-native-material-date-picker";
@@ -9,8 +9,10 @@ import RadioButton from '../listitems/RadioButton'
 import CameraButton from '../listitems/CameraButton'
 import TableMap from '../forms/TableMap'
 import * as ImagePicker from 'expo-image-picker';
+import axios from 'axios'
+import { SERVER } from 'react-native-dotenv'
 
-const SelecingSeats = ({ navigation }) => {
+const SelecingSeats = ({ data, navigation }) => {
     const {
         isOpen,
         onOpen,
@@ -58,18 +60,37 @@ const SelecingSeats = ({ navigation }) => {
     const [timing, setTiming] = useState()
     const [selectedDate, setSelectedDate] = useState(new Date().toDateString());
     const [notes, setNotes] = useState();
-
+    const [reservationDetails, setReservationDetails] = useState({})
     const [camera1Pic, setCamera1Pic] = useState()
     const [camera2Pic, setCamera2Pic] = useState()
     const [camera3Pic, setCamera3Pic] = useState()
     const [camera4Pic, setCamera4Pic] = useState()
+    const [dataLoaded, setDataLoaded] = useState(false)
 
     const [selectedNumOfPeople, setSelectedNumOfPeople] = useState(1)
-    const [vaccineCardImg, setVaccineCardImg] = useState(...Array(selectedNumOfPeople))
-    const [selectedVaccineCardImg, setSelectedVaccineCardImg] = useState(false)
+    const [vaccineCardImg, setVaccineCardImg] = useState([...Array(selectedNumOfPeople)])
+
+    useEffect(() => {
+        setVaccineCardImg([...Array(selectedNumOfPeople)])
+    }, [selectedNumOfPeople])
+
+    useEffect(() => {
+        setReservationDetails({
+            numberOfPeople: selectedNumOfPeople,
+            bookingDate: selectedDate,
+            bookingTime: timing,
+            tableNumber: tableOption,
+            restaurantName: data.restaurantDetails.name,
+            vicinity: data.restaurantDetails.vicinity,
+            specialRequests: request,
+            extraNotes: notes,
+        });
+        setDataLoaded(true);
+    },
+        [selectedNumOfPeople, selectedDate, timing, request, notes, tableOption])
 
     // function to pick an image
-    const pickImage = async () => {
+    const pickImage = async (index) => {
         // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -81,16 +102,23 @@ const SelecingSeats = ({ navigation }) => {
         console.log(result);
 
         if (!result.cancelled) {
-            setVaccineCardImg(result.uri);
+            let images = [...vaccineCardImg];
+            images[index] = result.uri;
+            setVaccineCardImg(images);
         }
         else {
-            setVaccineCardImg(null);
-            setSelectedVaccineCardImg(false)
+            setVaccineCardImg([...vaccineCardImg]);
         }
     };
 
+    const createReservation = () => {
+        axios.post(`${SERVER}/api/v1/reservations`, reservationDetails)
+            .then(res => console.log("Reservation sucessful"))
+            .catch(err => console.log("Error while creating reservation", err))
+    }
+
     return (
-        <View display="flex" mt="-8">
+        <View display="flex" mt="-6">
             {/* Top camera buttons */}
             <HStack display="flex" justifyContent="space-between" alignItems="center" mb="2" overflow="hidden">
                 <CameraButton name="Camera 1" cameraPic={camera1Pic} setCameraPic={setCamera1Pic} />
@@ -115,9 +143,13 @@ const SelecingSeats = ({ navigation }) => {
 
             {/* Book NOW Actionsheet */}
             {tableOption ?
-                <Button mt="5" bgColor="danger.300" onPress={onOpen}>BOOK NOW</Button>
+                <Button mt="5" color="#FFFFFF" bgColor="danger.300" onPress={onOpen}>
+                    <Text color="#FFFFFF" fontSize="16px" py="0.5" >Book Now</Text>
+                </Button>
                 :
-                <Button mt="5" bgColor="danger.300" onPress={onOpen} isDisabled>BOOK NOW</Button>}
+                <Button mt="5" color="#FFFFFF" bgColor="danger.300" onPress={onOpen} isDisabled>
+                    <Text color="#FFFFFF" fontSize="16px" py="0.5" >Book Now</Text>
+                </Button>}
             <Actionsheet isOpen={isOpen} onClose={onClose}>
                 {/* Booking for number of people */}
                 <Actionsheet.Content>
@@ -140,7 +172,6 @@ const SelecingSeats = ({ navigation }) => {
                                         <SelectDropdown
                                             data={numberOfPeople}
                                             onSelect={(selectedItem, index) => {
-                                                console.log("selected numberOfPeople", selectedItem)
                                                 setSelectedNumOfPeople(selectedItem)
                                             }}
                                             defaultButtonText={`${selectedNumOfPeople} person`}
@@ -162,7 +193,7 @@ const SelecingSeats = ({ navigation }) => {
                                                         name={isOpened ? "chevron-up" : "chevron-down"}
                                                         color={"#444"}
                                                         size={12}
-                                                        style={{ marginRight: 25 }}
+                                                        style={{ marginRight: 70 }}
                                                     />
                                                 );
                                             }}
@@ -193,9 +224,9 @@ const SelecingSeats = ({ navigation }) => {
                                     button={<SvgUri source={require('../assets/DatePickerIcon.svg')} height="50" width="25" />}
                                     locale="en"
                                     onSelect={(date) => {
-                                        console.log("date selected", date.toDateString());
+                                        // console.log("date selected", date.toDateString());
                                         const newDate = new Date();
-                                        console.log("new date", newDate.toDateString());
+                                        // console.log("new date", newDate.toDateString());
                                         if (date < newDate) {
                                             setSelectedDate(newDate.toDateString())
                                         } else {
@@ -230,16 +261,9 @@ const SelecingSeats = ({ navigation }) => {
                             <ScrollView display="flex" flexDirection="row" w="80" px="4" py="2" horizontal={true} showsHorizontalScrollIndicator={false} >
                                 {[...Array(selectedNumOfPeople)].map((_, index) => (
                                     <Pressable mr="5" key={index} onPress={() => {
-                                        pickImage()
-                                        setSelectedVaccineCardImg(true)
-                                        // {
-                                        //     vaccineCardImg[index] !== null
-                                        //         ? setSelectedVaccineCardImg(true)
-                                        //         : setSelectedVaccineCardImg(false)
-                                        // }
-
+                                        pickImage(index)
                                     }}>
-                                        {selectedVaccineCardImg
+                                        {vaccineCardImg && vaccineCardImg[index]
                                             ? <SvgUri source={require('../assets/vaccineCardSubmitted.svg')} height="50" width="26" />
                                             : <SvgUri source={require('../assets/vaccineCardNotSubmitted.svg')} height="50" width="26" />}
 
@@ -250,26 +274,31 @@ const SelecingSeats = ({ navigation }) => {
                         </Actionsheet.Item>
                         <Actionsheet.Item mt={-4}>
                             <Text fontSize="18" ml="2" mt="-3">Extra Notes</Text>
-                            <TextArea value={notes} ml="2" mt="4" w="325" h="100" onChangeText={(text) => setNotes(text)} placeholder="Any special requests?" />
+                            <TextArea value={notes} ml="2" mt="4" w="325" h="100" onChangeText={(text) => { setNotes(text); setDataLoaded(false); }} placeholder="Any special requests?" />
                         </Actionsheet.Item>
                         <Center>
-                            {selectedNumOfPeople && selectedDate && timing
-                                ? <Button w="330" size="lg" variant="outline" borderColor="#924344" onPress={() => navigation.navigate("Reservations", { selectedNumOfPeople, notes, selectedDate, timing, request, tableOption })}>
-                                    <Text color="#924344" fontSize="17px" py="1">CONFIRM BOOKING</Text>
+                            {dataLoaded && timing
+                                ? <Button w="330" size="lg" variant="outline" bgColor='danger.300' borderColor="#924344"
+                                    onPress={() => {
+                                        createReservation();
+                                        setTimeout(() => {
+                                            navigation.navigate("Reservations", { ...reservationDetails, vaccineCardImg });
+                                        }, 500);
+                                    }}
+                                >
+                                    <Text color="#FFFFFF" fontSize="16px" py="1" >CONFIRM BOOKING</Text>
                                 </Button>
-                                : <Button w="330" size="lg" variant="outline" borderColor="#924344" isDisabled>
-                                    <Text color="#924344" fontSize="17px" py="1">CONFIRM BOOKING</Text>
+                                : <Button w="330" size="lg" variant="outline" bgColor='danger.300' borderColor="#924344" isDisabled>
+                                    <Text color="#FFFFFF" fontSize="16px" py="1">CONFIRM BOOKING</Text>
                                 </Button>
                             }
-
-
                         </Center>
                     </ScrollView>
                 </Actionsheet.Content>
             </Actionsheet>
             {/* End of BOOK NOW Actionsheet */}
 
-        </View>
+        </View >
     )
 }
 

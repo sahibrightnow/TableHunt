@@ -58,7 +58,6 @@ const GooglePlacesInput = ({ location, setLocation, searchRestuarant }) => {
           }}
           onPress={(data = null) => {
             setPlaceID(data.place_id)
-            console.log("Place id", data.place_id)
           }}
           // onPress={onOpen}
           onFail={(error) => console.error(error)}
@@ -93,7 +92,6 @@ const GooglePlacesInput = ({ location, setLocation, searchRestuarant }) => {
           }}
           onPress={(data = null) => {
             setPlaceID(data.place_id)
-            console.log("Place id", data.place_id)
           }}
           // onPress={onOpen}
           onFail={(error) => console.error(error)}

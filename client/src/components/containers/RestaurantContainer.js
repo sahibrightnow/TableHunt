@@ -1,6 +1,6 @@
 import { Center, VStack, HStack, Heading, Text, Button, ScrollView, Divider, Image, Box } from "native-base";
 import React, { useEffect, useState, useRef } from "react";
-import { API_KEY } from 'react-native-dotenv'
+import { API_KEY, SERVER } from 'react-native-dotenv'
 import SvgUri from 'react-native-svg-uri'
 import axios from "axios";
 import { StyleSheet, Dimensions, View } from "react-native";
@@ -34,15 +34,30 @@ const RestaurantContainer = ({ data, navigation }) => {
     const [info, setInfo] = useState(true);
     const [reviews, setReviews] = useState(false);
     const [details, setDetails] = useState();
+    const [restaurantDetails, setRestaurantDetails] = useState({})
+
+    const createRestaurant = () => {
+        axios.post(`${SERVER}/api/v1/restaurants`, restaurantDetails)
+            .then((response) => console.log("Restaurant Created for Bookings"))
+            .catch((error) => console.error)
+    }
+
+
+    useEffect(() => {
+        setRestaurantDetails({
+            name: restaurant.name,
+            vicinity: restaurant.vicinity,
+            rating: restaurant.rating,
+            place_id: restaurant.place_id,
+            lat: restaurant.geometry.location.lat,
+            lng: restaurant.geometry.location.lng,
+        });
+    }, [])
 
     const restaurant = data.restaurant
-    console.log("restContainer", restaurant)
-
     const photoRef = restaurant?.photos[0]?.photo_reference
     const priceLevel = restaurant?.price_level
     let priceRating
-
-    // console.log("restContainer", restaurant)
 
     const placeID = restaurant?.place_id
 
@@ -52,9 +67,7 @@ const RestaurantContainer = ({ data, navigation }) => {
         axios
             .get(placeDetailsURL)
             .then((result) => {
-                // console.log("placeDetailsRESULTS", result?.data?.result?.opening_hours?.weekday_text)
                 setDetails(result?.data?.result)
-
             })
             .catch((error) => {
                 console.log(error)
@@ -65,7 +78,6 @@ const RestaurantContainer = ({ data, navigation }) => {
         getPlaceDetails();
 
     }, [reviews, info]);
-    console.log("details", details?.reviews)
     switch (priceLevel) {
         case 1:
             priceRating = `$5-$10`
@@ -82,8 +94,6 @@ const RestaurantContainer = ({ data, navigation }) => {
         default:
             priceRating = 'Not Available'
     }
-
-    console.log("reviews", reviews);
 
     return (
         <ScrollView>
@@ -148,9 +158,6 @@ const RestaurantContainer = ({ data, navigation }) => {
                         hasParallaxImages={true}
                     />}
 
-
-
-
                     <Text style={styles.heading}>Opening hours</Text>
                     {details?.opening_hours.weekday_text.map((el, index) => <Text fontSize={14} key={index}>{el}</Text>)}
                     <Text mt={6} fontSize={14}><Text style={styles.heading}>Phone:</Text> {details?.formatted_phone_number}</Text>
@@ -163,9 +170,10 @@ const RestaurantContainer = ({ data, navigation }) => {
                         mb={10}
                         width="90%"
                         bgColor={'green.300'}
-                        onPress={() =>
-                            navigation.navigate("Booking Page")
-                        }
+                        onPress={() => {
+                            navigation.navigate("Booking Page", { restaurantDetails })
+                            createRestaurant();
+                        }}
                     >
                         Book
                     </Button>
@@ -210,7 +218,6 @@ const RestaurantContainer = ({ data, navigation }) => {
             </VStack>
         </ScrollView>
     );
-
 };
 
 export default RestaurantContainer;
@@ -232,14 +239,3 @@ const styles = StyleSheet.create({
         fontSize: 12
     }
 })
-
-
-{/* <Image
-                    source={{
-                        uri: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${el.photo_reference}&key=${API_KEY}`
-                    }}
-                    alt={restaurant.name}
-                    resizeMode="contain"
-                    height={250}
-                    roundedTop="lg"
-                /> */}

@@ -8,7 +8,7 @@ const BookingCard = ({ data, navigation }) => {
                 borderColor="coolGray.200" borderWidth="1" >
 
                 <Stack space={3}>
-                    <Stack space={2} px="4" pt="4" pb="3">
+                    <Stack space={2} px="4" pt="4" pb="3" mb={-1}>
                         <View display="flex" flexDirection="row" alignItems="center" justifyContent="space-between">
                             <View display="flex" flexDirection="row" alignItems="center">
                                 <Image source={require('../assets/vectorConfirmedIcon.png')} mr="3" />
@@ -21,49 +21,51 @@ const BookingCard = ({ data, navigation }) => {
                             </Pressable>
                         </View>
                         <Heading size="md" ml="-1" mt="3" mb="2">
-                            Whitespot Kingsway
+                            {data.restaurantName}
                         </Heading>
+                        <Text mt={-3} ml={-1} mb={2}>{data.vicinity}</Text>
                         <View display="flex" flexDirection="row" justifyContent="space-between" >
                             <View display="flex" flexDirection="row" alignItems="center">
                                 <SvgUri source={require('../assets/person.svg')} />
                                 <Text fontSize="15" color="gray.500" fontWeight="500" ml="2">
-                                    {data.selectedNumOfPeople}
+                                    {data.numberOfPeople}
                                 </Text>
                             </View>
                             <View display="flex" flexDirection="row" alignItems="center">
                                 <SvgUri source={require('../assets/DatePickerIcon.svg')} />
                                 <VStack>
                                     <Text fontSize="15" color="gray.500" fontWeight="500" ml="2">
-                                        {/* {new Date().toDateString()}, Monday */}
-                                        {data.selectedDate || new Date().toDateString()}
+                                        {data.bookingDate || new Date().toDateString()}
                                     </Text>
                                     <Text fontSize="15" color="gray.500" fontWeight="500" ml="2">
-                                        {data.timing}
+                                        {data.bookingTime}
                                     </Text>
                                 </VStack>
                             </View>
                         </View>
                     </Stack>
                     <Divider />
-                    <Stack space={2} px="4" pt="2" pb="3">
-                        <HStack display="flex" justifyContent="space-between" alignItems="center">
-                            <VStack display="flex" justifyContent="space-between" alignItems="center">
-                                <Heading size="sm" mb="2" >
+                    <Stack space={2} px="4" pt="3" pb="3">
+                        <HStack display="flex" justifyContent="space-between" alignItems="center" >
+                            <VStack display="flex" justifyContent="space-around" maxWidth="48%" >
+                                <Heading size="sm" mb="-1">
                                     Requests
                                 </Heading>
                                 <Text fontWeight="400" height="50" mt="3">
-                                    {data.request || 'No request'}
+                                    {data.specialRequests}
 
                                 </Text>
                             </VStack>
                             <VStack maxWidth="50%" >
-                                <Heading size="sm" mb="2">
+                                <Heading size="sm" mb="-1">
                                     Vaccine Proof
                                 </Heading>
                                 <ScrollView display="flex" flexDirection="row" horizontal={true} showsHorizontalScrollIndicator={false} >
-                                    {[...Array(data.selectedNumOfPeople)].map((_, index) => (
+                                    {[...Array(data.numberOfPeople)].map((_, index) => (
                                         <Pressable mr="5" key={index}>
-                                            <SvgUri source={require('../assets/vaccineCardSubmitted.svg')} height="50" width="26" />
+                                            {data.vaccineCardImg && data.vaccineCardImg[index]
+                                                ? <SvgUri source={require('../assets/vaccineCardSubmitted.svg')} height="50" width="26" alt="vaccineCardSubmitted" />
+                                                : <SvgUri source={require('../assets/vaccineCardNotSubmitted.svg')} height="50" width="26" alt="vaccineCardNotSubmitted" />}
                                         </Pressable>
                                     )
                                     )}
@@ -71,18 +73,34 @@ const BookingCard = ({ data, navigation }) => {
 
                             </VStack>
                         </HStack>
-                        <VStack>
+
+                        <HStack display="flex" justifyContent="space-between" alignItems="center" mt={-3} mb={-5}>
+                            <VStack display="flex" justifyContent="space-around" maxWidth="48%" >
+                                <Heading size="sm" mb="-1">
+                                    Extra notes
+                                </Heading>
+                                <Text fontWeight="400" height="50" mt="3">
+                                    {data.extraNotes || 'none'}
+                                </Text>
+                            </VStack>
+                            <VStack maxWidth="50%" mr={5}>
+                                <Heading size="sm" mb="-1">
+                                    Reserved Table
+                                </Heading>
+                                <Text fontWeight="400" height="50" mt="3">
+                                    {data.tableNumber}
+                                </Text>
+                            </VStack>
+                        </HStack>
+                        {/* <VStack mt={-3}>
                             <Heading size="sm" mb="2">
                                 Extra notes
                             </Heading>
                             <Text fontWeight="400">
-                                {data.notes}
+                                {data.extraNotes}
                             </Text>
-                        </VStack>
-
+                        </VStack> */}
                     </Stack>
-
-
                 </Stack>
             </Box>
         </Box>

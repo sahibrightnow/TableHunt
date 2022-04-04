@@ -87,7 +87,8 @@ const HomeScreenContainer = ({ navigation }) => {
     <>
       <GooglePlacesInput location={location} setLocation={setLocation} />
       <MapInput nearbyPlaces={nearbyPlaces} location={location} getLocation={getLocation} mapRef={mapRef} />
-      <RestaurantList nearbyPlaces={nearbyPlaces} isLoaded={isLoaded} type={'homepage'} navigation={navigation} setMapRadius={setMapRadius} setRating={setRating} rating={rating} priceFilter={priceFilter} setPriceFilter={setPriceFilter} />
+      <RestaurantList nearbyPlaces={nearbyPlaces} isLoaded={isLoaded} type={'homepage'} navigation={navigation}
+        setMapRadius={setMapRadius} setRating={setRating} rating={rating} priceFilter={priceFilter} setPriceFilter={setPriceFilter} />
     </>
   )
 }
