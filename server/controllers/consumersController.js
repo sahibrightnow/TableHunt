@@ -6,30 +6,23 @@ require('dotenv').config();
 const registerUser = async (req, res) => {
     try {
         let user = await Consumer.findOne({ email: req.body.email }).lean();
-
         if (!user) {
             const newUser = new Consumer({ ...req.body });
             user = await newUser.save();
-
-            const token = jwt.sign(
-                { id: user._id, username: user.username },
-                process.env.JWT_SECRET,
-                {
-                    expiresIn: 157788000,
-                }
-            );
-            return res.status(201).json({
-                status: "SUCCESS",
-                message: "User successfully registered!",
-                userToken: token,
-                userId: user._id
-            });
-        } else {
-            return res.status(500).json({
-                status: "ERROR",
-                message: "Unable to register user!",
-            });
         }
+        const token = jwt.sign(
+            { id: user._id, username: user.username },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: 157788000,
+            }
+        );
+        return res.status(201).json({
+            status: "SUCCESS",
+            message: "User successfully registered!",
+            userToken: token,
+            userId: user._id
+        });
     } catch (error) {
         console.log("ERROR", error)
         return res.status(500).json({
