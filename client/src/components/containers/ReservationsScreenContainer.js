@@ -12,7 +12,7 @@ const ReservationsScreenContainer = ({ navigation, data }) => {
     const [isLoaded, setIsLoaded] = useState(false)
 
     const getAllReservations = () => {
-        axios.get(`${SERVER}/api/v1/reservations/list?userId=${userId}`,
+        axios.get(`https://tablehunt.herokuapp.com/api/v1/reservations/list?userId=${userId}`,
             {
                 headers: { 'Authorization': userToken }
             })

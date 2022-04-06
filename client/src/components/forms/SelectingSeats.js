@@ -116,7 +116,7 @@ const SelecingSeats = ({ data, navigation }) => {
     };
 
     const createReservation = () => {
-        axios.post(`${SERVER}/api/v1/reservations`, { ...reservationDetails, userId: userId }, {
+        axios.post(`https://tablehunt.herokuapp.com/api/v1/reservations`, { ...reservationDetails, userId: userId }, {
             headers: { 'Authorization': userToken }
         })
             .then(res => console.log("Reservation sucessful"))

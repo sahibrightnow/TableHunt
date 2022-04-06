@@ -31,7 +31,8 @@ const Authentication = () => {
         setAccessToken(result.accessToken);
         // getUserData();
         // console.log("RESULT", result);
-        axios.post(`${SERVER}/api/v1/consumers`, {
+        console.log("SERVER", SERVER)
+        axios.post(`https://tablehunt.herokuapp.com/api/v1/consumers`, {
           username: result.user.name,
           email: result.user.email,
           image: result.user.photoUrl
