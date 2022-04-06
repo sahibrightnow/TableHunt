@@ -23,7 +23,7 @@ const CuisinesStack = ({ onOpen, setRestaurantType }) => {
                         rounded="lg"
                     />
                 </TouchableOpacity>
-            </HStack >
+            </HStack>
             <HStack space={3}>
                 <TouchableOpacity onPress={() => { onOpen(); setRestaurantType('Chinese') }} activeOpacity={0.8}>
                     <Image //chinese img has a shadow

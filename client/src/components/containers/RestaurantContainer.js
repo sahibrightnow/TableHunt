@@ -41,7 +41,7 @@ const RestaurantContainer = ({ data, navigation }) => {
     const [restaurantDetails, setRestaurantDetails] = useState({})
 
     const createRestaurant = () => {
-        axios.post(`${SERVER}/api/v1/restaurants`, restaurantDetails, {
+        axios.post(`https://tablehunt.herokuapp.com/api/v1/restaurants`, restaurantDetails, {
             headers: { 'Authorization': userToken }
         })
             .then((res) => {
