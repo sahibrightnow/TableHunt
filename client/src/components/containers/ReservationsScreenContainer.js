@@ -11,7 +11,7 @@ const ReservationsScreenContainer = ({ navigation, data }) => {
     const [isLoaded, setIsLoaded] = useState(false)
 
     const getAllReservations = () => {
-        axios.get(`https://tablehunt.herokuapp.com/api/v1/reservations/list?userId=${userId}`,
+        axios.get(`http://tablehunt.herokuapp.com/api/v1/reservations/list?userId=${userId}`,
             {
                 headers: { 'Authorization': userToken }
             })
@@ -45,7 +45,7 @@ const ReservationsScreenContainer = ({ navigation, data }) => {
                     showsVerticalScrollIndicator={false}>
                     <VStack space={2} mb={4}>
                         {bookings.length > 0
-                            ? bookings.map((el, index) => (
+                            ? bookings.sort((a, b) => a.time - b.time).map((el, index) => (
                                 <BookingCard data={el} key={index} />
                             ))
                             : <Center fontSize={14} mt={250}>No Reservations</Center>}
