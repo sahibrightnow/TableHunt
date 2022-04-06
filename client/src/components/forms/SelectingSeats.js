@@ -116,10 +116,10 @@ const SelecingSeats = ({ data, navigation }) => {
     };
 
     const createReservation = () => {
-        axios.post(`${REACT_APP_SERVER}/api/v1/reservations`, { ...reservationDetails, userId: userId }, {
+        axios.post(`https://tablehunt.herokuapp.com/api/v1/reservations`, { ...reservationDetails, userId: userId }, {
             headers: { 'Authorization': userToken }
         })
-            .then(res => console.log("Reservation sucessful"))
+            .then(res => console.log("Reservation sucessful", res))
             .catch(err => console.log("Error while creating reservation", err))
     }
 

@@ -18,7 +18,7 @@ const SearchPageRestaurantCard = (props) => {
                         uri: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${props.photoRef}&key=${API_KEY}`
                     }}
                     alt="image base"
-                    width={110} height={145} resizeMode="cover" rounded="sm"
+                    width={130} height={145} resizeMode="cover" rounded="sm"
                 />
                 <VStack ml="2" mt={2} space={1} m="auto">
                     <Heading size={'sm'} noOfLines={1} maxW={200}>
@@ -35,7 +35,7 @@ const SearchPageRestaurantCard = (props) => {
                                 navigation.navigate("Restaurant Page", { restaurant });
                             }, 700);
                         }}
-                    > View Menu</Button>
+                    > View</Button>
                 </VStack>
             </HStack>
         </Center>

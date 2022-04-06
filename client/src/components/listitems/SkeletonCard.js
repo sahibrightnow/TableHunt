@@ -1,4 +1,4 @@
-import { HStack, ScrollView, View, VStack, Skeleton } from 'native-base'
+import { VStack, Skeleton } from 'native-base'
 
 const SkeletonCard = () => {
     return (

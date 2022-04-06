@@ -13,7 +13,7 @@ app.use(express.json());
 mongoConnect.then(() => {
     app.listen(process.env.PORT || 4000, () => {
         console.log(
-            `Connected to TableHunt DB & Server running on port ${process.env.PORT || 4000
+            `Connected to TableHunt DB. 🚀 Server running on port ${process.env.PORT || 4000
             }`
         );
     });

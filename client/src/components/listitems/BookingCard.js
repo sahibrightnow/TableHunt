@@ -1,4 +1,4 @@
-import { Box, Heading, Divider, Image, Text, Center, HStack, Stack, VStack, View, Pressable, ScrollView } from "native-base"
+import { Box, Heading, Divider, Image, Text, HStack, Stack, VStack, View, Pressable, ScrollView } from "native-base"
 import SvgUri from 'react-native-svg-uri'
 
 const BookingCard = ({ data, navigation }) => {
@@ -92,14 +92,6 @@ const BookingCard = ({ data, navigation }) => {
                                 </Text>
                             </VStack>
                         </HStack>
-                        {/* <VStack mt={-3}>
-                            <Heading size="sm" mb="2">
-                                Extra notes
-                            </Heading>
-                            <Text fontWeight="400">
-                                {data.extraNotes}
-                            </Text>
-                        </VStack> */}
                     </Stack>
                 </Stack>
             </Box>

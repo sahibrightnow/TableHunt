@@ -1,10 +1,8 @@
 import React, { useContext } from 'react';
 import * as Google from 'expo-google-app-auth'
-
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, } from 'react-native';
 import { HStack, Button, VStack, Flex, Stack, Center, Divider, Link } from 'native-base';
-
 import { useNavigation } from '@react-navigation/native';
 import SvgUri from 'react-native-svg-uri'
 import { LoginContext } from '../context/LoginContext'
@@ -16,7 +14,6 @@ const OwnerAuthentication = () => {
   const navigation = useNavigation();
 
   async function signInWithGoogleAsync() {
-
     try {
       const result = await Google.logInAsync({
         expoClientId: "32874219277-hu0dk0feqc5ovl3gjg6b4i2lieopbi6a.apps.googleusercontent.com",
@@ -65,7 +62,6 @@ const OwnerAuthentication = () => {
       <Flex alignItems="center">
         <View style={styles.container}>
           {showUserInfo()}
-          {/* <Heading style={styles.tableHunt} ml={'auto'} mr={'auto'} mt={'100px'}>Table Hunt</Heading> */}
           <Stack alignItems="center" style={styles.tableHunt} mt={'100px'} mb={'20'} >
             <SvgUri source={require('../assets/app_logo.svg')} />
           </Stack>
@@ -74,7 +70,6 @@ const OwnerAuthentication = () => {
 
           <Button style={styles.button} borderRadius={8} width='100%' mt='5' onPress={() => signInWithGoogleAsync()} alignItems='center'>
             <HStack space={2}>
-              {/* <MaterialCommunityIcons name="google" size={26} color="green" /> */}
               <SvgUri source={require('../assets/google_logo.svg')} />
               <Center>
                 <Text>{accessToken ? "Logging in..." : "Sign Up with Google"}</Text>
@@ -86,15 +81,11 @@ const OwnerAuthentication = () => {
 
           <Button style={styles.button_email} mt='0' height='50' onPress={() => accessToken ? getUserData : signInWithGoogleAsync} >Continue with email</Button>
 
-
           <Text >Not a member?<Link>Sign up</Link></Text>
           <StatusBar style="auto" />
-
-          
         </View>
       </Flex>
     </VStack>
-
   )
 }
 

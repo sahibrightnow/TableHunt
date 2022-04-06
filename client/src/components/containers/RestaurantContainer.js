@@ -7,7 +7,6 @@ import { StyleSheet, Dimensions, View } from "react-native";
 import { Rating } from "react-native-ratings"
 import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
 import { LoginContext } from '../context/LoginContext'
-import logoutUser from "../context/logoutUser";
 
 const RestaurantContainer = ({ data, navigation }) => {
     const [accessToken, setAccessToken, userInfo, setUserInfo, userToken, setUserToken, userId, setUserId] = useContext(LoginContext)
@@ -41,15 +40,14 @@ const RestaurantContainer = ({ data, navigation }) => {
     const [restaurantDetails, setRestaurantDetails] = useState({})
 
     const createRestaurant = () => {
-        console.log("SERVER in create restaurant", REACT_APP_SERVER)
-        axios.post(`${REACT_APP_SERVER}/api/v1/restaurants`, restaurantDetails, {
+        axios.post(`https://tablehunt.herokuapp.com/api/v1/restaurants`, restaurantDetails, {
             headers: { 'Authorization': userToken }
         })
             .then((res) => {
                 console.log('Restaurant created')
             })
             .catch((error) => {
-                console.log('error', error);
+                console.log('Error in creating restaurant', error);
             })
     }
 
@@ -191,7 +189,7 @@ const RestaurantContainer = ({ data, navigation }) => {
                 </Center>
                 {reviews && <VStack ml={5} mr={5} mt={-2}>
                     <Text style={styles.heading}>{restaurant?.user_ratings_total} Reviews </Text>
-                    {details?.reviews.map((el, index) => <Box mt={5} key={index}>
+                    {details?.reviews.sort((a, b) => b.time - a.time).map((el, index) => <Box mt={5} key={index}>
 
                         <HStack>
                             <Image

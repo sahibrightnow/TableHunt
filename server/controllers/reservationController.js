@@ -8,8 +8,6 @@ const createReservation = async (req, res) => {
 
         const reservation = new Reservations({ ...req.body, restaurantId: restaurant._id });
         reservation.save().then((result) => {
-            // console.log('Reservation CREATED WITH FOLLOWING DETAILS:', result);
-
             res.status(201).json({
                 status: 'SUCCESS',
                 message: 'Reservation Created!',

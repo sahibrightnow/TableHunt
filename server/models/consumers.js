@@ -11,19 +11,6 @@ const consumerSchema = new Schema(
     { versionKey: false }
 );
 
-// consumerSchema.statics.isEmailInUse = async function (email) {
-//     if (!email) {
-//         throw new Error('Invalid Email. No user exists!');
-//     }
-//     try {
-//         const user = await this.findOne({ email });
-//         return user ? false : true;
-//     } catch (error) {
-//         console.log('Error inside isEmailInUse Method!', error.message);
-//         return false;
-//     }
-// };
-
 const consumersModel = mongoose.model('Consumer', consumerSchema);
 
 module.exports = consumersModel;

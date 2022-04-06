@@ -1,9 +1,7 @@
-// import { MapView } from 'expo'
 import MapView from 'react-native-maps'
 import { Dimensions } from 'react-native'
 import * as Location from 'expo-location'
-import React, { useState, useEffect, createRef } from 'react'
-import { TouchableOpacity, Image } from "react-native";
+import { TouchableOpacity } from "react-native";
 import SvgUri from 'react-native-svg-uri'
 
 
@@ -19,9 +17,7 @@ const MapInput = ({ navigation, nearbyPlaces, location, getLocation, mapRef }) =
       region={{
         latitude: location ? location.latitude : 49.246292,
         longitude: location ? location.longitude : -123.116226,
-        // latitudeDelta: 0.0922,
         latitudeDelta: 0.015,
-        // longitudeDelta: 0.0421,
         longitudeDelta: 0.0121,
       }}
     >
@@ -31,7 +27,6 @@ const MapInput = ({ navigation, nearbyPlaces, location, getLocation, mapRef }) =
       }}>
         <SvgUri source={require('../assets/findLocation.svg')} />
       </TouchableOpacity>
-
 
       {
         nearbyPlaces && nearbyPlaces.map((el, index) => (
@@ -46,7 +41,6 @@ const MapInput = ({ navigation, nearbyPlaces, location, getLocation, mapRef }) =
           />
         ))
       }
-
     </MapView>
   )
 }

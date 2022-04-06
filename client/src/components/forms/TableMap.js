@@ -1,4 +1,4 @@
-import { HStack, useDisclose, Button, VStack, Box, View, Container, Text, Checkbox, Pressable, Actionsheet, ScrollView, TextArea, Center } from 'native-base'
+import { HStack, VStack, Box, View, Container, Pressable } from 'native-base'
 import { StyleSheet } from 'react-native'
 import Chair from '../listitems/Chair'
 import Window from '../listitems/Window'
