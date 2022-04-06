@@ -1,13 +1,14 @@
-import { Center, VStack, HStack, Heading, Text, Button, ScrollView, Divider, Image, Box } from "native-base";
+import { Center, VStack, HStack, Heading, Text, Button, ScrollView, Divider, Image, Box, FlatList, Flex } from "native-base";
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { API_KEY, SERVER } from 'react-native-dotenv'
 import SvgUri from 'react-native-svg-uri'
 import axios from "axios";
-import { StyleSheet, Dimensions, View } from "react-native";
+import { StyleSheet, Dimensions, View, VirtualizedList } from "react-native";
 import { Rating } from "react-native-ratings"
-import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
+
 import { LoginContext } from '../context/LoginContext'
 import logoutUser from "../context/logoutUser";
+
 
 const RestaurantContainer = ({ data, navigation }) => {
     const [accessToken, setAccessToken, userInfo, setUserInfo, userToken, setUserToken, userId, setUserId] = useContext(LoginContext)
@@ -17,20 +18,27 @@ const RestaurantContainer = ({ data, navigation }) => {
     const goForward = () => {
         carouselRef.current.snapToNext();
     };
-    const renderItem = ({ item, index }, parallaxProps) => {
+    const renderItem = ({ item, index }) => {
         return (
             <View style={styles.item}>
-                <ParallaxImage
+                <Image
                     source={{ uri: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${item.photo_reference}&key=${API_KEY}` }}
                     containerStyle={styles.imageContainer}
                     style={styles.image}
-                    parallaxFactor={0.4}
-                    {...parallaxProps}
+                    alt="ok"
+                    
+                  
                 />
 
             </View>
         );
     };
+    const getItem = (data, index) => ({
+        id: Math.random().toString(12).substring(0),
+        title: `Item ${index+1}`
+      });
+      
+      const getItemCount = (data) => 50;
 
     // break
 
@@ -38,6 +46,10 @@ const RestaurantContainer = ({ data, navigation }) => {
     const [info, setInfo] = useState(true);
     const [reviews, setReviews] = useState(false);
     const [details, setDetails] = useState();
+    const [variant, setVariant] = useState("ghost");
+    const [cVariant, setCVariant] = useState("ghost");
+    // state for photos carousel 
+    const [photos, setPhotos] = useState([]);
     const [restaurantDetails, setRestaurantDetails] = useState({})
 
     const createRestaurant = () => {
@@ -62,7 +74,7 @@ const RestaurantContainer = ({ data, navigation }) => {
             lat: restaurant.geometry.location.lat,
             lng: restaurant.geometry.location.lng,
         });
-    }, [])
+    }, [photos])
 
     const restaurant = data.restaurant
     const photoRef = restaurant?.photos[0]?.photo_reference
@@ -78,6 +90,8 @@ const RestaurantContainer = ({ data, navigation }) => {
             .get(placeDetailsURL)
             .then((result) => {
                 setDetails(result?.data?.result)
+                setPhotos(result?.data?.result?.photos)
+
             })
             .catch((error) => {
                 console.log(error)
@@ -87,7 +101,7 @@ const RestaurantContainer = ({ data, navigation }) => {
     useEffect(() => {
         getPlaceDetails();
 
-    }, [reviews, info]);
+    }, []);
     switch (priceLevel) {
         case 1:
             priceRating = `$5-$10`
@@ -106,127 +120,132 @@ const RestaurantContainer = ({ data, navigation }) => {
     }
 
     return (
-        <ScrollView>
-            <VStack space={0} py={1} px={1}>
-                <Image
-                    source={{
-                        uri: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoRef}&key=${API_KEY}`
-                    }}
-                    alt={restaurant.name}
-                    resizeMode="contain"
-                    height={250}
-                    roundedTop="lg"
-                />
-
-                <HStack p={6} pb={3}>
-                    <Heading size="md" mr="60px">
-                        {restaurant.name}
-                    </Heading>
-                    <Heading size="sm" mr="0" ml="auto">
-                        <SvgUri source={require('../assets/star.svg')} />
-                        {restaurant.rating}
-                    </Heading>
-                </HStack>
-                <Divider />
-
-                <HStack space={20} pt={5} pl={8}>
-                    <HStack >
-                        <SvgUri source={require('../assets/ForkKnife.svg')} />
-                        <Text>
-                            Multiple
-                        </Text>
-                    </HStack>
-                    <HStack >
-                        <SvgUri source={require('../assets/CurrencyCircleDollar.svg')} />
-                        <Text>
-                            {priceRating}
-                        </Text>
-                    </HStack>
-                </HStack>
-
-                <HStack pt={2} pl={8} mb={2}>
-                    <SvgUri source={require('../assets/Location.svg')} />
-                    <Text>
-                        {restaurant.vicinity}
-                    </Text>
-                </HStack>
-                <Divider />
-
-                <Button.Group isAttached size="md" m='auto' mb={2} mt={4}>
-                    <Button variant="outline" onPress={() => { setInfo(true); setReviews(false) }}>Info</Button><Button onPress={() => { setInfo(false); setReviews(true) }} >Reviews</Button>
-
-                </Button.Group>
-                {info && <VStack ml={5} mr={5} mt={5}>
-
-                    {details && <Carousel
-                        ref={carouselRef}
-                        sliderWidth={screenWidth}
-                        sliderHeight={screenWidth}
-                        itemWidth={screenWidth - 60}
-                        data={details?.photos}
-                        renderItem={renderItem}
-                        hasParallaxImages={true}
-                    />}
-
-                    <Text style={styles.heading}>Opening hours</Text>
-                    {details?.opening_hours.weekday_text.map((el, index) => <Text fontSize={14} key={index}>{el}</Text>)}
-                    <Text mt={6} fontSize={14}><Text style={styles.heading}>Phone:</Text> {details?.formatted_phone_number}</Text>
-                </VStack>}
-
-                <Center pt={10}>
-                    <Button
-                        // position="absolute"
-                        top={-10}
-                        mb={10}
-                        width="90%"
-                        bgColor={'green.300'}
-                        onPress={() => {
-                            navigation.navigate("Booking Page", { restaurantDetails })
-                            createRestaurant();
+        <View>
+        
+            <ScrollView >
+            {photos!=[] && <FlatList 
+                            data={photos}
+                            renderItem={renderItem}
+                            keyExtractor={(item, index) => index.toString()}
+                            horizontal
+                    showsHorizontalScrollIndicator={false}
+                    onSnapToItem={(index) => setActiveSlide(index)}
+                        />}
+            
+                <VStack space={0} py={1} px={1}>
+                    {/* <Image
+                        source={{
+                            uri: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoRef}&key=${API_KEY}`
                         }}
-                    >
-                        Book
-                    </Button>
-                </Center>
-                {reviews && <VStack ml={5} mr={5} mt={-2}>
-                    <Text style={styles.heading}>{restaurant?.user_ratings_total} Reviews </Text>
-                    {details?.reviews.map((el, index) => <Box mt={5} key={index}>
-
-                        <HStack>
-                            <Image
-                                source={{
-                                    uri: el.profile_photo_url
-                                }}
-                                alt={el.author_name}
-                                height={50}
-                                width={50}
-
-                            />
-                            <VStack>
-                                <Text style={styles.name} key={index}>{el.author_name}</Text>
-                                <HStack>
-                                    <Rating
-                                        style={{ marginLeft: 10, marginTop: 2 }}
-                                        type='star'
-                                        ratingCount={5}
-                                        imageSize={15}
-                                        startingValue={el.rating}
-                                        readonly="true"
-                                        ratingBackgroundColor='black'
-
-                                    />
-                                    <Text style={styles.time}>{el.relative_time_description}</Text>
-                                </HStack>
-                            </VStack>
+                        alt={restaurant.name}
+                        resizeMode="contain"
+                        height={250}
+                        roundedTop="lg"
+                    /> */}
+                    <HStack p={6} pb={3}>
+                        <Heading size="lg" mr="60px">
+                            {restaurant.name}
+                        </Heading>
+                        <Heading size="sm" mr="0" ml="auto"  >
+                            <SvgUri  source={require('../assets/star.svg')} />
+                            {restaurant.rating}
+                        </Heading>
+                    </HStack>
+                    <Divider />
+                    <HStack space={20} pt={5} pl={8}>
+                        <HStack >
+                            <SvgUri source={require('../assets/ForkKnife.svg')} />
+                            <Text>
+                                Multiple
+                            </Text>
                         </HStack>
-
-                        <Text mb={2} mt={4} fontSize={14}>{el.text}</Text>
-                        <Divider />
-                    </Box>)}
-                </VStack>}
-
-            </VStack>
-        </ScrollView>
+                        <HStack >
+                            <SvgUri source={require('../assets/CurrencyCircleDollar.svg')} />
+                            <Text>
+                                {priceRating}
+                            </Text>
+                        </HStack>
+                    </HStack>
+                    <HStack pt={2} pl={8} mb={2}>
+                        <SvgUri source={require('../assets/Location.svg')} />
+                        <Text>
+                            {restaurant.vicinity}
+                        </Text>
+                    </HStack>
+                    <Divider />
+                    
+            
+                    {/* <Button.Group  size="md" m='auto' mb={2} mt={4} colorScheme='rgba(188, 71, 73, 1)'> */}
+                    {/* <HStack  m='auto' mt={2}><Button size="lg" mr={50} colorScheme='rgba(188, 71, 73, 1)' variant={variant} onPress={() => { setInfo(true); setReviews(false);  }}>Info</Button><Button size="lg" colorScheme='rgba(188, 71, 73, 1)'variant={cVariant} onPress={() => { setInfo(false); setReviews(true);  }} >Reviews</Button></HStack> */}
+                    {/* </Button.Group> */}
+                    <HStack mt={4}>
+                        <Text style={info ? styles.selected : styles.unselected} onPress={() => { setInfo(true); setReviews(false);  }} fontSize="2xl" ml={20}>Info</Text>
+                        <Text style={reviews ? styles.selected : styles.unselected} fontSize="2xl" ml='auto' mr={20} onPress={() => { setInfo(false); setReviews(true);  }}>Reviews</Text>
+                    </HStack>
+                   
+                    {info && <VStack ml={5} mr={5} mt={5}>
+                        
+                        <Text style={styles.heading}>Opening hours</Text>
+                        {details?.opening_hours.weekday_text.map((el, index) => <Text fontSize={14} key={index}>{el}</Text>)}
+                        <Text mt={6} mb={10} fontSize={14}><Text style={styles.heading}>Phone:</Text> {details?.formatted_phone_number}</Text>
+                    </VStack>}
+                    <Center pt={10}>
+            
+                    </Center>
+                    {reviews && <VStack ml={5} mr={5} mt={-2}  mb={20} >
+                        <Text style={styles.heading}>{restaurant?.user_ratings_total} Reviews </Text>
+                        {details?.reviews.map((el, index) => <Box mt={5} key={index}>
+                            <HStack>
+                                <Image
+                                    source={{
+                                        uri: el.profile_photo_url
+                                    }}
+                                    alt={el.author_name}
+                                    height={50}
+                                    width={50}
+                                />
+                                <VStack>
+                                    <Text style={styles.name} key={index}>{el.author_name}</Text>
+                                    <HStack>
+                                        <Rating
+                                            style={{ marginLeft: 10, marginTop: 2 }}
+                                            type='star'
+                                            ratingCount={5}
+                                            imageSize={15}
+                                            startingValue={el.rating}
+                                            readonly="true"
+                                            ratingBackgroundColor='black'
+                                        />
+                                        <Text style={styles.time}>{el.relative_time_description}</Text>
+                                    </HStack>
+                                </VStack>
+                            </HStack>
+                            <Text mb={2} mt={4} fontSize={14}>{el.text}</Text>
+                            <Divider />
+                        </Box>)}
+                    </VStack>}
+                </VStack>
+            </ScrollView>
+            
+            <Button
+                            position="absolute"
+                            bottom={5}
+                            left={5}
+                            mt={5}
+                            mb={2}
+                            m='auto'
+                            width="90%"
+                            zIndex={1}
+                            bgColor={'rgba(188, 71, 73, 1)'}
+                            onPress={() => {
+                                navigation.navigate("Booking Page", { restaurantDetails })
+                                createRestaurant();
+                            }}
+                            size="12"
+                        >
+                            Book
+                        </Button>
+        </View>
     );
 };
 
@@ -247,5 +266,22 @@ const styles = StyleSheet.create({
     time: {
         marginLeft: 120,
         fontSize: 12
-    }
+    },
+    image: { 
+        width: 300,
+        height: 300,
+        borderRadius: 10,
+        marginLeft: 10,
+        marginTop: 10,
+        marginBottom: 1
+    },
+    selected: {
+        fontWeight: 'bold',
+        borderColor: 'black',
+        // borderWidth: 2,
+       
+      
+    },
+    unselected: { 
+        fontWeight: '300' }
 })
