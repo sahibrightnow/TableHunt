@@ -9,7 +9,7 @@ import CameraButton from '../listitems/CameraButton'
 import TableMap from '../forms/TableMap'
 import * as ImagePicker from 'expo-image-picker';
 import axios from 'axios'
-import { SERVER } from 'react-native-dotenv'
+import { REACT_APP_SERVER } from 'react-native-dotenv'
 import React, { useState, useEffect, useContext } from 'react'
 import { LoginContext } from '../context/LoginContext'
 
@@ -116,7 +116,7 @@ const SelecingSeats = ({ data, navigation }) => {
     };
 
     const createReservation = () => {
-        axios.post(`${SERVER}/api/v1/reservations`, { ...reservationDetails, userId: userId }, {
+        axios.post(`${REACT_APP_SERVER}/api/v1/reservations`, { ...reservationDetails, userId: userId }, {
             headers: { 'Authorization': userToken }
         })
             .then(res => console.log("Reservation sucessful"))

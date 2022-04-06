@@ -1,6 +1,6 @@
 import { Center, VStack, HStack, Heading, Text, Button, ScrollView, Divider, Image, Box } from "native-base";
 import React, { useEffect, useState, useRef, useContext } from "react";
-import { API_KEY, SERVER } from 'react-native-dotenv'
+import { API_KEY, REACT_APP_SERVER } from 'react-native-dotenv'
 import SvgUri from 'react-native-svg-uri'
 import axios from "axios";
 import { StyleSheet, Dimensions, View } from "react-native";
@@ -41,11 +41,12 @@ const RestaurantContainer = ({ data, navigation }) => {
     const [restaurantDetails, setRestaurantDetails] = useState({})
 
     const createRestaurant = () => {
-        axios.post(`${SERVER}/api/v1/restaurants`, restaurantDetails, {
+        console.log("SERVER in create restaurant", REACT_APP_SERVER)
+        axios.post(`${REACT_APP_SERVER}/api/v1/restaurants`, restaurantDetails, {
             headers: { 'Authorization': userToken }
         })
             .then((res) => {
-                console.log('Restaurants created')
+                console.log('Restaurant created')
             })
             .catch((error) => {
                 console.log('error', error);

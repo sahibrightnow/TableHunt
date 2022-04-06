@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import BookingCard from '../listitems/BookingCard'
 import { Box, Heading, Center, Image, Text, HStack, ScrollView, Stack, VStack, View, Spinner } from "native-base"
-import { SERVER } from 'react-native-dotenv'
+import { REACT_APP_SERVER } from 'react-native-dotenv'
 import { LoginContext } from '../context/LoginContext'
 
 const ReservationsScreenContainer = ({ navigation, data }) => {
@@ -12,7 +12,8 @@ const ReservationsScreenContainer = ({ navigation, data }) => {
     const [isLoaded, setIsLoaded] = useState(false)
 
     const getAllReservations = () => {
-        axios.get(`${SERVER}/api/v1/reservations/list?userId=${userId}`,
+        console.log("SERVER", REACT_APP_SERVER)
+        axios.get(`${REACT_APP_SERVER}/api/v1/reservations/list?userId=${userId}`,
             {
                 headers: { 'Authorization': userToken }
             })
@@ -26,7 +27,7 @@ const ReservationsScreenContainer = ({ navigation, data }) => {
                     setIsLoaded(true)
                 }
             })
-            .catch(err => console.log("error in fetching reservations"))
+            .catch(err => console.log("error in fetching reservations", err))
     }
 
 

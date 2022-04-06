@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import SvgUri from 'react-native-svg-uri'
 import { LoginContext } from '../context/LoginContext'
 import axios from 'axios'
-import { SERVER } from 'react-native-dotenv'
+import { REACT_APP_SERVER } from 'react-native-dotenv'
 
 
 const Authentication = () => {
@@ -31,7 +31,7 @@ const Authentication = () => {
         setAccessToken(result.accessToken);
         // getUserData();
         // console.log("RESULT", result);
-        axios.post(`${SERVER}/api/v1/consumers`, {
+        axios.post(`${REACT_APP_SERVER}/api/v1/consumers`, {
           username: result.user.name,
           email: result.user.email,
           image: result.user.photoUrl
