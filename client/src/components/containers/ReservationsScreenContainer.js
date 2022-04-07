@@ -46,7 +46,7 @@ const ReservationsScreenContainer = ({ navigation, data }) => {
                     <VStack space={2} mb={4} display="flex" alignItems="center" justifyContent="center">
                         {bookings.length > 0
                             ? bookings.sort((a, b) => a.time - b.time).map((el, index) => (
-                                <Box shadow={5} rounded="lg" w="88%"  >
+                                <Box shadow={5} rounded="lg" w="88%" ml="2" >
                                     <BookingCard data={el} key={index} />
                                 </Box>
                             ))
