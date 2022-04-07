@@ -188,6 +188,9 @@ const AppStack = () => {
         <Stack.Screen
           name="Account Settings"
           component={AccountSettings}
+          options={{
+            headerBackTitleVisible: false
+          }}
         />
 
       </Stack.Navigator>

@@ -148,14 +148,16 @@ const RestaurantContainer = ({ data, navigation }) => {
             roundedTop="lg"
         /> */}
                     <HStack p={6} pb={3}>
-                        <Heading size="lg" mr="60px">
+                        <Heading size='xl' mr="60px">
                             {restaurant.name}
                         </Heading>
-                        <Heading size="sm" mr="0" ml="auto"  >
+                        <Button size="sm" mr={0} ml={-2} style={styles.button} >
                             {/* <SvgUri source={require('../assets/star.svg')} /> */}
-                            <StarIcon />
-                            {restaurant.rating}
-                        </Heading>
+                            <HStack>
+                                <StarIcon />
+                                <Text color="white" fontSize={14} ml={2} mr={2}>{restaurant.rating}</Text>
+                            </HStack>
+                        </Button>
                     </HStack>
                     <Divider />
                     <HStack space={20} pt={5} pl={8}>
@@ -166,7 +168,7 @@ const RestaurantContainer = ({ data, navigation }) => {
                                 Multiple
                             </Text>
                         </HStack>
-                        <HStack >
+                        <HStack ml={10} >
                             {/* <SvgUri source={require('../assets/CurrencyCircleDollar.svg')} /> */}
                             <CurrencyCircleDollar />
                             <Text>
@@ -184,26 +186,30 @@ const RestaurantContainer = ({ data, navigation }) => {
                     <Divider />
 
 
-                    {/* <Button.Group  size="md" m='auto' mb={2} mt={4} colorScheme='rgba(188, 71, 73, 1)'> */}
-                    {/* <HStack  m='auto' mt={2}><Button size="lg" mr={50} colorScheme='rgba(188, 71, 73, 1)' variant={variant} onPress={() => { setInfo(true); setReviews(false);  }}>Info</Button><Button size="lg" colorScheme='rgba(188, 71, 73, 1)'variant={cVariant} onPress={() => { setInfo(false); setReviews(true);  }} >Reviews</Button></HStack> */}
-                    {/* </Button.Group> */}
+                    {/* <Button.Group  size="md" m='auto' mb={2} mt={4} colorScheme='green.300.'>
+                    <HStack  m='auto' mt={2}><Button size="lg" mr={50} colorScheme='rgba(188, 71, 73, 1)' variant={variant} onPress={() => { setInfo(true); setReviews(false);  }}>Info</Button><Button size="lg" colorScheme='rgba(188, 71, 73, 1)'variant={cVariant} onPress={() => { setInfo(false); setReviews(true);  }} >Reviews</Button></HStack>
+                    </Button.Group> */}
                     <HStack mt={4}>
-                        <Text style={info ? styles.selected : styles.unselected} onPress={() => { setInfo(true); setReviews(false); }} fontSize="2xl" ml={20}>Info</Text>
-                        <Text style={reviews ? styles.selected : styles.unselected} fontSize="2xl" ml='auto' mr={20} onPress={() => { setInfo(false); setReviews(true); }}>Reviews</Text>
+                        <View style={info && styles.under}>
+                            <Text mb={4} style={info ? styles.selected : styles.unselected} onPress={() => { setInfo(true); setReviews(false); }} mr={20} fontSize="lg" ml={20}>Info</Text>
+                        </View>
+                        <View style={reviews && styles.under} >
+                            <Text style={reviews ? styles.selected : styles.unselected} fontSize="lg" mr={20} ml={12}  mb={2} onPress={() => { setInfo(false); setReviews(true); }}>Reviews</Text>
+                        </View>
                     </HStack>
 
-                    {info && <VStack ml={5} mr={5} mt={5}>
+                    {info && <VStack ml={5} mr={5} mt={8}>
 
                         <Text style={styles.heading}>Opening hours</Text>
                         {details?.opening_hours.weekday_text.map((el, index) => <Text
                             style={el.includes(dayOfWeekName) ? styles.highlighted : styles.unselected}
                             fontSize={14} key={index}>{el}</Text>)}
-                        <Text onPress={() => Linking.openURL(`tel:${details?.formatted_phone_number}`)} mt={6} mb={16} fontSize={16}><Text style={styles.heading}>Phone: </Text><Text fontWeight='bold' color="rgba(188, 71, 73, 1)">{details?.formatted_phone_number}</Text></Text>
+                        <Text onPress={() => Linking.openURL(`tel:${details?.formatted_phone_number}`)} mt={6} mb={16} fontSize={16}><Text style={styles.heading}>Call: </Text><Text fontWeight='bold' color="rgba(188, 71, 73, 1)">{details?.formatted_phone_number}</Text></Text>
                     </VStack>}
-                    <Center pt={10}>
+                    <Center pt={10}>.
 
                     </Center>
-                    {reviews && <VStack ml={5} mr={5} mt={-2} mb={20} >
+                    {reviews && <VStack ml={5} mr={5} mt={-8} mb={20} >
                         <Text style={styles.heading}>{restaurant?.user_ratings_total} Reviews </Text>
                         {details?.reviews.sort((a, b) => b.time - a.time).map((el, index) => <Box mt={5} key={index}>
                             <HStack>
@@ -256,7 +262,7 @@ const RestaurantContainer = ({ data, navigation }) => {
             >
                 Book
             </Button>
-        </View >
+        </View>
     );
 };
 
@@ -300,5 +306,16 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'rgba(188, 71, 73, 1)',
         fontSize: 16
+    },
+    under: {
+        borderBottomColor: 'black',
+        borderBottomWidth:2
+    },
+    button: {
+        backgroundColor: 'rgba(106, 153, 78, 1)',
+        borderRadius: 30,
+        height: 40,
+        marginTop: 'auto',
+        marginBottom: 'auto',
     }
 })
