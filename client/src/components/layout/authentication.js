@@ -7,8 +7,9 @@ import { useNavigation } from '@react-navigation/native';
 import SvgUri from 'react-native-svg-uri'
 import { LoginContext } from '../context/LoginContext'
 import axios from 'axios'
-import { REACT_APP_SERVER } from 'react-native-dotenv'
-
+import { SERVER } from 'react-native-dotenv'
+import AppIconComponent from '../assets/iconComponents/AppIcon'
+import GoogleLogo from '../assets/iconComponents/GoogleLogo';
 
 const Authentication = () => {
 
@@ -76,19 +77,22 @@ const Authentication = () => {
         <View style={styles.container}>
           {showUserInfo()}
           <Stack alignItems="center" style={styles.tableHunt} mt={'100px'} mb={'20'} >
-            <SvgUri source={require('../assets/app_logo.svg')} />
+            {/* <SvgUri source={require('../assets/app_logo.svg')} /> */}
+            <AppIconComponent />
           </Stack>
           <Text bold style={styles.subheading} noOfLines={3}>Book your spot in seconds for your next occasion</Text>
           <Text style={styles.subtitle}>You signup, We reserve. Quick!</Text>
 
           <Button style={styles.button} borderRadius={8} width='100%' mt='5' onPress={() => signInWithGoogleAsync()} alignItems='center'>
             <HStack space={2}>
-              <SvgUri source={require('../assets/google_logo.svg')} />
+              {/* <MaterialCommunityIcons name="google" size={26} color="green" /> */}
+              {/* <SvgUri source={require('../assets/google_logo.svg')} /> */}
+              <GoogleLogo />
               <Center>
                 <Text>{accessToken ? "Logging in..." : "Sign Up with Google"}</Text>
               </Center>
-            </HStack>
-          </Button>
+            </HStack >
+          </Button >
 
           <Divider m={'5'} thickness="1" />
 
@@ -98,8 +102,8 @@ const Authentication = () => {
           <StatusBar style="auto" />
 
           {/* <Text style={styles.text}>Are you a restaurant owner? <Text onPress={() => navigation.navigate("OwnerAuthentication")} style={styles.text2}>Sign in</Text></Text> */}
-        </View>
-      </Flex>
+        </View >
+      </Flex >
     </VStack >
 
   )

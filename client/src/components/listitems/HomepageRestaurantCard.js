@@ -1,6 +1,7 @@
 import { Box, Stack, Text, Heading, Image, Button } from 'native-base'
 import { API_KEY } from 'react-native-dotenv'
 import SvgUri from 'react-native-svg-uri'
+import StarIcon from '../assets/iconComponents/StarIcon'
 
 const HomepageRestaurantCard = (props) => {
     const navigation = props.navigation
@@ -35,7 +36,8 @@ const HomepageRestaurantCard = (props) => {
                 </Heading>
                 <Stack space={1} mt={'auto'}>
                     <Text color="green.300">
-                        <SvgUri source={require('../assets/star.svg')} />
+                        {/* <SvgUri source={require('../assets/star.svg')} /> */}
+                        <StarIcon />
                         {props.restaurantRating} {props.ratingDescription}
 
                         <Text color="gray.600">

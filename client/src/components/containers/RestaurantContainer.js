@@ -5,9 +5,11 @@ import SvgUri from 'react-native-svg-uri'
 import axios from "axios";
 import { StyleSheet, Dimensions, View, VirtualizedList } from "react-native";
 import { Rating } from "react-native-ratings"
-
 import { LoginContext } from '../context/LoginContext'
-
+import CurrencyCircleDollar from '../assets/iconComponents/CurrencyCircleDollar'
+import ForkKnife from '../assets/iconComponents/ForkKnifeIcon'
+import LocationIcon from '../assets/iconComponents/LocationIcon'
+import StarIcon from "../assets/iconComponents/StarIcon";
 
 const RestaurantContainer = ({ data, navigation }) => {
     const [accessToken, setAccessToken, userInfo, setUserInfo, userToken, setUserToken, userId, setUserId] = useContext(LoginContext)
@@ -135,38 +137,42 @@ const RestaurantContainer = ({ data, navigation }) => {
                     {/* <Image
                         source={{
                             uri: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoRef}&key=${API_KEY}`
-                        }}
-                        alt={restaurant.name}
-                        resizeMode="contain"
-                        height={250}
-                        roundedTop="lg"
-                    /> */}
+            }}
+            alt={restaurant.name}
+            resizeMode="contain"
+            height={250}
+            roundedTop="lg"
+        /> */}
                     <HStack p={6} pb={3}>
                         <Heading size="lg" mr="60px">
                             {restaurant.name}
                         </Heading>
                         <Heading size="sm" mr="0" ml="auto"  >
-                            <SvgUri source={require('../assets/star.svg')} />
+                            {/* <SvgUri source={require('../assets/star.svg')} /> */}
+                            <StarIcon />
                             {restaurant.rating}
                         </Heading>
                     </HStack>
                     <Divider />
                     <HStack space={20} pt={5} pl={8}>
                         <HStack >
-                            <SvgUri source={require('../assets/ForkKnife.svg')} />
+                            {/* <SvgUri source={require('../assets/ForkKnife.svg')} /> */}
+                            <ForkKnife />
                             <Text>
                                 Multiple
                             </Text>
                         </HStack>
                         <HStack >
-                            <SvgUri source={require('../assets/CurrencyCircleDollar.svg')} />
+                            {/* <SvgUri source={require('../assets/CurrencyCircleDollar.svg')} /> */}
+                            <CurrencyCircleDollar />
                             <Text>
                                 {priceRating}
                             </Text>
                         </HStack>
                     </HStack>
                     <HStack pt={2} pl={8} mb={2}>
-                        <SvgUri source={require('../assets/Location.svg')} />
+                        {/* <SvgUri source={require('../assets/Location.svg')} /> */}
+                        <LocationIcon />
                         <Text>
                             {restaurant.vicinity}
                         </Text>
@@ -224,7 +230,7 @@ const RestaurantContainer = ({ data, navigation }) => {
                         </Box>)}
                     </VStack>}
                 </VStack>
-            </ScrollView>
+            </ScrollView >
 
             <Button
                 position="absolute"
@@ -244,7 +250,7 @@ const RestaurantContainer = ({ data, navigation }) => {
             >
                 Book
             </Button>
-        </View>
+        </View >
     );
 };
 

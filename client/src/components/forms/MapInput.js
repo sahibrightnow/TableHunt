@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native'
 import * as Location from 'expo-location'
 import { TouchableOpacity } from "react-native";
 import SvgUri from 'react-native-svg-uri'
-
+import FindLocation from '../assets/iconComponents/FindLocationIcon'
 
 const MapInput = ({ navigation, nearbyPlaces, location, getLocation, mapRef }) => {
   return (
@@ -26,6 +26,8 @@ const MapInput = ({ navigation, nearbyPlaces, location, getLocation, mapRef }) =
         position: "absolute", bottom: 20, right: 20, borderRadius: 30, backgroundColor: "#d2d2d2"
       }}>
         <SvgUri source={require('../assets/findLocation.svg')} />
+        {/* <FindLocation /> */}
+
       </TouchableOpacity>
 
       {

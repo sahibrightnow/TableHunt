@@ -1,9 +1,10 @@
 import { StyleSheet } from 'react-native'
-import { HStack, useDisclose, Button, Box, View, Text, Pressable, Actionsheet, ScrollView, TextArea, Center } from 'native-base'
+import { HStack, useDisclose, Button, Box, View, Text, Pressable, Actionsheet, ScrollView, TextArea, Center, Spinner, Image } from 'native-base'
 import SvgUri from 'react-native-svg-uri'
+import Svg, { Path } from "react-native-svg"
 import SelectDropdown from 'react-native-select-dropdown'
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { ModalDatePicker } from "react-native-material-date-picker";
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { ModalDatePicker } from 'react-native-material-date-picker';
 import RadioButton from '../listitems/RadioButton'
 import CameraButton from '../listitems/CameraButton'
 import TableMap from '../forms/TableMap'
@@ -12,6 +13,9 @@ import axios from 'axios'
 import { REACT_APP_SERVER } from 'react-native-dotenv'
 import React, { useState, useEffect, useContext } from 'react'
 import { LoginContext } from '../context/LoginContext'
+import CameraViewButton from '../listitems/CameraViewButton'
+import DatePickerIcon from '../assets/iconComponents/DatePickerIcon'
+import PeopleIcon from '../assets/iconComponents/PeopleIcon'
 
 const SelecingSeats = ({ data, navigation }) => {
     const [accessToken, setAccessToken, userInfo, setUserInfo, userToken, setUserToken, userId, setUserId] = useContext(LoginContext)
@@ -70,6 +74,9 @@ const SelecingSeats = ({ data, navigation }) => {
     const [camera4Pic, setCamera4Pic] = useState()
     const [dataLoaded, setDataLoaded] = useState(false)
 
+    // Image Overlay
+    // const [imgIsDisplayed, setImgIsDisplayed] = useState(false);
+
     const [selectedNumOfPeople, setSelectedNumOfPeople] = useState(1)
     const [vaccineCardImg, setVaccineCardImg] = useState([...Array(selectedNumOfPeople)])
 
@@ -124,11 +131,28 @@ const SelecingSeats = ({ data, navigation }) => {
 
     return (
         <View display="flex" mt="-6">
+
+            {/* <Image
+                source={require('../assets/restaurantImgs/topLeft.jpg')}
+                alt="Top left image"
+                style={{
+                    display: 'flex',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    zIndex: 1,
+
+                }}
+            />  */}
             {/* Top camera buttons */}
             <HStack display="flex" justifyContent="space-between" alignItems="center" mb="2" overflow="hidden">
-                <CameraButton name="Camera 1" cameraPic={camera1Pic} setCameraPic={setCamera1Pic} />
+                {/* <CameraButton name="Camera 1" cameraPic={camera1Pic} setCameraPic={setCamera1Pic} /> */}
+                <CameraViewButton imgSource={require('../assets/restaurantImgs/topLeft.jpg')} name="Camera 1" />
+
                 <Text>KITCHEN AREA</Text>
-                <CameraButton name="Camera 2" cameraPic={camera2Pic} setCameraPic={setCamera2Pic} />
+                {/* <CameraButton name="Camera 2" cameraPic={camera2Pic} setCameraPic={setCamera2Pic} /> */}
+                <CameraViewButton imgSource={require('../assets/restaurantImgs/topRight.jpg')} name="Camera 2" />
             </HStack>
             {/* End of top camera buttons */}
 
@@ -140,8 +164,10 @@ const SelecingSeats = ({ data, navigation }) => {
 
             {/* Bottom Camera buttons */}
             <HStack display="flex" justifyContent="space-between" mt="2">
-                <CameraButton name="Camera 3" cameraPic={camera3Pic} setCameraPic={setCamera3Pic} />
-                <CameraButton name="Camera 4" cameraPic={camera4Pic} setCameraPic={setCamera4Pic} />
+                {/* <CameraButton name="Camera 3" cameraPic={camera3Pic} setCameraPic={setCamera3Pic} />
+                <CameraButton name="Camera 4" cameraPic={camera4Pic} setCameraPic={setCamera4Pic} /> */}
+                <CameraViewButton imgSource={require('../assets/restaurantImgs/bottomLeft.jpg')} name="Camera 3" />
+                <CameraViewButton imgSource={require('../assets/restaurantImgs/bottomRight.jpg')} name="Camera 4" />
             </HStack>
             {/* End of bottom camera buttons */}
 
@@ -170,7 +196,8 @@ const SelecingSeats = ({ data, navigation }) => {
                                 }} _light={{
                                     backgroundColor: "#FFF"
                                 }}>
-                                <SvgUri source={require('../assets/PersonIcon.svg')} height="50" width="26" />
+                                {/* <SvgUri source={require('../assets/PersonIcon.svg')} height="50" width="26" /> */}
+                                <PeopleIcon height="50" width="26" />
                                 <View ml="2" mb={0}>
                                     <Text fontSize="18" ml="2" mt="-1" mb="-1">Booking for</Text>
                                     <View ml="-2" mb={-3}>
@@ -226,7 +253,7 @@ const SelecingSeats = ({ data, navigation }) => {
                                     backgroundColor: "#FFF"
                                 }}>
                                 <ModalDatePicker
-                                    button={<SvgUri source={require('../assets/DatePickerIcon.svg')} height="50" width="25" />}
+                                    button={<DatePickerIcon />}
                                     locale="en"
                                     onSelect={(date) => {
                                         // console.log("date selected", date.toDateString());
@@ -307,7 +334,7 @@ const SelecingSeats = ({ data, navigation }) => {
             </Actionsheet>
             {/* End of BOOK NOW Actionsheet */}
 
-        </View >
+        </View>
     )
 }
 
