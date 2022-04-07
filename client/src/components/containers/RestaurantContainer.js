@@ -236,7 +236,7 @@ const RestaurantContainer = ({ data, navigation }) => {
                         </Box>)}
                     </VStack>}
                 </VStack>
-            </ScrollView >
+            </ScrollView>
 
             <Button
                 position="absolute"
@@ -256,7 +256,7 @@ const RestaurantContainer = ({ data, navigation }) => {
             >
                 Book
             </Button>
-        </View >
+        </View>
     );
 };
 
