@@ -1,34 +1,30 @@
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import BookingCard from '../listitems/BookingCard'
-import { Box, Heading, Center, Image, Text, HStack, ScrollView, Stack, VStack, View, Spinner } from "native-base"
-import { SERVER } from 'react-native-dotenv'
+import { Heading, Center, Text, HStack, ScrollView, VStack, Spinner } from "native-base"
+import { REACT_APP_SERVER } from 'react-native-dotenv'
 import { LoginContext } from '../context/LoginContext'
 
 const ReservationsScreenContainer = ({ navigation, data }) => {
     const [accessToken, setAccessToken, userInfo, setUserInfo, userToken, setUserToken, userId, setUserId] = useContext(LoginContext)
-
     const [bookings, setBookings] = useState()
     const [isLoaded, setIsLoaded] = useState(false)
 
     const getAllReservations = () => {
-        axios.get(`https://tablehunt.herokuapp.com/api/v1/reservations/list?userId=${userId}`,
+        axios.get(`http://tablehunt.herokuapp.com/api/v1/reservations/list?userId=${userId}`,
             {
                 headers: { 'Authorization': userToken }
             })
             .then(res => {
                 if (res.data.status == 'AUTH FAILED') {
-                    console.log('inside logout')
                     logoutUser()
                 } else {
-                    console.log("GETTING ALL RESERVATIONS FROM DB", res.data);
                     setBookings(res.data.data);
                     setIsLoaded(true)
                 }
             })
-            .catch(err => console.log("error in fetching reservations"))
+            .catch(err => console.log("error in fetching reservations", err))
     }
-
 
     useEffect(() => {
         navigation.addListener('focus', () => {
@@ -49,7 +45,7 @@ const ReservationsScreenContainer = ({ navigation, data }) => {
                     showsVerticalScrollIndicator={false}>
                     <VStack space={2} mb={4}>
                         {bookings.length > 0
-                            ? bookings.map((el, index) => (
+                            ? bookings.sort((a, b) => a.time - b.time).map((el, index) => (
                                 <BookingCard data={el} key={index} />
                             ))
                             : <Center fontSize={14} mt={250}>No Reservations</Center>}
@@ -63,18 +59,6 @@ const ReservationsScreenContainer = ({ navigation, data }) => {
                     </Heading>
                 </HStack>
             }
-
-            {/* 
-            {data
-                ? <BookingCard data={data} />
-                : <HStack space={2} justifyContent="center">
-                    <Spinner color="danger.300" accessibilityLabel="Loading cards" key="secondary" />
-                    <Heading color="danger.300" fontSize="md">
-                        Refreshing
-                    </Heading>
-                </HStack>
-            } */}
-
         </VStack >
     );
 };

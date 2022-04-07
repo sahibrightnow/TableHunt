@@ -9,7 +9,7 @@ import CameraButton from '../listitems/CameraButton'
 import TableMap from '../forms/TableMap'
 import * as ImagePicker from 'expo-image-picker';
 import axios from 'axios'
-import { SERVER } from 'react-native-dotenv'
+import { REACT_APP_SERVER } from 'react-native-dotenv'
 import React, { useState, useEffect, useContext } from 'react'
 import { LoginContext } from '../context/LoginContext'
 
@@ -88,6 +88,7 @@ const SelecingSeats = ({ data, navigation }) => {
             vicinity: data.restaurantDetails.vicinity,
             specialRequests: request,
             extraNotes: notes,
+            time: Math.floor(new Date(`${selectedDate} ${timing}`).getTime() / 1000)
         });
         setDataLoaded(true);
     },
@@ -103,8 +104,6 @@ const SelecingSeats = ({ data, navigation }) => {
             quality: 1,
         });
 
-        console.log(result);
-
         if (!result.cancelled) {
             let images = [...vaccineCardImg];
             images[index] = result.uri;
@@ -119,7 +118,7 @@ const SelecingSeats = ({ data, navigation }) => {
         axios.post(`https://tablehunt.herokuapp.com/api/v1/reservations`, { ...reservationDetails, userId: userId }, {
             headers: { 'Authorization': userToken }
         })
-            .then(res => console.log("Reservation sucessful"))
+            .then(res => console.log("Reservation successful"))
             .catch(err => console.log("Error while creating reservation", err))
     }
 
@@ -290,6 +289,10 @@ const SelecingSeats = ({ data, navigation }) => {
                                         setTimeout(() => {
                                             navigation.navigate("Reservations", { ...reservationDetails, vaccineCardImg });
                                         }, 500);
+                                        // const time =
+                                        // const unixTime = Math.floor(new Date(`${selectedDate} ${timing}`).getTime() / 1000)
+                                        // console.log("TIME", unixTime);
+
                                     }}
                                 >
                                     <Text color="#FFFFFF" fontSize="16px" py="1" >CONFIRM BOOKING</Text>

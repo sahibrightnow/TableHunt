@@ -4,9 +4,8 @@ import { API_KEY } from 'react-native-dotenv'
 import axios from 'axios'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 
-const GooglePlacesInput = ({ location, setLocation, searchRestuarant }) => {
+const GooglePlacesInput = ({ location, setLocation, searchRestaurant, navigation }) => {
   const [placeID, setPlaceID] = useState()
-
 
   const placeDetailsAPI = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeID}&key=${API_KEY}`
 
@@ -25,6 +24,16 @@ const GooglePlacesInput = ({ location, setLocation, searchRestuarant }) => {
       })
   }, [placeID])
 
+  const getRestaurantDetail = (place_id) => {
+    const resDetailsURL = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&key=${API_KEY}`
+    axios
+      .get(resDetailsURL).then((result) => {
+        navigation.navigate("Restaurant Page", { restaurant: result.data.result })
+      }).catch((error) => {
+        console.log(error)
+      })
+  }
+
   return (
     <HStack
       // pt={20}
@@ -37,7 +46,7 @@ const GooglePlacesInput = ({ location, setLocation, searchRestuarant }) => {
     // bg="green.200"
     // flex={1}
     >
-      {searchRestuarant
+      {searchRestaurant
         ?
         <GooglePlacesAutocomplete
 
@@ -56,23 +65,17 @@ const GooglePlacesInput = ({ location, setLocation, searchRestuarant }) => {
             // rankby: 'distance',
             types: ['restaurant', 'cafe'],
           }}
-          onPress={(data = null) => {
-            setPlaceID(data.place_id)
+          onPress={(data) => {
+            getRestaurantDetail(data.place_id)
           }}
-          // onPress={onOpen}
           onFail={(error) => console.error(error)}
           requestUrl={{
             url: 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api',
             useOnPlatform: 'web',
           }} // this in only required for use on the web. See https://git.io/JflFv more for details.
           enablePoweredByContainer={false}
-        // currentLocation={true}
-        // currentLocationLabel='Current location'
-        // getAddressText={(data) => data.description}
         />
-
         :
-
         <GooglePlacesAutocomplete
 
           placeholder='Search a location'
@@ -90,23 +93,17 @@ const GooglePlacesInput = ({ location, setLocation, searchRestuarant }) => {
             // rankby: 'distance',
             types: ['restaurant', 'cafe'],
           }}
-          onPress={(data = null) => {
+          onPress={(data) => {
             setPlaceID(data.place_id)
           }}
-          // onPress={onOpen}
           onFail={(error) => console.error(error)}
           requestUrl={{
             url: 'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api',
             useOnPlatform: 'web',
           }} // this in only required for use on the web. See https://git.io/JflFv more for details.
           enablePoweredByContainer={false}
-        // currentLocation={true}
-        // currentLocationLabel='Current location'
-        // getAddressText={(data) => data.description}
         />
       }
-
-
     </HStack>
   )
 }

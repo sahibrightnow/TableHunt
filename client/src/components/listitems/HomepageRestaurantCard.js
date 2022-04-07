@@ -1,4 +1,4 @@
-import { Box, Stack, Text, Heading, Image, Center, Button } from 'native-base'
+import { Box, Stack, Text, Heading, Image, Button } from 'native-base'
 import { API_KEY } from 'react-native-dotenv'
 import SvgUri from 'react-native-svg-uri'
 
@@ -18,14 +18,14 @@ const HomepageRestaurantCard = (props) => {
                 roundedTop="md"
             />
             <Button
-                width="33%"
+                width="25%"
                 bgColor={'green.300'}
                 style={{
-                    position: "absolute", bottom: 127, right: 8
+                    position: "absolute", bottom: 130, right: 12
                 }}
                 onPress={() => navigation.navigate("Restaurant Page", { restaurant })}
             >
-                View Menu
+                View
             </Button>
 
 

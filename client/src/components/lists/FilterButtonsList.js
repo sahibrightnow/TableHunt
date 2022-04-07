@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Button, useDisclose, Heading, Actionsheet, Box, Text, Slider, Radio, Stack } from 'native-base'
+import { View, Button, useDisclose, Heading, Actionsheet, Box, Text, Slider } from 'native-base'
 import { MaterialIcons } from '@expo/vector-icons'
 import RadioButton from '../listitems/RadioButton'
 
@@ -115,8 +115,6 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, se
                     </Button>
                 </Actionsheet.Content>
             </Actionsheet>
-
-
         </View >
     )
 }

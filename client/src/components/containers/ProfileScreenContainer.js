@@ -21,11 +21,10 @@ const ProfileScreenContainer = ({ navigation }) => {
   }, [userInfo])
 
   const logOut = () => {
-    setAccessToken("");
-    setUserToken("")
-    setUserId("")
-
     setTimeout(() => {
+      setAccessToken("");
+      setUserToken("")
+      setUserId("")
       navigation.navigate("Authentication");
     }, 1000);
   }

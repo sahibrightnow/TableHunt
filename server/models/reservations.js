@@ -14,6 +14,7 @@ const reservationSchema = new Schema(
         vicinity: { type: String, maxLength: 100, required: true },
         specialRequests: { type: String, maxLength: 100, default: '' },
         extraNotes: { type: String, maxLength: 2000, default: '' },
+        time: { type: Number, maxLength: 100, required: true },
         vaccineProof: [{ type: String, default: '' }],
         restaurantId: {
             type: ObjectId,

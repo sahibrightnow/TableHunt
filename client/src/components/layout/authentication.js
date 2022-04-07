@@ -1,15 +1,13 @@
 import React, { useContext } from 'react';
 import * as Google from 'expo-google-app-auth'
-
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, } from 'react-native';
 import { HStack, Button, VStack, Flex, Stack, Center, Divider, Link } from 'native-base';
-
 import { useNavigation } from '@react-navigation/native';
 import SvgUri from 'react-native-svg-uri'
 import { LoginContext } from '../context/LoginContext'
 import axios from 'axios'
-import { SERVER } from 'react-native-dotenv'
+import { REACT_APP_SERVER } from 'react-native-dotenv'
 
 
 const Authentication = () => {
@@ -18,7 +16,6 @@ const Authentication = () => {
   const navigation = useNavigation();
 
   async function signInWithGoogleAsync() {
-
     try {
       const result = await Google.logInAsync({
         expoClientId: "32874219277-hu0dk0feqc5ovl3gjg6b4i2lieopbi6a.apps.googleusercontent.com",
@@ -29,15 +26,11 @@ const Authentication = () => {
 
       if (result.type === "success") {
         setAccessToken(result.accessToken);
-        // getUserData();
-        // console.log("RESULT", result);
-        console.log("SERVER", SERVER)
         axios.post(`https://tablehunt.herokuapp.com/api/v1/consumers`, {
           username: result.user.name,
           email: result.user.email,
           image: result.user.photoUrl
         }).then(res => {
-          // console.log("LOGIN SUCCESSFUL!", res)
           if (res.data.status == "SUCCESS") {
             setUserId(res.data.userId)
             setUserToken(res.data.userToken)
@@ -82,7 +75,6 @@ const Authentication = () => {
       <Flex alignItems="center">
         <View style={styles.container}>
           {showUserInfo()}
-          {/* <Heading style={styles.tableHunt} ml={'auto'} mr={'auto'} mt={'100px'}>Table Hunt</Heading> */}
           <Stack alignItems="center" style={styles.tableHunt} mt={'100px'} mb={'20'} >
             <SvgUri source={require('../assets/app_logo.svg')} />
           </Stack>
@@ -91,7 +83,6 @@ const Authentication = () => {
 
           <Button style={styles.button} borderRadius={8} width='100%' mt='5' onPress={() => signInWithGoogleAsync()} alignItems='center'>
             <HStack space={2}>
-              {/* <MaterialCommunityIcons name="google" size={26} color="green" /> */}
               <SvgUri source={require('../assets/google_logo.svg')} />
               <Center>
                 <Text>{accessToken ? "Logging in..." : "Sign Up with Google"}</Text>
@@ -103,15 +94,10 @@ const Authentication = () => {
 
           <Button style={styles.button_email} mt='0' height='50' onPress={() => accessToken ? getUserData : signInWithGoogleAsync} >Continue with email</Button>
 
-
           <Text >Not a member?<Link>Sign up</Link></Text>
           <StatusBar style="auto" />
 
-          <Text style={styles.text}>Are you a restaurant owner? <Text onPress={() => navigation.navigate("OwnerAuthentication")} style={styles.text2}>Sign in</Text></Text>
-          {/* <Button height='50' borderRadius={8} width='50%' mt='5'>Continue with email</Button>
-          <Button height='50' borderRadius={8} width='50%' mt='5' onPress={accessToken ? getUserData : signInWithGoogleAsync}>
-            {accessToken ? "Get user data" : "Continue with google"}
-          </Button> */}
+          {/* <Text style={styles.text}>Are you a restaurant owner? <Text onPress={() => navigation.navigate("OwnerAuthentication")} style={styles.text2}>Sign in</Text></Text> */}
         </View>
       </Flex>
     </VStack >
