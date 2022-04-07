@@ -8,7 +8,7 @@ const SkeletonCard = () => {
         }} _light={{
             borderColor: "coolGray.300"
         }}>
-            <Skeleton h="195" />
+            <Skeleton h="195" startColor="coolGray.400" />
             <Skeleton.Text px="4" />
         </VStack>
     )
