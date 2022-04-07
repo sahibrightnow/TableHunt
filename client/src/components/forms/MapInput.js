@@ -3,7 +3,8 @@ import { Dimensions, Image } from 'react-native'
 import * as Location from 'expo-location'
 import { TouchableOpacity } from "react-native";
 import SvgUri from 'react-native-svg-uri'
-import FindLocation from '../assets/iconComponents/FindLocationIcon'
+import FindLocationIcon from '../assets/iconComponents/FindLocationIcon'
+import { Pressable, Button } from 'native-base'
 
 const MapInput = ({ navigation, nearbyPlaces, location, getLocation, mapRef }) => {
   return (
@@ -21,14 +22,14 @@ const MapInput = ({ navigation, nearbyPlaces, location, getLocation, mapRef }) =
         longitudeDelta: 0.0121,
       }}
     >
-      <TouchableOpacity onPress={getLocation} style={{
-        width: 40, height: 40,
-        position: "absolute", bottom: 20, right: 20, borderRadius: 30, backgroundColor: "#d2d2d2"
+      <Pressable onPress={getLocation} style={{
+        width: 40, height: 40, padding: 8,
+        position: "absolute", bottom: 20, right: 20, borderRadius: 30, backgroundColor: "#6A994E"
       }}>
         <SvgUri source={require('../assets/findLocation.svg')} />
-        {/* <FindLocation /> */}
+        {/* <FindLocationIcon /> */}
 
-      </TouchableOpacity>
+      </Pressable>
 
       {
         nearbyPlaces && nearbyPlaces.map((el, index) => (

@@ -200,7 +200,7 @@ const SelecingSeats = ({ data, navigation }) => {
                                 {/* <SvgUri source={require('../assets/PersonIcon.svg')} height="50" width="26" /> */}
                                 <PeopleIcon height="50" width="26" />
                                 <View ml="2" mb={0}>
-                                    <Text fontSize="18" ml="2" mt="-1" mb="-1">Booking for</Text>
+                                    <Text fontSize="18" ml="2" mt="-1" >Booking for</Text>
                                     <View ml="-2" mb={-3}>
                                         <SelectDropdown
                                             data={numberOfPeople}

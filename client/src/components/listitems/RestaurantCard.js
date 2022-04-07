@@ -29,19 +29,19 @@ const RestaurantCard = ({ restaurant, navigation, onClose, type }) => {
 
   switch (Math.round(restaurantRating)) {
     case 1:
-      ratingDescription = `Very Bad`
+      ratingDescription = `Very Bad `
       break
     case 2:
-      ratingDescription = `Bad`
+      ratingDescription = `Bad `
       break
     case 3:
-      ratingDescription = `Average`
+      ratingDescription = `Average `
       break
     case 4:
-      ratingDescription = `Good`
+      ratingDescription = `Good `
       break
     default:
-      ratingDescription = 'Excellent'
+      ratingDescription = 'Excellent '
   }
 
   return (

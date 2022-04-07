@@ -1,4 +1,4 @@
-import { Box, Stack, Text, Heading, Image, Button } from 'native-base'
+import { Box, Stack, Text, Heading, Image, Button, ScrollView } from 'native-base'
 import { API_KEY } from 'react-native-dotenv'
 import SvgUri from 'react-native-svg-uri'
 import StarIcon from '../assets/iconComponents/StarIcon'
@@ -31,9 +31,15 @@ const HomepageRestaurantCard = (props) => {
 
 
             <Stack space={2} p={[3, 3, 6]}>
-                <Heading size={'md'} noOfLines={2}>
-                    {props.restaurantName ? props.restaurantName : "Name not Available"}
-                </Heading>
+                <ScrollView
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                >
+                    <Heading size={'md'} noOfLines={2}>
+                        {props.restaurantName ? props.restaurantName : "Name not Available"}
+                    </Heading>
+                </ScrollView>
+
                 <Stack space={1} mt={'auto'}>
                     <Text color="green.300">
                         {/* <SvgUri source={require('../assets/star.svg')} /> */}

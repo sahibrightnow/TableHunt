@@ -102,6 +102,7 @@ const GooglePlacesInput = ({ location, setLocation, searchRestaurant, navigation
             useOnPlatform: 'web',
           }} // this in only required for use on the web. See https://git.io/JflFv more for details.
           enablePoweredByContainer={false}
+
         />
       }
     </HStack>
