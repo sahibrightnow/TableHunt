@@ -8,6 +8,7 @@ import { Rating } from "react-native-ratings"
 
 import { LoginContext } from '../context/LoginContext'
 import logoutUser from "../context/logoutUser";
+import {Linking} from 'react-native'
 
 
 const RestaurantContainer = ({ data, navigation }) => {
@@ -33,12 +34,7 @@ const RestaurantContainer = ({ data, navigation }) => {
             </View>
         );
     };
-    const getItem = (data, index) => ({
-        id: Math.random().toString(12).substring(0),
-        title: `Item ${index+1}`
-      });
-      
-      const getItemCount = (data) => 50;
+
 
     // break
 
@@ -46,6 +42,7 @@ const RestaurantContainer = ({ data, navigation }) => {
     const [info, setInfo] = useState(true);
     const [reviews, setReviews] = useState(false);
     const [details, setDetails] = useState();
+
     const [variant, setVariant] = useState("ghost");
     const [cVariant, setCVariant] = useState("ghost");
     // state for photos carousel 
@@ -85,6 +82,7 @@ const RestaurantContainer = ({ data, navigation }) => {
 
     const placeDetailsURL = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeID}&key=${API_KEY}`
 
+    // Call the place details API
     const getPlaceDetails = () => {
         axios
             .get(placeDetailsURL)
@@ -118,6 +116,12 @@ const RestaurantContainer = ({ data, navigation }) => {
         default:
             priceRating = 'Not Available'
     }
+
+
+    // Show todays opening_hours 
+    const dayOfWeekName = new Date().toLocaleString(
+  'default', {weekday: 'long'}
+   );
 
     return (
         <View>
@@ -186,8 +190,10 @@ const RestaurantContainer = ({ data, navigation }) => {
                     {info && <VStack ml={5} mr={5} mt={5}>
                         
                         <Text style={styles.heading}>Opening hours</Text>
-                        {details?.opening_hours.weekday_text.map((el, index) => <Text fontSize={14} key={index}>{el}</Text>)}
-                        <Text mt={6} mb={10} fontSize={14}><Text style={styles.heading}>Phone:</Text> {details?.formatted_phone_number}</Text>
+                        {details?.opening_hours.weekday_text.map((el, index) => <Text
+                        style={el.includes(dayOfWeekName) ? styles.highlighted : styles.unselected}
+                         fontSize={14} key={index}>{el}</Text>)}
+                        <Text  onPress={()=> Linking.openURL(`tel:${details?.formatted_phone_number}`)} mt={6} mb={16} fontSize={16}><Text style={styles.heading}>Phone: </Text><Text fontWeight='300' color="rgba(188, 71, 73, 1)">{details?.formatted_phone_number}</Text></Text>
                     </VStack>}
                     <Center pt={10}>
             
@@ -283,5 +289,10 @@ const styles = StyleSheet.create({
       
     },
     unselected: { 
-        fontWeight: '300' }
+        fontWeight: '300' },
+    highlighted: {
+        fontWeight: 'bold',
+        color: 'rgba(188, 71, 73, 1)',
+        fontSize: 16
+    }
 })

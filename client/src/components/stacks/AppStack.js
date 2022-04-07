@@ -13,6 +13,7 @@ import RestaurantOwnerScreen from '../screens/RestaurantOwnerScreen'
 import OwnerAuthentication from '../layout/OwnerAuthentication'
 import RestuarantBookings from '../screens/RestuarantBookings'
 import { LogBox } from 'react-native'
+import AccountSettings from '../screens/AccountSettings'
 
 const Tab = createBottomTabNavigator()
 
@@ -167,6 +168,10 @@ const AppStack = () => {
           options={{
             headerShown: false,
           }}
+        />
+        <Stack.Screen
+        name="Account Settings"
+        component={AccountSettings}
         />
 
       </Stack.Navigator>
