@@ -151,7 +151,7 @@ const RestaurantContainer = ({ data, navigation }) => {
                         <Heading size='xl' mr="60px">
                             {restaurant.name}
                         </Heading>
-                        <Button size="sm" mr={0} ml={-2} style={styles.button} >
+                        <Button size="sm" mr={-2} ml={'auto'} style={styles.button} >
                             {/* <SvgUri source={require('../assets/star.svg')} /> */}
                             <HStack>
                                 <StarIcon color="white" />
