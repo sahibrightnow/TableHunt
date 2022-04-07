@@ -34,7 +34,7 @@ const ReservationsScreenContainer = ({ navigation, data }) => {
 
     return (
         <VStack bgColor="white" height="100%" >
-            <Heading size="xl" mt="20" ml="6" color='danger.300' bold>
+            <Heading size="lg" mt="20" ml="6">
                 Your Reservations
             </Heading>
             <Text fontSize={18} fontWeight="bold" color="gray.500" ml="7" mt="5" mb={2}>Upcoming</Text>
