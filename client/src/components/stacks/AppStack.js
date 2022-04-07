@@ -17,6 +17,8 @@ import RestaurantOwnerScreen from '../screens/RestaurantOwnerScreen'
 import OwnerAuthentication from '../layout/OwnerAuthentication'
 import SvgUri from 'react-native-svg-uri'
 import RestuarantBookings from '../screens/RestuarantBookings'
+import AccountSettings from '../screens/AccountSettings'
+
 const Tab = createBottomTabNavigator()
 
 const navColors = {
@@ -182,6 +184,11 @@ const AppStack = () => {
             headerBackTitleVisible: false
           }}
         /> */}
+
+        <Stack.Screen
+          name="Account Settings"
+          component={AccountSettings}
+        />
 
       </Stack.Navigator>
     </NavigationContainer>
