@@ -154,7 +154,7 @@ const RestaurantContainer = ({ data, navigation }) => {
                         <Button size="sm" mr={0} ml={-2} style={styles.button} >
                             {/* <SvgUri source={require('../assets/star.svg')} /> */}
                             <HStack>
-                                <StarIcon />
+                                <StarIcon color="white" />
                                 <Text color="white" fontSize={14} ml={2} mr={2}>{restaurant.rating}</Text>
                             </HStack>
                         </Button>
@@ -164,14 +164,14 @@ const RestaurantContainer = ({ data, navigation }) => {
                         <HStack >
                             {/* <SvgUri source={require('../assets/ForkKnife.svg')} /> */}
                             <ForkKnife />
-                            <Text>
+                            <Text ml="2">
                                 Multiple
                             </Text>
                         </HStack>
                         <HStack ml={10} >
                             {/* <SvgUri source={require('../assets/CurrencyCircleDollar.svg')} /> */}
                             <CurrencyCircleDollar />
-                            <Text>
+                            <Text ml="2">
                                 {priceRating}
                             </Text>
                         </HStack>
@@ -179,7 +179,7 @@ const RestaurantContainer = ({ data, navigation }) => {
                     <HStack pt={2} pl={8} mb={2}>
                         {/* <SvgUri source={require('../assets/Location.svg')} /> */}
                         <LocationIcon />
-                        <Text>
+                        <Text ml="2">
                             {restaurant.vicinity}
                         </Text>
                     </HStack>
@@ -194,7 +194,7 @@ const RestaurantContainer = ({ data, navigation }) => {
                             <Text mb={4} style={info ? styles.selected : styles.unselected} onPress={() => { setInfo(true); setReviews(false); }} mr={20} fontSize="lg" ml={20}>Info</Text>
                         </View>
                         <View style={reviews && styles.under} >
-                            <Text style={reviews ? styles.selected : styles.unselected} fontSize="lg" mr={20} ml={12}  mb={2} onPress={() => { setInfo(false); setReviews(true); }}>Reviews</Text>
+                            <Text style={reviews ? styles.selected : styles.unselected} fontSize="lg" mr={20} ml={12} mb={2} onPress={() => { setInfo(false); setReviews(true); }}>Reviews</Text>
                         </View>
                     </HStack>
 
@@ -209,7 +209,7 @@ const RestaurantContainer = ({ data, navigation }) => {
                     <Center pt={10}>.
 
                     </Center>
-                    {reviews && <VStack  ml={5} mr={5} mt={-8} mb={20} >
+                    {reviews && <VStack ml={5} mr={5} mt={-8} mb={20} >
                         <Text style={styles.heading}>{restaurant?.user_ratings_total} Reviews </Text>
                         {details?.reviews.sort((a, b) => b.time - a.time).map((el, index) => <Box mt={5} key={index}>
                             <HStack >
@@ -242,7 +242,7 @@ const RestaurantContainer = ({ data, navigation }) => {
                         </Box>)}
                     </VStack>}
                 </VStack>
-            </ScrollView >
+            </ScrollView>
 
             <Button
                 position="absolute"
@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
     },
     under: {
         borderBottomColor: 'black',
-        borderBottomWidth:2
+        borderBottomWidth: 2
     },
     button: {
         backgroundColor: 'rgba(106, 153, 78, 1)',

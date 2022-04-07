@@ -37,7 +37,7 @@ const HomepageRestaurantCard = (props) => {
                 <Stack space={1} mt={'auto'}>
                     <Text color="green.300">
                         {/* <SvgUri source={require('../assets/star.svg')} /> */}
-                        <StarIcon />
+                        <StarIcon color="#FFD600" />
                         {props.restaurantRating} {props.ratingDescription}
 
                         <Text color="gray.600">
@@ -49,7 +49,7 @@ const HomepageRestaurantCard = (props) => {
                     </Text>
                 </Stack>
             </Stack>
-        </Box >
+        </Box>
     )
 }
 
