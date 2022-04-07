@@ -1,6 +1,5 @@
 import { ScrollView, VStack, Heading } from "native-base";
 import React, { useEffect, useState } from "react";
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 import { API_KEY } from 'react-native-dotenv'
 import GooglePlacesInput from '../forms/GooglePlacesInput'
 import { Actionsheet, useDisclose, Box } from "native-base";
@@ -12,7 +11,6 @@ import CuisinesStack from '../stacks/CuisinesStack'
 
 const SearchScreenContainer = ({ navigation }) => {
   const { isOpen, onOpen, onClose } = useDisclose();
-
   const [restaurantType, setRestaurantType] = useState()
   const [nearbyPlaces, setNearbyPlaces] = useState([])
   const [location, setLocation] = useState()
@@ -59,7 +57,7 @@ const SearchScreenContainer = ({ navigation }) => {
 
   return (
     <VStack space={10} py={20} px={5}>
-      <GooglePlacesInput searchRestuarant={"searchRestuarant"} />
+      <GooglePlacesInput searchRestaurant={"searchRestaurant"} navigation={navigation} />
       <Heading size="lg" mt="12" ml="5">
         Cuisines
       </Heading>

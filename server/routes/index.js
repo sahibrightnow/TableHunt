@@ -1,14 +1,14 @@
 const router = require('express').Router({ mergeParams: true });
 const consumers = require('./consumers');
-const restaurantOwners = require('./restaurantOwners')
-
-// const apiEndpointValidator = require('../middlewares/apiEndpointValidator');
-// this middlerware will check for dynamic entered endpoints
+const restaurants = require('./restaurants');
+const reservations = require('./reservations');
 
 router.use('/consumers', consumers);
-router.use('/restaurantOwners', restaurantOwners);
+router.use('/restaurants', restaurants);
+router.use('/reservations', reservations);
 
-router.get('/', (req, res, next) => {
+
+router.get('/', (req, res) => {
     res.send('TableHunt Server API V1!');
 });
 

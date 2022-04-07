@@ -5,7 +5,6 @@ import SkeletonCard from '../listitems/SkeletonCard'
 import React from 'react'
 
 const RestaurantList = ({ nearbyPlaces, isLoaded, type, navigation, setMapRadius, setRating, rating, setPriceFilter, priceFilter }) => {
-
   return (
     < View flex={1} p={'10px'} >
       <FilterButtonsList

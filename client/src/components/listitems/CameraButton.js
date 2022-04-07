@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Pressable, StyleSheet } from 'react-native';
-import { Button, useDisclose, Actionsheet, View, Modal, VStack, HStack, Text, Image } from 'native-base';
+import { StyleSheet } from 'react-native';
+import { Button, useDisclose, Actionsheet, View, Modal, Text, Image } from 'native-base';
 import SvgUri from 'react-native-svg-uri'
 import { Camera } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';

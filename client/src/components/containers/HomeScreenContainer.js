@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import GooglePlacesInput from '../forms/GooglePlacesInput'
 import MapInput from '../forms/MapInput'
 import RestaurantList from '../lists/RestaurantList'
-import { getLocation, getNearbyPlaces, LocationAndPlacesNearby } from '../services/LocationAndPlacesNearby'
 import axios from 'axios'
 import { API_KEY } from 'react-native-dotenv'
 import * as Location from 'expo-location'
@@ -87,7 +86,8 @@ const HomeScreenContainer = ({ navigation }) => {
     <>
       <GooglePlacesInput location={location} setLocation={setLocation} />
       <MapInput nearbyPlaces={nearbyPlaces} location={location} getLocation={getLocation} mapRef={mapRef} />
-      <RestaurantList nearbyPlaces={nearbyPlaces} isLoaded={isLoaded} type={'homepage'} navigation={navigation} setMapRadius={setMapRadius} setRating={setRating} rating={rating} priceFilter={priceFilter} setPriceFilter={setPriceFilter} />
+      <RestaurantList nearbyPlaces={nearbyPlaces} isLoaded={isLoaded} type={'homepage'} navigation={navigation}
+        setMapRadius={setMapRadius} setRating={setRating} rating={rating} priceFilter={priceFilter} setPriceFilter={setPriceFilter} />
     </>
   )
 }

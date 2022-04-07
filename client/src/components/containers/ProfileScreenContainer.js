@@ -1,12 +1,14 @@
 import { Center, VStack, Image, Text, Heading, Divider, Button, ChevronRightIcon, HStack } from "native-base";
 import React, { useContext, useState, useEffect } from "react";
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Alert } from 'react-native';
 import { LoginContext } from "../context/LoginContext";
+
 
 
 const ProfileScreenContainer = ({ navigation }) => {
   const [userInfo, setUserInfo] = useState();
-  const [accessToken, setAccessToken] = useContext(LoginContext)
+  const [loading, setLoading] = useState(false);
+  const [accessToken, setAccessToken, userToken, setUserToken, userId, setUserId] = useContext(LoginContext)
   async function getUserData() {
     let userInfoResponse = await fetch("https://www.googleapis.com/userinfo/v2/me", {
       headers: { 'Authorization': `Bearer ${accessToken}` }
@@ -21,12 +23,19 @@ const ProfileScreenContainer = ({ navigation }) => {
   }, [userInfo])
 
   const logOut = () => {
-    setAccessToken("");
-    
-    setTimeout(() => {
-      navigation.navigate("Authentication");
-    }, 1000);
-    
+    return Alert.alert("Logout", "Are you sure you want to logout?", [{
+      text: "Yes", onPress: () => {
+        setLoading(true)
+        setTimeout(() => {
+          setAccessToken("");
+          setUserToken("")
+          setUserId("")
+          navigation.navigate("Authentication");
+        }, 1000);
+      }
+    }, {
+      text: "No",
+    },])
 
   }
 
@@ -42,22 +51,24 @@ const ProfileScreenContainer = ({ navigation }) => {
           <Image source={{ uri: userInfo.picture }} style={styles.picture} alt={"user_profile_picture"} />
           <Heading fontSize="md" style={styles.text}>{userInfo.name} </Heading>
           <VStack style={styles.options} width='100%'>
-            <HStack>
-              <Text fontSize="lg" fontWeight="light">Account Settings</Text>
-              <ChevronRightIcon mt="2" ml="auto" />
+            <HStack >
+              <Text onPress={() => {
+                navigation.navigate("Account Settings")
+              }} fontSize="xl" fontWeight="light" mt={1}>Account Settings</Text>
+              <ChevronRightIcon ml="auto" />
             </HStack>
             <Divider my='2' />
             <HStack>
-              <Text fontSize="lg" fontWeight="light">Help & Support</Text>
-              <ChevronRightIcon mt="2" ml="auto" />
+              <Text fontSize="xl" fontWeight="light" mt={1}>Help & Support</Text>
+              <ChevronRightIcon ml="auto" />
             </HStack>
             <Divider my='2' />
             <HStack>
-              <Text fontSize="lg" fontWeight="light">Terms & Privacy</Text>
-              <ChevronRightIcon mt="2" ml="auto" />
+              <Text fontSize="xl" fontWeight="light" mt={1}>Terms & Privacy</Text>
+              <ChevronRightIcon ml="auto" />
             </HStack>
             <Divider my='2' />
-            <Button size="lg" mt="220" backgroundColor="#924344" borderRadius="md" onPress={() => logOut()}>Log Out</Button>
+            <Button isLoading={loading} variant="outline" size="lg" mt="250" colorScheme='rgba(188, 71, 73, 1)' borderRadius="md" onPress={() => logOut()}>{loading ? 'Logging Out' : 'Log Out'}</Button>
           </VStack>
         </Center>
       ) : <Text>Loading</Text>}

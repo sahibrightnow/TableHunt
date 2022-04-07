@@ -6,7 +6,6 @@ import { StyleSheet } from 'react-native'
 import React from 'react'
 import { LoginProvider } from './src/components/context/LoginContext'
 
-
 import {
   useFonts,
   Poppins_400Regular,
@@ -103,7 +102,7 @@ const App = () => {
       <LoginProvider>
         <AppStack />
       </LoginProvider>
-      <StatusBar style="light" />
+      {/* <StatusBar style="light" /> */}
     </NativeBaseProvider>
   )
 }

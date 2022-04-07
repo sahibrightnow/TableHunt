@@ -1,6 +1,7 @@
-import { Box, Stack, Text, Heading, Image, Center, Button } from 'native-base'
+import { Box, Stack, Text, Heading, Image, Button } from 'native-base'
 import { API_KEY } from 'react-native-dotenv'
 import SvgUri from 'react-native-svg-uri'
+import StarIcon from '../assets/iconComponents/StarIcon'
 
 const HomepageRestaurantCard = (props) => {
     const navigation = props.navigation
@@ -18,16 +19,14 @@ const HomepageRestaurantCard = (props) => {
                 roundedTop="md"
             />
             <Button
-                width="33%"
+                width="25%"
                 bgColor={'green.300'}
                 style={{
-                    position: "absolute", bottom: 127, right: 8
+                    position: "absolute", bottom: 130, right: 12
                 }}
-                onPress={() =>
-                    navigation.navigate("Restaurant Page", { restaurant })
-                }
+                onPress={() => navigation.navigate("Restaurant Page", { restaurant })}
             >
-                View Menu
+                View
             </Button>
 
 
@@ -37,19 +36,20 @@ const HomepageRestaurantCard = (props) => {
                 </Heading>
                 <Stack space={1} mt={'auto'}>
                     <Text color="green.300">
-                        <SvgUri source={require('../assets/star.svg')} />
+                        {/* <SvgUri source={require('../assets/star.svg')} /> */}
+                        <StarIcon />
                         {props.restaurantRating} {props.ratingDescription}
 
                         <Text color="gray.600">
-                            ({props.totalUserReviews}) | Change later
+                            ({props.totalUserReviews})
                         </Text>
                     </Text>
-                    <Text color="danger.300" ml={1}>
+                    <Text color="danger.300" ml={1} mt={0.5}>
                         {props.priceRating}
                     </Text>
                 </Stack>
             </Stack>
-        </Box>
+        </Box >
     )
 }
 
