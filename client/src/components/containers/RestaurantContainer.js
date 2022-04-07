@@ -198,7 +198,7 @@ const RestaurantContainer = ({ data, navigation }) => {
                         {details?.opening_hours.weekday_text.map((el, index) => <Text
                             style={el.includes(dayOfWeekName) ? styles.highlighted : styles.unselected}
                             fontSize={14} key={index}>{el}</Text>)}
-                        <Text onPress={() => Linking.openURL(`tel:${details?.formatted_phone_number}`)} mt={6} mb={16} fontSize={16}><Text style={styles.heading}>Phone: </Text><Text fontWeight='bold' color="rgba(188, 71, 73, 1)">{details?.formatted_phone_number}</Text></Text>
+                        <Text onPress={() => Linking.openURL(`tel:${details?.formatted_phone_number}`)} mt={6} mb={16} fontSize={16}><Text style={styles.heading}>Phone: </Text><Text fontWeight='bold' color="rgba(188, 71, 73, 1)">{details?.formatted_phone_number || 'Not Available'}</Text></Text>
                     </VStack>}
                     <Center pt={10}>
 
@@ -299,6 +299,6 @@ const styles = StyleSheet.create({
     highlighted: {
         fontWeight: 'bold',
         color: 'rgba(188, 71, 73, 1)',
-        fontSize: 16
+        fontSize: 15
     }
 })

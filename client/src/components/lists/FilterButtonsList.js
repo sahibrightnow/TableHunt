@@ -107,6 +107,7 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, se
                     </Button>
 
                     <Button w="100%" variant="outline" borderColor="danger.300"
+                        colorScheme='rgba(188, 71, 73, 1)'
                         mt={2}
                         mb={-3}
                         onPress={onClose}
