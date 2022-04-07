@@ -78,7 +78,7 @@ const Authentication = () => {
           <Stack alignItems="center" style={styles.tableHunt} mt={'100px'} mb={'20'} >
             <SvgUri source={require('../assets/app_logo.svg')} />
           </Stack>
-          <Text bold style={styles.subheading} noOfLines={3}>Find your seating in seconds for your next occasion</Text>
+          <Text bold style={styles.subheading} noOfLines={3}>Book your spot in seconds for your next occasion</Text>
           <Text style={styles.subtitle}>You signup, We reserve. Quick!</Text>
 
           <Button style={styles.button} borderRadius={8} width='100%' mt='5' onPress={() => signInWithGoogleAsync()} alignItems='center'>
