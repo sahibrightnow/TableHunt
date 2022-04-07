@@ -3,8 +3,6 @@ import React, { useContext, useState, useEffect } from "react";
 import { StyleSheet, Alert } from 'react-native';
 import { LoginContext } from "../context/LoginContext";
 
-
-
 const ProfileScreenContainer = ({ navigation }) => {
   const [userInfo, setUserInfo] = useState();
   const [loading, setLoading] = useState(false);

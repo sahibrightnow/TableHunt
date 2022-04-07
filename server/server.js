@@ -5,8 +5,6 @@ const app = express();
 const mongoConnect = require('./db/connection.js');
 const router = require('./routes/index.js');
 
-
-
 app.use(cors());
 app.use(express.json());
 

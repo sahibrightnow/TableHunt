@@ -1,10 +1,8 @@
 import MapView from 'react-native-maps'
 import { Dimensions, Image } from 'react-native'
-import * as Location from 'expo-location'
-import { TouchableOpacity } from "react-native";
 import SvgUri from 'react-native-svg-uri'
 import FindLocationIcon from '../assets/iconComponents/FindLocationIcon'
-import { Pressable, Button } from 'native-base'
+import { Pressable } from 'native-base'
 
 const MapInput = ({ navigation, nearbyPlaces, location, getLocation, mapRef }) => {
   return (
@@ -43,7 +41,6 @@ const MapInput = ({ navigation, nearbyPlaces, location, getLocation, mapRef }) =
             description={`${el.vicinity}`}
           >
             <Image source={require('../assets/locationMarker.png')} style={{ height: 35, width: 28 }} />
-            {/* <SvgUri source={require('../assets/locationMarker.svg')} /> */}
           </MapView.Marker>
         ))
       }

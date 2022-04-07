@@ -99,7 +99,6 @@ const CuisinesStack = ({ onOpen, setRestaurantType }) => {
                     />
                 </TouchableOpacity>
             </HStack>
-
         </VStack >
     )
 }

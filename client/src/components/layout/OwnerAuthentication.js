@@ -4,7 +4,6 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, } from 'react-native';
 import { HStack, Button, VStack, Flex, Stack, Center, Divider, Link } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
-import SvgUri from 'react-native-svg-uri'
 import { LoginContext } from '../context/LoginContext'
 import AppIconComponent from '../assets/iconComponents/AppIcon';
 import GoogleLogo from '../assets/iconComponents/GoogleLogo';
@@ -64,7 +63,6 @@ const OwnerAuthentication = () => {
         <View style={styles.container}>
           {showUserInfo()}
           <Stack alignItems="center" style={styles.tableHunt} mt={'100px'} mb={'20'} >
-            {/* <SvgUri source={require('../assets/app_logo.svg')} /> */}
             <AppIconComponent />
           </Stack>
           <Text bold style={styles.subheading} noOfLines={3}>Manage your restaurant's reservations right here.</Text>
@@ -72,8 +70,6 @@ const OwnerAuthentication = () => {
 
           <Button style={styles.button} borderRadius={8} width='100%' mt='5' onPress={() => signInWithGoogleAsync()} alignItems='center'>
             <HStack space={2}>
-              {/* <MaterialCommunityIcons name="google" size={26} color="green" /> */}
-              {/* <SvgUri source={require('../assets/google_logo.svg')} /> */}
               <GoogleLogo />
               <Center>
                 <Text>{accessToken ? "Logging in..." : "Sign Up with Google"}</Text>

@@ -1,9 +1,8 @@
 import { Center, VStack, HStack, Heading, Text, Button, ScrollView, Divider, Image, Box, FlatList, Flex } from "native-base";
-import React, { useEffect, useState, useRef, useContext } from "react";
-import { API_KEY, REACT_APP_SERVER } from 'react-native-dotenv'
-import SvgUri from 'react-native-svg-uri'
+import React, { useEffect, useState, useContext } from "react";
+import { API_KEY } from 'react-native-dotenv'
 import axios from "axios";
-import { StyleSheet, Dimensions, View, VirtualizedList } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Rating } from "react-native-ratings"
 import { LoginContext } from '../context/LoginContext'
 import CurrencyCircleDollar from '../assets/iconComponents/CurrencyCircleDollar'
@@ -16,11 +15,6 @@ import { Linking } from 'react-native'
 const RestaurantContainer = ({ data, navigation }) => {
     const [accessToken, setAccessToken, userInfo, setUserInfo, userToken, setUserToken, userId, setUserId] = useContext(LoginContext)
 
-    const carouselRef = useRef(null);
-    const { width: screenWidth } = Dimensions.get('window');
-    const goForward = () => {
-        carouselRef.current.snapToNext();
-    };
     const renderItem = ({ item, index }) => {
         return (
             <View style={styles.item}>
@@ -29,23 +23,16 @@ const RestaurantContainer = ({ data, navigation }) => {
                     containerStyle={styles.imageContainer}
                     style={styles.image}
                     alt="ok"
-
-
                 />
-
             </View>
         );
     };
-
-    // break
 
     // States for the info/reviews toggle
     const [info, setInfo] = useState(true);
     const [reviews, setReviews] = useState(false);
     const [details, setDetails] = useState();
 
-    const [variant, setVariant] = useState("ghost");
-    const [cVariant, setCVariant] = useState("ghost");
     // state for photos carousel 
     const [photos, setPhotos] = useState([]);
     const [restaurantDetails, setRestaurantDetails] = useState({})
@@ -62,7 +49,6 @@ const RestaurantContainer = ({ data, navigation }) => {
             })
     }
 
-
     useEffect(() => {
         setRestaurantDetails({
             name: restaurant.name,
@@ -75,7 +61,6 @@ const RestaurantContainer = ({ data, navigation }) => {
     }, [photos])
 
     const restaurant = data.restaurant
-    const photoRef = restaurant?.photos[0]?.photo_reference
     const priceLevel = restaurant?.price_level
     let priceRating
 
@@ -138,21 +123,11 @@ const RestaurantContainer = ({ data, navigation }) => {
                 />}
 
                 <VStack space={0} py={1} px={1}>
-                    {/* <Image
-                        source={{
-                            uri: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoRef}&key=${API_KEY}`
-            }}
-            alt={restaurant.name}
-            resizeMode="contain"
-            height={250}
-            roundedTop="lg"
-        /> */}
                     <HStack p={6} pb={3}>
                         <Heading size='xl' mr="60px">
                             {restaurant.name}
                         </Heading>
                         <Button size="sm" mr={-2} ml={'auto'} style={styles.button} >
-                            {/* <SvgUri source={require('../assets/star.svg')} /> */}
                             <HStack>
                                 <StarIcon color="white" />
                                 <Text color="white" fontSize={14} ml={2} mr={2}>{restaurant.rating}</Text>
@@ -162,14 +137,12 @@ const RestaurantContainer = ({ data, navigation }) => {
                     <Divider />
                     <HStack space={20} pt={5} pl={8}>
                         <HStack >
-                            {/* <SvgUri source={require('../assets/ForkKnife.svg')} /> */}
                             <ForkKnife />
                             <Text ml="2">
                                 Multiple
                             </Text>
                         </HStack>
                         <HStack ml={10} >
-                            {/* <SvgUri source={require('../assets/CurrencyCircleDollar.svg')} /> */}
                             <CurrencyCircleDollar />
                             <Text ml="2">
                                 {priceRating}
@@ -177,7 +150,6 @@ const RestaurantContainer = ({ data, navigation }) => {
                         </HStack>
                     </HStack>
                     <HStack pt={2} pl={8} mb={2}>
-                        {/* <SvgUri source={require('../assets/Location.svg')} /> */}
                         <LocationIcon />
                         <Text ml="2">
                             {restaurant.vicinity}
@@ -185,10 +157,6 @@ const RestaurantContainer = ({ data, navigation }) => {
                     </HStack>
                     <Divider />
 
-
-                    {/* <Button.Group  size="md" m='auto' mb={2} mt={4} colorScheme='green.300.'>
-                    <HStack  m='auto' mt={2}><Button size="lg" mr={50} colorScheme='rgba(188, 71, 73, 1)' variant={variant} onPress={() => { setInfo(true); setReviews(false);  }}>Info</Button><Button size="lg" colorScheme='rgba(188, 71, 73, 1)'variant={cVariant} onPress={() => { setInfo(false); setReviews(true);  }} >Reviews</Button></HStack>
-                    </Button.Group> */}
                     <HStack mt={4}>
                         <View style={info && styles.under}>
                             <Text mb={4} style={info ? styles.selected : styles.unselected} onPress={() => { setInfo(true); setReviews(false); }} mr={20} fontSize="lg" ml={20}>Info</Text>

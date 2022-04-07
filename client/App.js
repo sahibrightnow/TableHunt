@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar'
 import { NativeBaseProvider, extendTheme } from 'native-base'
 import AppStack from './src/components/stacks/AppStack'
 import AppLoading from 'expo-app-loading'
@@ -28,13 +27,6 @@ export const fontsContext = createContext();
 
 const App = () => {
 
-  // Color Palette
-  // black = #14110F
-  // singletons.white = #FFFFFF
-
-  // Rename Primary.50 in Color pallette to light.50
-  // Primary.50 = #f4f2f0
-
   let [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_500Medium,
@@ -50,7 +42,6 @@ const App = () => {
     colors: {
       singletons: {
         black: '#14110F',
-        // white: "#FFFFFF",
       },
       gray: {
         50: '#c5cad4',
@@ -112,7 +103,6 @@ const App = () => {
           <AppStack />
         </LoginProvider>
       </fontsContext.Provider>
-      {/* <StatusBar style="light" /> */}
     </NativeBaseProvider>
   )
 }

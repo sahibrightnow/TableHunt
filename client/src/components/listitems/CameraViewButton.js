@@ -1,4 +1,4 @@
-import { Button, useDisclose, Actionsheet, View, Modal, VStack, HStack, Text, Image } from 'native-base';
+import { Button, View, Modal, Image } from 'native-base';
 import CameraIconComponent from '../assets/iconComponents/CameraIcon';
 import React, { useState } from 'react';
 

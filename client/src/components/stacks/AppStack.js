@@ -45,8 +45,6 @@ const TabStack = () => (
       options={{
         ...tabScreenOptions,
         tabBarIcon: ({ focused, color, size }) => (
-          // <SvgUri source={require('../assets/nav_icons/homeIcon.svg')}
-          //   fill={focused ? navColors.primary : navColors.secondary} />
           <HomeIcon color={focused ? navColors.primary : navColors.secondary} />
         ),
       }}
@@ -57,8 +55,6 @@ const TabStack = () => (
       options={{
         ...tabScreenOptions,
         tabBarIcon: ({ focused, color, size }) => (
-          // <SvgUri source={require('../assets/nav_icons/searchIcon.svg')}
-          //   fill={focused ? navColors.primary : navColors.secondary} />
           <SearchIcon color={focused ? navColors.primary : navColors.secondary} />
         ),
       }}
@@ -69,8 +65,6 @@ const TabStack = () => (
       options={{
         ...tabScreenOptions,
         tabBarIcon: ({ focused, color, size }) => (
-          // <SvgUri source={require('../assets/nav_icons/bookingsIcon.svg')}
-          //   fill={focused ? navColors.primary : navColors.secondary} />
           <BookingsIcon color={focused ? navColors.primary : navColors.secondary} />
         ),
       }}
@@ -81,9 +75,6 @@ const TabStack = () => (
       options={{
         ...tabScreenOptions,
         tabBarIcon: ({ focused, color, size }) => (
-          // <SvgUri
-          //   source={require('../assets/nav_icons/profileIcon.svg')}
-          //   fill={focused ? navColors.primary : navColors.secondary} />
           <ProfileIcon color={focused ? navColors.primary : navColors.secondary} />
         ),
       }}

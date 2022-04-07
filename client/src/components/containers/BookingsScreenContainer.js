@@ -1,4 +1,4 @@
-import { Center, VStack } from "native-base";
+import { VStack } from "native-base";
 import React from "react";
 import SelectingSeats from "../forms/SelectingSeats";
 

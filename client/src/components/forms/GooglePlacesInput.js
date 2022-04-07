@@ -36,15 +36,11 @@ const GooglePlacesInput = ({ location, setLocation, searchRestaurant, navigation
 
   return (
     <HStack
-      // pt={20}
-      // px={10}
       zIndex={2}
       position="absolute"
       top={20}
       left={10}
       right={10}
-    // bg="green.200"
-    // flex={1}
     >
       {searchRestaurant
         ?
@@ -102,7 +98,6 @@ const GooglePlacesInput = ({ location, setLocation, searchRestaurant, navigation
             useOnPlatform: 'web',
           }} // this in only required for use on the web. See https://git.io/JflFv more for details.
           enablePoweredByContainer={false}
-
         />
       }
     </HStack>

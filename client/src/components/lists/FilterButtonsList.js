@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { View, Button, useDisclose, Heading, Actionsheet, Box, Text, Slider } from 'native-base'
-import { MaterialIcons } from '@expo/vector-icons'
 import RadioButton from '../listitems/RadioButton'
 import FilterListIcon from '../assets/iconComponents/FilterListIcon'
 

@@ -67,7 +67,6 @@ const TableMap = ({ tableOption, setTableOption }) => {
                         >
                         </Box>
                     </Pressable>
-                    {/* <Checkbox value="table1" colorScheme="success" accessibilityLabel="This is table 1" mx="2" style={styles.checkbox1} checkboxTickColor="success.700" /> */}
                     <Chair />
                 </HStack>
                 {/* End of table 1 */}
@@ -90,7 +89,6 @@ const TableMap = ({ tableOption, setTableOption }) => {
                         >
                         </Box>
                     </Pressable>
-                    {/* <Checkbox value="table2" colorScheme="success" accessibilityLabel="This is table 2" my="2" style={styles.checkbox1} /> */}
                     <HStack display="flex" justifyContent="center">
                         <View mr="2" >
                             <Chair />
@@ -121,7 +119,6 @@ const TableMap = ({ tableOption, setTableOption }) => {
                         >
                         </Box>
                     </Pressable>
-                    {/* <Checkbox value="table3" colorScheme="success" accessibilityLabel="This is table 3" my="2" style={styles.checkbox2} /> */}
                     <HStack display="flex" justifyContent="center">
                         <View mr="2" >
                             <Chair />
@@ -152,7 +149,6 @@ const TableMap = ({ tableOption, setTableOption }) => {
                         >
                         </Box>
                     </Pressable>
-                    {/* <Checkbox value="table4" colorScheme="success" accessibilityLabel="This is table 4" style={styles.checkbox3} /> */}
                     <VStack display="flex" ml="2" >
                         <View mb="2" >
                             <Chair />
@@ -180,7 +176,6 @@ const TableMap = ({ tableOption, setTableOption }) => {
                         >
                         </Box>
                     </Pressable>
-                    {/* <Checkbox value="table5" colorScheme="success" accessibilityLabel="This is table 5" my="2" style={styles.checkbox3} /> */}
                     <HStack display="flex" justifyContent="center">
                         <Chair />
 
@@ -202,7 +197,6 @@ const TableMap = ({ tableOption, setTableOption }) => {
                         >
                         </Box>
                     </Pressable>
-                    {/* <Checkbox value="table6" colorScheme="success" accessibilityLabel="This is table 6" my="2" style={styles.checkbox3} /> */}
                     <HStack display="flex" justifyContent="center">
                         <Chair />
 
@@ -235,7 +229,6 @@ const TableMap = ({ tableOption, setTableOption }) => {
                             >
                             </Box>
                         </Pressable>
-                        {/* <Checkbox value="table7" colorScheme="success" accessibilityLabel="This is table 7" my="2" style={styles.checkbox3} /> */}
                         <HStack display="flex" justifyContent="center">
                             <Chair />
 
@@ -261,7 +254,6 @@ const TableMap = ({ tableOption, setTableOption }) => {
                         >
                         </Box>
                     </Pressable>
-                    {/* <Checkbox value="table8" colorScheme="success" accessibilityLabel="This is table 8" my="2" style={styles.checkbox1} /> */}
                     <HStack display="flex" justifyContent="center">
                         <View mr="2" >
                             <Chair />

@@ -6,23 +6,7 @@ import axios from 'axios'
 import { API_KEY } from 'react-native-dotenv'
 import * as Location from 'expo-location'
 
-// import AppLoading from 'expo-app-loading';
-
-// import {
-//   useFonts,
-//   Poppins_400Regular,
-//   Poppins_500Medium,
-//   Poppins_600SemiBold,
-//   Poppins_700Bold,
-// } from '@expo-google-fonts/poppins';
-
 const HomeScreenContainer = ({ navigation }) => {
-  // let [fontsLoaded] = useFonts({ Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold, Poppins_700Bold });
-
-  // if (!fontsLoaded) {
-  //   return <AppLoading />;
-  // }
-
   // NEARBY PLACES
   const [nearbyPlaces, setNearbyPlaces] = useState([])
   const [location, setLocation] = useState()

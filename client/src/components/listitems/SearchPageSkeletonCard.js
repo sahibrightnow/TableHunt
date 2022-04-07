@@ -8,7 +8,7 @@ const SearchPageSkeletonCard = () => {
             }} _light={{
                 borderColor: "coolGray.300"
             }} p="2">
-                <Skeleton flex="1" h="145" rounded="md" startColor="coolGray.300" />
+                <Skeleton flex="1" w='160' h="145" rounded="md" startColor="coolGray.300" />
                 <VStack space="2" flex="2">
                     <Skeleton h="6" rounded="full" />
                     <Skeleton.Text />

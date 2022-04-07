@@ -1,5 +1,4 @@
 import { Box, Heading, Divider, Image, Text, HStack, Stack, VStack, View, Pressable, ScrollView, Button } from "native-base"
-import SvgUri from 'react-native-svg-uri'
 import DatePickerIcon from '../assets/iconComponents/DatePickerIcon'
 import PersonIcon from '../assets/iconComponents/PersonIcon'
 import VaccineCardIcon from '../assets/iconComponents/VaccineCardIcon'
@@ -38,22 +37,17 @@ const BookingCard = ({ data, navigation }) => {
 
                         <View display="flex" flexDirection="row" justifyContent="space-between" ml="1">
                             <View display="flex" flexDirection="row" alignItems="center">
-                                {/* <SvgUri source={require('../assets/person.svg')} /> */}
                                 <PersonIcon />
                                 <Text fontSize="15" color="gray.500" fontWeight="500" ml="2">
                                     {data.numberOfPeople}
                                 </Text>
                             </View>
                             <View display="flex" flexDirection="row" alignItems="center">
-                                {/* <SvgUri source={require('../assets/DatePickerIcon.svg')} /> */}
                                 <DatePickerIcon />
                                 <VStack>
                                     <Text fontSize="15" color="gray.500" fontWeight="500" ml="2">
                                         {data.bookingDate || new Date().toDateString()}, {data.bookingTime}
                                     </Text>
-                                    {/* <Text fontSize="15" color="gray.500" fontWeight="500" ml="2">
-                                        {data.bookingTime}
-                                    </Text> */}
                                 </VStack>
                             </View>
                         </View>
