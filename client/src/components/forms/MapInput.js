@@ -41,7 +41,8 @@ const MapInput = ({ navigation, nearbyPlaces, location, getLocation, mapRef }) =
             title={el.name}
             description={`${el.vicinity}`}
           >
-            <SvgUri source={require('../assets/locationMarker.svg')} />
+            <Image source={require('../assets/locationMarker.png')} style={{ height: 35, width: 28 }} />
+            {/* <SvgUri source={require('../assets/locationMarker.svg')} /> */}
           </MapView.Marker>
         ))
       }
