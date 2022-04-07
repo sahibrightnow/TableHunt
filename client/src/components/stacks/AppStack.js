@@ -13,6 +13,10 @@ import RestaurantOwnerScreen from '../screens/RestaurantOwnerScreen'
 import OwnerAuthentication from '../layout/OwnerAuthentication'
 import RestuarantBookings from '../screens/RestuarantBookings'
 import { LogBox } from 'react-native'
+import BookingsIcon from '../assets/iconComponents/bookingsIcon'
+import HomeIcon from '../assets/iconComponents/HomeIcon'
+import SearchIcon from '../assets/iconComponents/SearchIcon'
+import ProfileIcon from '../assets/iconComponents/ProfileIcon'
 
 const Tab = createBottomTabNavigator()
 
@@ -40,8 +44,9 @@ const TabStack = () => (
       options={{
         ...tabScreenOptions,
         tabBarIcon: ({ focused, color, size }) => (
-          <SvgUri source={require('../assets/nav_icons/homeIcon.svg')}
-            fill={focused ? navColors.primary : navColors.secondary} />
+          // <SvgUri source={require('../assets/nav_icons/homeIcon.svg')}
+          //   fill={focused ? navColors.primary : navColors.secondary} />
+          <HomeIcon color={focused ? navColors.primary : navColors.secondary} />
         ),
       }}
     />
@@ -51,8 +56,9 @@ const TabStack = () => (
       options={{
         ...tabScreenOptions,
         tabBarIcon: ({ focused, color, size }) => (
-          <SvgUri source={require('../assets/nav_icons/searchIcon.svg')}
-            fill={focused ? navColors.primary : navColors.secondary} />
+          // <SvgUri source={require('../assets/nav_icons/searchIcon.svg')}
+          //   fill={focused ? navColors.primary : navColors.secondary} />
+          <SearchIcon color={focused ? navColors.primary : navColors.secondary} />
         ),
       }}
     />
@@ -62,8 +68,9 @@ const TabStack = () => (
       options={{
         ...tabScreenOptions,
         tabBarIcon: ({ focused, color, size }) => (
-          <SvgUri source={require('../assets/nav_icons/bookingsIcon.svg')}
-            fill={focused ? navColors.primary : navColors.secondary} />
+          // <SvgUri source={require('../assets/nav_icons/bookingsIcon.svg')}
+          //   fill={focused ? navColors.primary : navColors.secondary} />
+          <BookingsIcon color={focused ? navColors.primary : navColors.secondary} />
         ),
       }}
     />
@@ -73,9 +80,10 @@ const TabStack = () => (
       options={{
         ...tabScreenOptions,
         tabBarIcon: ({ focused, color, size }) => (
-          <SvgUri
-            source={require('../assets/nav_icons/profileIcon.svg')}
-            fill={focused ? navColors.primary : navColors.secondary} />
+          // <SvgUri
+          //   source={require('../assets/nav_icons/profileIcon.svg')}
+          //   fill={focused ? navColors.primary : navColors.secondary} />
+          <ProfileIcon color={focused ? navColors.primary : navColors.secondary} />
         ),
       }}
     />
@@ -90,7 +98,8 @@ const OwnerScreen = () => (
       options={{
         headerShown: false,
         tabBarIcon: ({ focused, color, size }) => (
-          <SvgUri source={require('../assets/nav_icons/bookingsIcon.svg')} />
+          // <SvgUri source={require('../assets/nav_icons/bookingsIcon.svg')} />
+          <BookingsIcon />
         ),
       }}
     />
@@ -100,7 +109,8 @@ const OwnerScreen = () => (
       options={{
         headerShown: false,
         tabBarIcon: ({ focused, color, size }) => (
-          <SvgUri source={require('../assets/nav_icons/profileIcon.svg')} />
+          // <SvgUri source={require('../assets/nav_icons/profileIcon.svg')} />
+          <ProfileIcon />
         ),
       }}
     />

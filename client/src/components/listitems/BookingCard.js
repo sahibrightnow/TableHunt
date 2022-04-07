@@ -1,5 +1,8 @@
 import { Box, Heading, Divider, Image, Text, Center, HStack, Stack, VStack, View, Pressable, ScrollView } from "native-base"
 import SvgUri from 'react-native-svg-uri'
+import DatePickerIcon from '../assets/iconComponents/DatePickerIcon'
+import PersonIcon from '../assets/iconComponents/PersonIcon'
+import VaccineCardIcon from '../assets/iconComponents/VaccineCardIcon'
 
 const BookingCard = ({ data, navigation }) => {
     return (
@@ -26,13 +29,15 @@ const BookingCard = ({ data, navigation }) => {
                         <Text mt={-3} ml={-1} mb={2}>{data.vicinity}</Text>
                         <View display="flex" flexDirection="row" justifyContent="space-between" >
                             <View display="flex" flexDirection="row" alignItems="center">
-                                <SvgUri source={require('../assets/person.svg')} />
+                                {/* <SvgUri source={require('../assets/person.svg')} /> */}
+                                <PersonIcon />
                                 <Text fontSize="15" color="gray.500" fontWeight="500" ml="2">
                                     {data.numberOfPeople}
                                 </Text>
                             </View>
                             <View display="flex" flexDirection="row" alignItems="center">
-                                <SvgUri source={require('../assets/DatePickerIcon.svg')} />
+                                {/* <SvgUri source={require('../assets/DatePickerIcon.svg')} /> */}
+                                <DatePickerIcon />
                                 <VStack>
                                     <Text fontSize="15" color="gray.500" fontWeight="500" ml="2">
                                         {data.bookingDate || new Date().toDateString()}
@@ -63,9 +68,12 @@ const BookingCard = ({ data, navigation }) => {
                                 <ScrollView display="flex" flexDirection="row" horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {[...Array(data.numberOfPeople)].map((_, index) => (
                                         <Pressable mr="5" key={index}>
-                                            {data.vaccineCardImg && data.vaccineCardImg[index]
+                                            {/* {data.vaccineCardImg && data.vaccineCardImg[index]
                                                 ? <SvgUri source={require('../assets/vaccineCardSubmitted.svg')} height="50" width="26" alt="vaccineCardSubmitted" />
-                                                : <SvgUri source={require('../assets/vaccineCardNotSubmitted.svg')} height="50" width="26" alt="vaccineCardNotSubmitted" />}
+                                                : <SvgUri source={require('../assets/vaccineCardNotSubmitted.svg')} height="50" width="26" alt="vaccineCardNotSubmitted" />} */}
+                                            {data.vaccineCardImg && data.vaccineCardImg[index]
+                                                ? <VaccineCardIcon height="50" width="26" color="#6A994E" />
+                                                : <VaccineCardIcon height="50" width="26" color="#9CA3AF" />}
                                         </Pressable>
                                     )
                                     )}

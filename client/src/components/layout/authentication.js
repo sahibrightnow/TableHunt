@@ -10,7 +10,8 @@ import SvgUri from 'react-native-svg-uri'
 import { LoginContext } from '../context/LoginContext'
 import axios from 'axios'
 import { SERVER } from 'react-native-dotenv'
-
+import AppIconComponent from '../assets/iconComponents/AppIcon'
+import GoogleLogo from '../assets/iconComponents/GoogleLogo';
 
 const Authentication = () => {
 
@@ -83,7 +84,8 @@ const Authentication = () => {
           {showUserInfo()}
           {/* <Heading style={styles.tableHunt} ml={'auto'} mr={'auto'} mt={'100px'}>Table Hunt</Heading> */}
           <Stack alignItems="center" style={styles.tableHunt} mt={'100px'} mb={'20'} >
-            <SvgUri source={require('../assets/app_logo.svg')} />
+            {/* <SvgUri source={require('../assets/app_logo.svg')} /> */}
+            <AppIconComponent />
           </Stack>
           <Text bold style={styles.subheading} noOfLines={3}>Find your seating in seconds for your next occasion</Text>
           <Text style={styles.subtitle}>You signup, We reserve. Quick!</Text>
@@ -91,7 +93,8 @@ const Authentication = () => {
           <Button style={styles.button} borderRadius={8} width='100%' mt='5' onPress={() => signInWithGoogleAsync()} alignItems='center'>
             <HStack space={2}>
               {/* <MaterialCommunityIcons name="google" size={26} color="green" /> */}
-              <SvgUri source={require('../assets/google_logo.svg')} />
+              {/* <SvgUri source={require('../assets/google_logo.svg')} /> */}
+              <GoogleLogo />
               <Center>
                 <Text>{accessToken ? "Logging in..." : "Sign Up with Google"}</Text>
               </Center>

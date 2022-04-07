@@ -14,6 +14,8 @@ import { SERVER } from 'react-native-dotenv'
 import React, { useState, useEffect, useContext } from 'react'
 import { LoginContext } from '../context/LoginContext'
 import CameraViewButton from '../listitems/CameraViewButton'
+import DatePickerIcon from '../assets/iconComponents/DatePickerIcon'
+import PeopleIcon from '../assets/iconComponents/PeopleIcon'
 
 const SelecingSeats = ({ data, navigation }) => {
     const [accessToken, setAccessToken, userInfo, setUserInfo, userToken, setUserToken, userId, setUserId] = useContext(LoginContext)
@@ -195,7 +197,8 @@ const SelecingSeats = ({ data, navigation }) => {
                                 }} _light={{
                                     backgroundColor: "#FFF"
                                 }}>
-                                <SvgUri source={require('../assets/PersonIcon.svg')} height="50" width="26" />
+                                {/* <SvgUri source={require('../assets/PersonIcon.svg')} height="50" width="26" /> */}
+                                <PeopleIcon height="50" width="26" />
                                 <View ml="2" mb={0}>
                                     <Text fontSize="18" ml="2" mt="-1" mb="-1">Booking for</Text>
                                     <View ml="-2" mb={-3}>
@@ -251,7 +254,7 @@ const SelecingSeats = ({ data, navigation }) => {
                                     backgroundColor: "#FFF"
                                 }}>
                                 <ModalDatePicker
-                                    button={<SvgUri source={require('../assets/DatePickerIcon.svg')} height="50" width="25" />}
+                                    button={<DatePickerIcon />}
                                     locale="en"
                                     onSelect={(date) => {
                                         // console.log("date selected", date.toDateString());

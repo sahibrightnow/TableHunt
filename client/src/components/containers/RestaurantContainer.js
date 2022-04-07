@@ -8,6 +8,10 @@ import { Rating } from "react-native-ratings"
 import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
 import { LoginContext } from '../context/LoginContext'
 import logoutUser from "../context/logoutUser";
+import CurrencyCircleDollar from '../assets/iconComponents/CurrencyCircleDollar'
+import ForkKnife from '../assets/iconComponents/ForkKnifeIcon'
+import LocationIcon from '../assets/iconComponents/LocationIcon'
+import StarIcon from "../assets/iconComponents/StarIcon";
 
 const RestaurantContainer = ({ data, navigation }) => {
     const [accessToken, setAccessToken, userInfo, setUserInfo, userToken, setUserToken, userId, setUserId] = useContext(LoginContext)
@@ -123,7 +127,8 @@ const RestaurantContainer = ({ data, navigation }) => {
                         {restaurant.name}
                     </Heading>
                     <Heading size="sm" mr="0" ml="auto">
-                        <SvgUri source={require('../assets/star.svg')} />
+                        {/* <SvgUri source={require('../assets/star.svg')} /> */}
+                        <StarIcon />
                         {restaurant.rating}
                     </Heading>
                 </HStack>
@@ -131,13 +136,15 @@ const RestaurantContainer = ({ data, navigation }) => {
 
                 <HStack space={20} pt={5} pl={8}>
                     <HStack >
-                        <SvgUri source={require('../assets/ForkKnife.svg')} />
+                        {/* <SvgUri source={require('../assets/ForkKnife.svg')} /> */}
+                        <ForkKnife />
                         <Text>
                             Multiple
                         </Text>
                     </HStack>
                     <HStack >
-                        <SvgUri source={require('../assets/CurrencyCircleDollar.svg')} />
+                        {/* <SvgUri source={require('../assets/CurrencyCircleDollar.svg')} /> */}
+                        <CurrencyCircleDollar />
                         <Text>
                             {priceRating}
                         </Text>
@@ -145,7 +152,8 @@ const RestaurantContainer = ({ data, navigation }) => {
                 </HStack>
 
                 <HStack pt={2} pl={8} mb={2}>
-                    <SvgUri source={require('../assets/Location.svg')} />
+                    {/* <SvgUri source={require('../assets/Location.svg')} /> */}
+                    <LocationIcon />
                     <Text>
                         {restaurant.vicinity}
                     </Text>
