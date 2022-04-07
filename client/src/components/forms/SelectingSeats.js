@@ -95,11 +95,12 @@ const SelecingSeats = ({ data, navigation }) => {
             vicinity: data.restaurantDetails.vicinity,
             specialRequests: request,
             extraNotes: notes,
-            time: Math.floor(new Date(`${selectedDate} ${timing}`).getTime() / 1000)
+            time: Math.floor(new Date(`${selectedDate} ${timing}`).getTime() / 1000),
+            vaccineProof: vaccineCardImg.filter(el => el !== undefined)
         });
         setDataLoaded(true);
     },
-        [selectedNumOfPeople, selectedDate, timing, request, notes, tableOption])
+        [selectedNumOfPeople, selectedDate, timing, request, notes, tableOption, vaccineCardImg])
 
     // function to pick an image
     const pickImage = async (index) => {
@@ -312,14 +313,11 @@ const SelecingSeats = ({ data, navigation }) => {
                             {dataLoaded && timing
                                 ? <Button w="330" size="lg" variant="outline" bgColor='danger.300' borderColor="#924344"
                                     onPress={() => {
+                                        console.log("VACCINE", vaccineCardImg)
                                         createReservation();
                                         setTimeout(() => {
                                             navigation.navigate("Reservations", { ...reservationDetails, vaccineCardImg });
                                         }, 500);
-                                        // const time =
-                                        // const unixTime = Math.floor(new Date(`${selectedDate} ${timing}`).getTime() / 1000)
-                                        // console.log("TIME", unixTime);
-
                                     }}
                                 >
                                     <Text color="#FFFFFF" fontSize="16px" py="1" >CONFIRM BOOKING</Text>

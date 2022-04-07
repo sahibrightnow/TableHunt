@@ -61,19 +61,14 @@ const BookingCard = ({ data, navigation }) => {
 
                                 </Text>
                             </VStack>
-                            <VStack maxWidth="50%" >
-                                <Heading size="sm" mb="-1">
+                            <VStack maxWidth="50%">
+                                <Heading size="sm" mb="2">
                                     Vaccine Proof
                                 </Heading>
                                 <ScrollView display="flex" flexDirection="row" horizontal={true} showsHorizontalScrollIndicator={false} >
-                                    {[...Array(data.numberOfPeople)].map((_, index) => (
+                                    {(data.vaccineProof).map((_, index) => (
                                         <Pressable mr="5" key={index}>
-                                            {/* {data.vaccineCardImg && data.vaccineCardImg[index]
-                                                ? <SvgUri source={require('../assets/vaccineCardSubmitted.svg')} height="50" width="26" alt="vaccineCardSubmitted" />
-                                                : <SvgUri source={require('../assets/vaccineCardNotSubmitted.svg')} height="50" width="26" alt="vaccineCardNotSubmitted" />} */}
-                                            {data.vaccineCardImg && data.vaccineCardImg[index]
-                                                ? <VaccineCardIcon height="50" width="26" color="#6A994E" />
-                                                : <VaccineCardIcon height="50" width="26" color="#9CA3AF" />}
+                                            <VaccineCardIcon height="50" width="26" color="#6A994E" />
                                         </Pressable>
                                     )
                                     )}
