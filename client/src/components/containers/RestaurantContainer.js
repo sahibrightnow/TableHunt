@@ -125,9 +125,9 @@ const RestaurantContainer = ({ data, navigation }) => {
     );
 
     return (
-        <View>
+        <View >
 
-            <ScrollView >
+            <ScrollView bgColor="#ffffff" >
                 {photos != [] && <FlatList
                     data={photos}
                     renderItem={renderItem}
@@ -209,10 +209,10 @@ const RestaurantContainer = ({ data, navigation }) => {
                     <Center pt={10}>.
 
                     </Center>
-                    {reviews && <VStack ml={5} mr={5} mt={-8} mb={20} >
+                    {reviews && <VStack  ml={5} mr={5} mt={-8} mb={20} >
                         <Text style={styles.heading}>{restaurant?.user_ratings_total} Reviews </Text>
                         {details?.reviews.sort((a, b) => b.time - a.time).map((el, index) => <Box mt={5} key={index}>
-                            <HStack>
+                            <HStack >
                                 <Image
                                     source={{
                                         uri: el.profile_photo_url
