@@ -53,7 +53,9 @@ const ProfileScreenContainer = ({ navigation }) => {
           <VStack style={styles.options} width='100%'>
             <HStack >
               <Text onPress={() => {
-                navigation.navigate("Account Settings")
+                navigation.navigate("Account Settings", {
+                  userInfo: userInfo
+                })
               }} fontSize="xl" fontWeight="light" mt={1}>Account Settings</Text>
               <ChevronRightIcon ml="auto" />
             </HStack>
@@ -88,7 +90,7 @@ const styles = StyleSheet.create({
   },
   text: {
     marginTop: 20,
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold'
   },
   options: {

@@ -5,6 +5,7 @@ import AppLoading from 'expo-app-loading'
 import { StyleSheet } from 'react-native'
 import React from 'react'
 import { LoginProvider } from './src/components/context/LoginContext'
+import { createContext } from "react";
 
 import {
   useFonts,
@@ -22,6 +23,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 })
+
+export const fontsContext = createContext();
 
 const App = () => {
 
@@ -76,32 +79,39 @@ const App = () => {
     },
 
     // Fonts
-    // fontConfig: {
-    //   Poppins: {
-    //     100: {
-    //       normal: Poppins_400Regular,
-    //     },
-    //     200: {
-    //       normal: Poppins_500Medium,
-    //     },
-    //     300: {
-    //       normal: Poppins_600SemiBold,
-    //     },
-    //     400: {
-    //       normal: Poppins_700Bold,
-    //     },
-    //   },
-    // },
-    // fonts: {
-    //   body: 'Poppins'
-    // },
+    fontConfig: {
+      Poppins: {
+        100: {
+          normal: "Poppins_400Regular",
+          italic: "",
+        },
+        200: {
+          normal: "Poppins_500Medium",
+          italic: "",
+        },
+        300: {
+          normal: "Poppins_600SemiBold",
+          italic: "",
+        },
+        400: {
+          normal: "Poppins_700Bold",
+          italic: "",
+        },
+      },
+    },
+    fonts: {
+      body: 'Poppins_500Medium',
+      head: 'Poppins_600SemiBold',
+    },
   })
 
   return (
     <NativeBaseProvider theme={theme}>
-      <LoginProvider>
-        <AppStack />
-      </LoginProvider>
+      <fontsContext.Provider value={fontsContext}>
+        <LoginProvider>
+          <AppStack />
+        </LoginProvider>
+      </fontsContext.Provider>
       {/* <StatusBar style="light" /> */}
     </NativeBaseProvider>
   )

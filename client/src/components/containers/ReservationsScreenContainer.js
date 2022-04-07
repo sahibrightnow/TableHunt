@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import BookingCard from '../listitems/BookingCard'
-import { Heading, Center, Text, HStack, ScrollView, VStack, Spinner } from "native-base"
+import { Heading, Center, Text, HStack, ScrollView, VStack, Spinner, Box } from "native-base"
 import { REACT_APP_SERVER } from 'react-native-dotenv'
 import { LoginContext } from '../context/LoginContext'
 
@@ -35,18 +35,20 @@ const ReservationsScreenContainer = ({ navigation, data }) => {
 
     return (
         <VStack bgColor="white" height="100%" >
-            <Heading size="xl" mt="20" ml="6" color="danger.300" bold>
-                Your Reservations
+            <Heading size="lg" mt="20" ml="7" >
+                Booking list
             </Heading>
-            <Text fontSize={20} fontWeight="bold" color="gray.500" ml="6" mt="5" mb={2}>Upcoming</Text>
+            <Text fontSize={18} fontWeight="bold" color="gray.500" ml="7" mt="5" mb={2}>Upcoming</Text>
 
             {isLoaded ?
                 <ScrollView vertical={true} w={380}
                     showsVerticalScrollIndicator={false}>
-                    <VStack space={2} mb={4}>
+                    <VStack space={2} mb={4} display="flex" alignItems="center" justifyContent="center">
                         {bookings.length > 0
                             ? bookings.sort((a, b) => a.time - b.time).map((el, index) => (
-                                <BookingCard data={el} key={index} />
+                                <Box shadow={5} rounded="lg" w="88%" ml="2" >
+                                    <BookingCard data={el} key={index} />
+                                </Box>
                             ))
                             : <Center fontSize={14} mt={250}>No Reservations</Center>}
                     </VStack>
@@ -59,7 +61,7 @@ const ReservationsScreenContainer = ({ navigation, data }) => {
                     </Heading>
                 </HStack>
             }
-        </VStack >
+        </VStack>
     );
 };
 

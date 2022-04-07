@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { View, Button, useDisclose, Heading, Actionsheet, Box, Text, Slider } from 'native-base'
 import { MaterialIcons } from '@expo/vector-icons'
 import RadioButton from '../listitems/RadioButton'
+import FilterListIcon from '../assets/iconComponents/FilterListIcon'
 
 
 const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, setRating, rating, setPriceFilter, priceFilter }) => {
@@ -24,8 +25,9 @@ const FilterButtonsList = ({ totalMatchedRestaurants, isLoaded, setMapRadius, se
     return (
         <View display={'flex'} justifyContent="space-between" flexDirection={'row'}>
             <Heading size="md" pt={'3px'}> {isLoaded && totalMatchedRestaurants > 0 ? `${totalMatchedRestaurants} Restaurants found` : message}</Heading>
-            <Button bgColor="danger.300" mr={1} h={'34px'} onPress={onOpen} w={12} alignItems="flex-end">
-                <MaterialIcons name="filter-list" size={20} color="white" />
+            <Button bgColor="danger.300" mr={1} h={'34px'} onPress={onOpen} w={12} pt={4} pl={5}>
+                {/* <MaterialIcons name="filter-list" size={20} color="white" /> */}
+                <FilterListIcon height="20" width="26" />
             </Button>
 
             <Actionsheet isOpen={isOpen} onClose={onClose} hideDragIndicator >
