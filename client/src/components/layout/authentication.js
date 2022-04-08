@@ -25,7 +25,7 @@ const Authentication = () => {
 
       if (result.type === "success") {
         setAccessToken(result.accessToken);
-        axios.post(`https://tablehunt.herokuapp.com/api/v1/consumers`, {
+        axios.post(`https://harman.wmdd4950.com/tablehunt/api/v1/consumers`, {
           username: result.user.name,
           email: result.user.email,
           image: result.user.photoUrl

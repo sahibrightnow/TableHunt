@@ -113,7 +113,7 @@ const SelecingSeats = ({ data, navigation }) => {
     };
 
     const createReservation = () => {
-        axios.post(`https://tablehunt.herokuapp.com/api/v1/reservations`, { ...reservationDetails, userId: userId }, {
+        axios.post(`https://harman.wmdd4950.com/tablehunt/api/v1/reservations`, { ...reservationDetails, userId: userId }, {
             headers: { 'Authorization': userToken }
         })
             .then(res => console.log("Reservation successful"))

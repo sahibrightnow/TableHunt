@@ -10,7 +10,7 @@ const ReservationsScreenContainer = ({ navigation, data }) => {
     const [isLoaded, setIsLoaded] = useState(false)
 
     const getAllReservations = () => {
-        axios.get(`http://tablehunt.herokuapp.com/api/v1/reservations/list?userId=${userId}`,
+        axios.get(`https://harman.wmdd4950.com/tablehunt/api/v1/reservations/list?userId=${userId}`,
             {
                 headers: { 'Authorization': userToken }
             })
