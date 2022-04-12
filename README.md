@@ -4,20 +4,21 @@ Table hunt is an app that helps you to discover nearby restaurants and reserve y
 An app is developed in a team of 6 members - 3 developers and 3 designers - over a period of 12 weeks!
 
 ## Tech-Stack
-1. React Native( using EXPO ), ReactJS
-2. Google Map Platform APIs
-3. Google OAuth
-4. NodeJS, ExpressJS for server
-5. MongoDB as database
-6. Amazon EC2 for hosting our server
+1. React Native(using Expo), ReactJS
+2. Native Base for Styling
+3. Google Map Platform APIs
+4. Google OAuth using Implicit Grant Flow
+5. NodeJS, ExpressJS for Server
+6. MongoDB as Database
+7. Amazon EC2 for hosting our server
 
 ## FEATURES
-1. Home Page -> Search your nearby restauarnts or by your preferred location, filter results based on preferences
-2. Search Page -> Seacrh & book your favorite restaurant, or search restauarnts by cuisine, based on your current location
-3. Restaurant Details Page -> See the restaurant's ratings and review, its location and images of the restaurant
-4. Bookings Page -> Get a bird's eye view of a restaurant's seating, select your favorite spot, and upload your vaccine proof (if applicable)
-5. Reservations Page -> Get list of your upcoming reservations, or cancel as per desired
-6. Profile Page -> Manage your account settings, save your special requests to be sent to the restaurants
+1. #### Home Page --> Search your nearby restaurants or by your preferred location, filter results based on preferences
+2. #### Search Page --> Seacrh & book your favorite restaurant, or search restauarnts by cuisine, based on your current location
+3. #### Restaurant Details Page --> See the restaurant's ratings and review, its location and images of the restaurant
+4. #### Bookings Page --> Get a bird's eye view of a restaurant's seating, select your favorite spot, and upload your vaccine proof (if applicable)
+5. #### Reservations Page --> Get list of your upcoming reservations, or cancel as per desired
+6. #### Profile Page --> Manage your account settings, save your special requests to be sent to the restaurants
 
 ### SCREENSHOTS OF THE APP
 
