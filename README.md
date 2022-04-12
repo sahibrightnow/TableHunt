@@ -1,6 +1,8 @@
 # TABLE HUNT
 
 Table hunt is an app that helps you to discover nearby restaurants and reserve your preferred sitting spot for your next occasion. It also allows the users to pre-upload their vaccine proof in order to avoid long queues outside the restaurants.
+<br />
+<br />
 This app was developed in a team of 6 members - 3 developers and 3 designers - over a period of 12 weeks!
 
 ## Tech-Stack
@@ -62,7 +64,3 @@ This app was developed in a team of 6 members - 3 developers and 3 designers - o
 
 <img src="https://user-images.githubusercontent.com/46571445/162880885-75f805b0-93d8-424d-bcd5-53a4156e46a0.png" width="330" height="700">&nbsp;&nbsp;<img src="https://user-images.githubusercontent.com/46571445/162880956-5bd62e7b-93f0-4702-ba70-786c6a416595.png" width="330" height="700">
  <br />
-
-
-
- 
