@@ -41,8 +41,11 @@ const RestaurantContainer = ({ data, navigation }) => {
     const createRestaurant = async () => {
         try {
             const res = await fetchCreateRestaurant(restaurantDetails, userToken);
-            if (res?.data)
+            if (res?.data?.status == 'AUTH FAILED')
+                logoutUser()
+            else {
                 console.log(res.data.message)
+            }
         }
         catch (error) {
             console.log('Error in creating restaurant', error);
@@ -55,6 +58,7 @@ const RestaurantContainer = ({ data, navigation }) => {
             vicinity: restaurant.vicinity,
             rating: restaurant.rating,
             place_id: restaurant.place_id,
+            phoneNumber: details?.formatted_phone_number || 'Not Available',
             lat: restaurant.geometry.location.lat,
             lng: restaurant.geometry.location.lng,
         });

@@ -11,6 +11,7 @@ const reservationSchema = new Schema(
         bookingTime: { type: String, maxLength: 100, required: true },
         tableNumber: { type: String, maxLength: 100, required: true },
         restaurantName: { type: String, maxLength: 100, required: true },
+        restaurantPhoneNumber: { type: String, maxLength: 100 },
         vicinity: { type: String, maxLength: 100, required: true },
         specialRequests: { type: String, maxLength: 100, default: '' },
         extraNotes: { type: String, maxLength: 2000, default: '' },

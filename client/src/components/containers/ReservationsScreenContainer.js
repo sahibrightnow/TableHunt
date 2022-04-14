@@ -20,7 +20,7 @@ const ReservationsScreenContainer = ({ navigation, data }) => {
             }
         }
         catch (error) {
-            console.log("error in fetching reservations", error)
+            console.log("error in fetching user reservations", error)
         }
     }
 

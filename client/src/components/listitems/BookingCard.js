@@ -1,19 +1,19 @@
 import { Box, Heading, Divider, Image, Text, HStack, Stack, VStack, View, Pressable, ScrollView, Button } from "native-base"
 import DatePickerIcon from '../assets/iconComponents/DatePickerIcon'
 import React, { useContext } from 'react'
+import { LoginContext } from "../context/LoginContext";
 import PersonIcon from '../assets/iconComponents/PersonIcon'
 import VaccineCardIcon from '../assets/iconComponents/VaccineCardIcon'
 import LocationIcon from '../assets/iconComponents/LocationIcon'
-import { Alert } from 'react-native';
-import { LoginContext } from "../context/LoginContext";
-import { fetchRemoveReservation } from '../../api'
+import { Alert, Linking } from 'react-native';
+import { fetchCancelReservation } from '../../api'
 
 const BookingCard = ({ data, navigation, getAllReservations }) => {
     const [accessToken, setAccessToken, userToken, setUserToken, userId, setUserId] = useContext(LoginContext)
 
     const removeReservation = async () => {
         try {
-            const res = await fetchRemoveReservation({ reservationId: data._id });
+            const res = await fetchCancelReservation({ reservationId: data._id }, userToken);
             if (res?.data?.status == 'AUTH FAILED')
                 logoutUser()
             else {
@@ -124,7 +124,7 @@ const BookingCard = ({ data, navigation, getAllReservations }) => {
                             </VStack>
                         </HStack>
                         <HStack display="flex" justifyContent="space-around" alignItems="center" mb="1">
-                            <Button bgColor={'green.300'} px="3">
+                            <Button bgColor={'green.300'} px="3" onPress={() => Linking.openURL(`tel:${data.restaurantPhoneNumber}`)}>
                                 Call Restaurant
                             </Button>
                             <Button w="120" variant="outline" colorScheme='rgba(188, 71, 73, 1)' style={
@@ -145,7 +145,7 @@ const BookingCard = ({ data, navigation, getAllReservations }) => {
                     </Stack>
                 </Stack>
             </View>
-        </Box>
+        </Box >
 
     )
 };

@@ -81,6 +81,7 @@ const SelecingSeats = ({ data, navigation }) => {
             bookingTime: timing,
             tableNumber: tableOption,
             restaurantName: data.restaurantDetails.name,
+            restaurantPhoneNumber: data.restaurantDetails.phoneNumber,
             placeId: data.restaurantDetails.place_id,
             vicinity: data.restaurantDetails.vicinity,
             specialRequests: request,
@@ -122,7 +123,7 @@ const SelecingSeats = ({ data, navigation }) => {
             }
         }
         catch (error) {
-            console.log("error in creating reservations", error)
+            console.log("error in creating reservation", error)
         }
     }
 
