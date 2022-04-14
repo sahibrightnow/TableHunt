@@ -14,7 +14,7 @@ import DatePickerIcon from '../assets/iconComponents/DatePickerIcon'
 import PeopleIcon from '../assets/iconComponents/PeopleIcon'
 import { fetchCreateReservation } from '../../api'
 
-const SelecingSeats = ({ data, navigation }) => {
+const SelectingSeats = ({ data, navigation }) => {
     const [accessToken, setAccessToken, userInfo, setUserInfo, userToken, setUserToken, userId, setUserId] = useContext(LoginContext)
 
     const {
@@ -350,4 +350,4 @@ const styles = StyleSheet.create({
     dropdown1RowTxtStyle: { color: "#444", textAlign: "left" },
 });
 
-export default SelecingSeats
+export default SelectingSeats

@@ -8,6 +8,6 @@ const {
 
 router.post('/', validateJWT, createReservation);
 router.get('/list', validateJWT, getUserReservations);
-router.patch('/remove-reservation', removeUserReservation);
+router.patch('/remove-reservation', validateJWT, removeUserReservation);
 
 module.exports = router;

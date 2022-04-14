@@ -45,7 +45,7 @@ const ReservationsScreenContainer = ({ navigation, data }) => {
                         {bookings.length > 0
                             ? bookings.sort((a, b) => a.time - b.time).map((el, index) => (
                                 <Box shadow={5} rounded="lg" w="88%" ml="2" key={index} >
-                                    <BookingCard data={el} key={index} getAllReservations={getAllReservations} />
+                                    <BookingCard data={el} key={index} getAllReservations={getAllReservations} userToken={userToken} />
                                 </Box>
                             ))
                             : <Center fontSize={14} mt={250}>No Reservations</Center>}

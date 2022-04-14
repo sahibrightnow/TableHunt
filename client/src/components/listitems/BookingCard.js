@@ -1,16 +1,12 @@
 import { Box, Heading, Divider, Image, Text, HStack, Stack, VStack, View, Pressable, ScrollView, Button } from "native-base"
 import DatePickerIcon from '../assets/iconComponents/DatePickerIcon'
-import React, { useContext } from 'react'
-import { LoginContext } from "../context/LoginContext";
 import PersonIcon from '../assets/iconComponents/PersonIcon'
 import VaccineCardIcon from '../assets/iconComponents/VaccineCardIcon'
 import LocationIcon from '../assets/iconComponents/LocationIcon'
 import { Alert, Linking } from 'react-native';
 import { fetchCancelReservation } from '../../api'
 
-const BookingCard = ({ data, navigation, getAllReservations }) => {
-    const [accessToken, setAccessToken, userToken, setUserToken, userId, setUserId] = useContext(LoginContext)
-
+const BookingCard = ({ data, navigation, getAllReservations, userToken }) => {
     const removeReservation = async () => {
         try {
             const res = await fetchCancelReservation({ reservationId: data._id }, userToken);
