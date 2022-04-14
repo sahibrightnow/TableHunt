@@ -1,23 +1,29 @@
 import { Box, Heading, Divider, Image, Text, HStack, Stack, VStack, View, Pressable, ScrollView, Button } from "native-base"
 import DatePickerIcon from '../assets/iconComponents/DatePickerIcon'
+import React, { useContext } from 'react'
 import PersonIcon from '../assets/iconComponents/PersonIcon'
 import VaccineCardIcon from '../assets/iconComponents/VaccineCardIcon'
 import LocationIcon from '../assets/iconComponents/LocationIcon'
-import { StyleSheet, Alert } from 'react-native';
-import axios from 'axios'
+import { Alert } from 'react-native';
+import { LoginContext } from "../context/LoginContext";
+import { fetchRemoveReservation } from '../../api'
 
 const BookingCard = ({ data, navigation, getAllReservations }) => {
-    const removeReservation = () => {
-        axios.patch(`http://localhost:4000/api/v1/reservations/remove-reservation`, { reservationId: data._id }
-            // {
-            //     headers: { 'Authorization': userToken }
-            // }
-        )
-            .then(res => {
-                console.log('REMOVE RESREVATION', res.data.message)
+    const [accessToken, setAccessToken, userToken, setUserToken, userId, setUserId] = useContext(LoginContext)
+
+    const removeReservation = async () => {
+        try {
+            const res = await fetchRemoveReservation({ reservationId: data._id });
+            if (res?.data?.status == 'AUTH FAILED')
+                logoutUser()
+            else {
+                console.log(res.data.message)
                 getAllReservations()
-            })
-            .catch(err => console.log("error in removing reservations", err))
+            }
+        }
+        catch (error) {
+            console.log("error in cancelling the reservation", error)
+        }
     }
 
     return (

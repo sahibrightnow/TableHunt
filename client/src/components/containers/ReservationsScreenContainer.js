@@ -1,28 +1,27 @@
 import React, { useState, useEffect, useContext } from 'react'
-import axios from 'axios'
 import BookingCard from '../listitems/BookingCard'
 import { Heading, Center, Text, HStack, ScrollView, VStack, Spinner, Box } from "native-base"
 import { LoginContext } from '../context/LoginContext'
+import { fetchReservations } from '../../api'
 
 const ReservationsScreenContainer = ({ navigation, data }) => {
     const [accessToken, setAccessToken, userInfo, setUserInfo, userToken, setUserToken, userId, setUserId] = useContext(LoginContext)
     const [bookings, setBookings] = useState()
     const [isLoaded, setIsLoaded] = useState(false)
 
-    const getAllReservations = () => {
-        axios.get(`http://localhost:4000/api/v1/reservations/list?userId=${userId}`,
-            {
-                headers: { 'Authorization': userToken }
-            })
-            .then(res => {
-                if (res.data.status == 'AUTH FAILED') {
-                    logoutUser()
-                } else {
-                    setBookings(res.data.data);
-                    setIsLoaded(true)
-                }
-            })
-            .catch(err => console.log("error in fetching reservations", err))
+    const getAllReservations = async () => {
+        try {
+            const res = await fetchReservations(userId, userToken);
+            if (res?.data?.status == 'AUTH FAILED')
+                logoutUser()
+            else {
+                setBookings(res.data.data);
+                setIsLoaded(true)
+            }
+        }
+        catch (error) {
+            console.log("error in fetching reservations", error)
+        }
     }
 
     useEffect(() => {

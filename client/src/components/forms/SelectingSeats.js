@@ -7,12 +7,12 @@ import { ModalDatePicker } from 'react-native-material-date-picker';
 import RadioButton from '../listitems/RadioButton'
 import TableMap from '../forms/TableMap'
 import * as ImagePicker from 'expo-image-picker';
-import axios from 'axios'
 import React, { useState, useEffect, useContext } from 'react'
 import { LoginContext } from '../context/LoginContext'
 import CameraViewButton from '../listitems/CameraViewButton'
 import DatePickerIcon from '../assets/iconComponents/DatePickerIcon'
 import PeopleIcon from '../assets/iconComponents/PeopleIcon'
+import { fetchCreateReservation } from '../../api'
 
 const SelecingSeats = ({ data, navigation }) => {
     const [accessToken, setAccessToken, userInfo, setUserInfo, userToken, setUserToken, userId, setUserId] = useContext(LoginContext)
@@ -112,12 +112,18 @@ const SelecingSeats = ({ data, navigation }) => {
         }
     };
 
-    const createReservation = () => {
-        axios.post(`http://localhost:4000/api/v1/reservations`, { ...reservationDetails, userId: userId }, {
-            headers: { 'Authorization': userToken }
-        })
-            .then(res => console.log("Reservation successful"))
-            .catch(err => console.log("Error while creating reservation", err))
+    const createReservation = async () => {
+        try {
+            const res = await fetchCreateReservation({ ...reservationDetails, userId: userId }, userToken)
+            if (res?.data?.status == 'AUTH FAILED')
+                logoutUser()
+            else {
+                console.log(res.data.message)
+            }
+        }
+        catch (error) {
+            console.log("error in creating reservations", error)
+        }
     }
 
     return (

@@ -8,6 +8,7 @@ import { LoginContext } from '../context/LoginContext'
 import axios from 'axios'
 import AppIconComponent from '../assets/iconComponents/AppIcon'
 import GoogleLogo from '../assets/iconComponents/GoogleLogo';
+import { fetchRegisterUser } from '../../api'
 
 const Authentication = () => {
 
@@ -25,19 +26,18 @@ const Authentication = () => {
 
       if (result.type === "success") {
         setAccessToken(result.accessToken);
-        axios.post(`http://localhost:4000/api/v1/consumers`, {
+
+        const res = await fetchRegisterUser({
           username: result.user.name,
           email: result.user.email,
           image: result.user.photoUrl
-        }).then(res => {
-          if (res.data.status == "SUCCESS") {
-            setUserId(res.data.userId)
-            setUserToken(res.data.userToken)
-            navigation.navigate('HomePage')
-          }
         })
-          .catch((error) => console.log(error))
 
+        if (res.data.status == "SUCCESS") {
+          setUserId(res.data.userId)
+          setUserToken(res.data.userToken)
+          navigation.navigate('HomePage')
+        }
       } else {
         console.log("Permission denied");
       }

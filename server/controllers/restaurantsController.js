@@ -1,12 +1,13 @@
 const Restaurants = require('../models/restaurants');
 
 const createRestaurant = async (req, res) => {
-    const place_id = req.body.place_id
+    const payload = req.body
+    const place_id = payload.place_id
     const found = await Restaurants.findOne({ place_id })
 
     if (!found) {
         try {
-            const restaurant = new Restaurants({ ...req.body });
+            const restaurant = new Restaurants({ ...payload });
             restaurant.save().then((result) => {
                 res.status(201).json({
                     status: 201,

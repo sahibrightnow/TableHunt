@@ -6,7 +6,7 @@ const {
     getRestaurantsWithOrders
 } = require('../controllers/restaurantsController');
 
-router.post('/', createRestaurant);
+router.post('/', validateJWT, createRestaurant);
 router.get('/list', validateJWT, getRestaurantsWithOrders)
 
 module.exports = router;

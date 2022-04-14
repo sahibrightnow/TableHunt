@@ -10,6 +10,7 @@ import ForkKnife from '../assets/iconComponents/ForkKnifeIcon'
 import LocationIcon from '../assets/iconComponents/LocationIcon'
 import StarIcon from "../assets/iconComponents/StarIcon";
 import { Linking } from 'react-native'
+import { fetchCreateRestaurant } from '../../api'
 
 
 const RestaurantContainer = ({ data, navigation }) => {
@@ -37,16 +38,15 @@ const RestaurantContainer = ({ data, navigation }) => {
     const [photos, setPhotos] = useState([]);
     const [restaurantDetails, setRestaurantDetails] = useState({})
 
-    const createRestaurant = () => {
-        axios.post(`http://localhost:4000/api/v1/restaurants`, restaurantDetails, {
-            headers: { 'Authorization': userToken }
-        })
-            .then((res) => {
-                console.log('Restaurant created')
-            })
-            .catch((error) => {
-                console.log('Error in creating restaurant', error);
-            })
+    const createRestaurant = async () => {
+        try {
+            const res = await fetchCreateRestaurant(restaurantDetails, userToken);
+            if (res?.data)
+                console.log(res.data.message)
+        }
+        catch (error) {
+            console.log('Error in creating restaurant', error);
+        }
     }
 
     useEffect(() => {

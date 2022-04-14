@@ -6,7 +6,7 @@ const {
     removeUserReservation
 } = require('../controllers/reservationController');
 
-router.post('/', createReservation);
+router.post('/', validateJWT, createReservation);
 router.get('/list', validateJWT, getUserReservations);
 router.patch('/remove-reservation', removeUserReservation);
 

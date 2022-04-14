@@ -2,11 +2,12 @@ const Reservations = require('../models/reservations');
 const Restaurants = require('../models/restaurants')
 
 const createReservation = async (req, res) => {
+    const payload = req.body
     try {
-        const restaurant = await Restaurants.findOne({ place_id: req.body.placeId }).exec()
-        delete req.body.placeId
+        const restaurant = await Restaurants.findOne({ place_id: payload.placeId }).exec()
+        delete payload.placeId
 
-        const reservation = new Reservations({ ...req.body, restaurantId: restaurant._id });
+        const reservation = new Reservations({ ...payload, restaurantId: restaurant._id });
         reservation.save().then((result) => {
             res.status(201).json({
                 status: 'SUCCESS',
@@ -50,8 +51,9 @@ const getUserReservations = async (req, res) => {
 };
 
 const removeUserReservation = async (req, res) => {
+    const payload = req.body
     try {
-        const reservationId = req.body.reservationId;
+        const reservationId = payload.reservationId;
         let reservation = await Reservations.findOne({
             _id: reservationId,
         }).exec();

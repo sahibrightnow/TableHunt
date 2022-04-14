@@ -3,10 +3,11 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const registerUser = async (req, res) => {
+    const payload = req.body
     try {
-        let user = await Consumer.findOne({ email: req.body.email }).lean();
+        let user = await Consumer.findOne({ email: payload.email }).lean();
         if (!user) {
-            const newUser = new Consumer({ ...req.body });
+            const newUser = new Consumer({ ...payload });
             user = await newUser.save();
         }
         const token = jwt.sign(

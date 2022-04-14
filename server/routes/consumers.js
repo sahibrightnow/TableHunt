@@ -5,7 +5,7 @@ const {
     userRegistrations,
 } = require('../controllers/consumersController');
 
-router.route('/').post(registerUser);
+router.post('/', registerUser);
 
 // Internal API, not in use by Front-end
 // router.route('/registrations').get(userRegistrations);  
