@@ -10,7 +10,7 @@ const ReservationsScreenContainer = ({ navigation, data }) => {
     const [isLoaded, setIsLoaded] = useState(false)
 
     const getAllReservations = () => {
-        axios.get(`https://harman.wmdd4950.com/tablehunt/api/v1/reservations/list?userId=${userId}`,
+        axios.get(`http://localhost:4000/api/v1/reservations/list?userId=${userId}`,
             {
                 headers: { 'Authorization': userToken }
             })
@@ -46,7 +46,7 @@ const ReservationsScreenContainer = ({ navigation, data }) => {
                         {bookings.length > 0
                             ? bookings.sort((a, b) => a.time - b.time).map((el, index) => (
                                 <Box shadow={5} rounded="lg" w="88%" ml="2" key={index} >
-                                    <BookingCard data={el} key={index} />
+                                    <BookingCard data={el} key={index} getAllReservations={getAllReservations} />
                                 </Box>
                             ))
                             : <Center fontSize={14} mt={250}>No Reservations</Center>}

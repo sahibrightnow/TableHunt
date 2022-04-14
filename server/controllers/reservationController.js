@@ -49,7 +49,32 @@ const getUserReservations = async (req, res) => {
     }
 };
 
+const removeUserReservation = async (req, res) => {
+    try {
+        const reservationId = req.body.reservationId;
+        let reservation = await Reservations.findOne({
+            _id: reservationId,
+        }).exec();
+
+        if (reservation) {
+            await Reservations.deleteOne({ _id: reservationId })
+
+            res.status(200).json({
+                status: 'Success',
+                message: 'Reservation successfully cancelled',
+                data: reservation,
+            });
+        }
+    } catch (error) {
+        res.status(400).json({
+            status: 'Failed',
+            message: error.message,
+        });
+    }
+}
+
 module.exports = {
     createReservation,
-    getUserReservations
+    getUserReservations,
+    removeUserReservation
 };

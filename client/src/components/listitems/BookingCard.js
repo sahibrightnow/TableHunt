@@ -3,8 +3,23 @@ import DatePickerIcon from '../assets/iconComponents/DatePickerIcon'
 import PersonIcon from '../assets/iconComponents/PersonIcon'
 import VaccineCardIcon from '../assets/iconComponents/VaccineCardIcon'
 import LocationIcon from '../assets/iconComponents/LocationIcon'
+import { StyleSheet, Alert } from 'react-native';
+import axios from 'axios'
 
-const BookingCard = ({ data, navigation }) => {
+const BookingCard = ({ data, navigation, getAllReservations }) => {
+    const removeReservation = () => {
+        axios.patch(`http://localhost:4000/api/v1/reservations/remove-reservation`, { reservationId: data._id }
+            // {
+            //     headers: { 'Authorization': userToken }
+            // }
+        )
+            .then(res => {
+                console.log('REMOVE RESREVATION', res.data.message)
+                getAllReservations()
+            })
+            .catch(err => console.log("error in removing reservations", err))
+    }
+
     return (
         <Box alignItems="center" mt={15} rounded="lg" bg="white" >
             <View overflow="hidden" w="100%"
@@ -109,7 +124,13 @@ const BookingCard = ({ data, navigation }) => {
                             <Button w="120" variant="outline" colorScheme='rgba(188, 71, 73, 1)' style={
                                 {
                                     borderColor: '#ef233c',
-                                }}
+                                }} onPress={() => Alert.alert("Cancel Reservation", "Would you like to cancel your reservation?", [{
+                                    text: "Yes", onPress: () => {
+                                        removeReservation()
+                                    }
+                                }, {
+                                    text: "No",
+                                }])}
                             >
                                 <Text style={{ color: '#ef233c' }}>Cancel </Text>
 

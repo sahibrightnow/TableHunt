@@ -38,7 +38,7 @@ const RestaurantContainer = ({ data, navigation }) => {
     const [restaurantDetails, setRestaurantDetails] = useState({})
 
     const createRestaurant = () => {
-        axios.post(`https://harman.wmdd4950.com/tablehunt/api/v1/restaurants`, restaurantDetails, {
+        axios.post(`http://localhost:4000/api/v1/restaurants`, restaurantDetails, {
             headers: { 'Authorization': userToken }
         })
             .then((res) => {
