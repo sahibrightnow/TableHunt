@@ -1,10 +1,11 @@
+import { REACT_APP_SERVER, REACT_APP_API_KEY } from 'react-native-dotenv'
 import { NativeBaseProvider, extendTheme } from 'native-base'
 import AppStack from './src/components/stacks/AppStack'
 import AppLoading from 'expo-app-loading'
 import { StyleSheet } from 'react-native'
 import React from 'react'
 import { LoginProvider } from './src/components/context/LoginContext'
-import { createContext } from "react";
+import { createContext } from 'react'
 
 import {
   useFonts,
@@ -23,10 +24,9 @@ const styles = StyleSheet.create({
   },
 })
 
-export const fontsContext = createContext();
+export const fontsContext = createContext()
 
 const App = () => {
-
   let [fontsLoaded] = useFonts({
     Poppins_400Regular,
     Poppins_500Medium,
@@ -60,7 +60,7 @@ const App = () => {
       danger: {
         100: '#ffd7dc',
         200: '#ef233c',
-        300: '#924344'
+        300: '#924344',
       },
       warning: {
         100: '#fff7db',
@@ -73,20 +73,20 @@ const App = () => {
     fontConfig: {
       Poppins: {
         100: {
-          normal: "Poppins_400Regular",
-          italic: "",
+          normal: 'Poppins_400Regular',
+          italic: '',
         },
         200: {
-          normal: "Poppins_500Medium",
-          italic: "",
+          normal: 'Poppins_500Medium',
+          italic: '',
         },
         300: {
-          normal: "Poppins_600SemiBold",
-          italic: "",
+          normal: 'Poppins_600SemiBold',
+          italic: '',
         },
         400: {
-          normal: "Poppins_700Bold",
-          italic: "",
+          normal: 'Poppins_700Bold',
+          italic: '',
         },
       },
     },

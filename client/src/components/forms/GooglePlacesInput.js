@@ -1,23 +1,27 @@
+import { REACT_APP_API_KEY } from 'react-native-dotenv'
 import React, { useState, useEffect } from 'react'
 import { HStack } from 'native-base'
-import { API_KEY } from 'react-native-dotenv'
 import axios from 'axios'
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
 
-const GooglePlacesInput = ({ location, setLocation, searchRestaurant, navigation }) => {
+const GooglePlacesInput = ({
+  location,
+  setLocation,
+  searchRestaurant,
+  navigation,
+}) => {
   const [placeID, setPlaceID] = useState()
 
-  const placeDetailsAPI = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeID}&key=${API_KEY}`
+  const placeDetailsAPI = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeID}&key=${REACT_APP_API_KEY}`
 
   useEffect(() => {
     axios
       .get(placeDetailsAPI)
       .then((result) => {
-        setLocation(
-          {
-            latitude: result?.data?.result?.geometry?.location?.lat,
-            longitude: result?.data?.result?.geometry?.location?.lng
-          })
+        setLocation({
+          latitude: result?.data?.result?.geometry?.location?.lat,
+          longitude: result?.data?.result?.geometry?.location?.lng,
+        })
       })
       .catch((error) => {
         console.log(error)
@@ -25,30 +29,26 @@ const GooglePlacesInput = ({ location, setLocation, searchRestaurant, navigation
   }, [placeID])
 
   const getRestaurantDetail = (place_id) => {
-    const resDetailsURL = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&key=${API_KEY}`
+    const resDetailsURL = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&key=${REACT_APP_API_KEY}`
     axios
-      .get(resDetailsURL).then((result) => {
-        navigation.navigate("Restaurant Page", { restaurant: result.data.result })
-      }).catch((error) => {
+      .get(resDetailsURL)
+      .then((result) => {
+        navigation.navigate('Restaurant Page', {
+          restaurant: result.data.result,
+        })
+      })
+      .catch((error) => {
         console.log(error)
       })
   }
 
   return (
-    <HStack
-      zIndex={2}
-      position="absolute"
-      top={20}
-      left={10}
-      right={10}
-    >
-      {searchRestaurant
-        ?
+    <HStack zIndex={2} position='absolute' top={20} left={10} right={10}>
+      {searchRestaurant ? (
         <GooglePlacesAutocomplete
-
           placeholder='Search for Restaurants'
           query={{
-            key: API_KEY,
+            key: `${REACT_APP_API_KEY}`,
             language: 'en', // language of the results
             location: location
               ? `${location.latitude},${location.longitude}`
@@ -62,6 +62,7 @@ const GooglePlacesInput = ({ location, setLocation, searchRestaurant, navigation
             types: ['restaurant', 'cafe'],
           }}
           onPress={(data) => {
+            console.log('PLACE ID', data.place_id)
             getRestaurantDetail(data.place_id)
           }}
           onFail={(error) => console.error(error)}
@@ -71,12 +72,11 @@ const GooglePlacesInput = ({ location, setLocation, searchRestaurant, navigation
           }} // this in only required for use on the web. See https://git.io/JflFv more for details.
           enablePoweredByContainer={false}
         />
-        :
+      ) : (
         <GooglePlacesAutocomplete
-
           placeholder='Search a location'
           query={{
-            key: API_KEY,
+            key: `${REACT_APP_API_KEY}`,
             language: 'en', // language of the results
             location: location
               ? `${location.latitude},${location.longitude}`
@@ -99,7 +99,7 @@ const GooglePlacesInput = ({ location, setLocation, searchRestaurant, navigation
           }} // this in only required for use on the web. See https://git.io/JflFv more for details.
           enablePoweredByContainer={false}
         />
-      }
+      )}
     </HStack>
   )
 }
